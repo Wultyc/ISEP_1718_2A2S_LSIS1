@@ -8,25 +8,24 @@
 #define MOTOR_A_CS = "A0";
 #define MOTOR_B_CS = "A1";
 
-#define SONAR_TRIG = "A4";
-#define SONAR_ECHO_FRENTE = "A1";
-#define SONAR_ECHO_DIREITA = "A2";
-#define SONAR_ECHO_ESQUERDA = "A3";
+#define SONAR_TRIG = 2;
+#define SONAR_ECHO_FRENTE = "A2";
+#define SONAR_ECHO_DIREITA = "A3";
+#define SONAR_ECHO_ESQUERDA = "A4";
 
 #define VENTOINHA_INA = 6;
-#define VENTOINHA_INB = 5;
 
-#define SERVO_MOTOR = 9;
+#define SERVO_MOTOR = 10;
 #define SERVO_DELAY = 25;
 
 #define CHAMA_PIN = "A5";
-#define CHAMA_LED = 10;
+#define CHAMA_LED = 7;
 
 #define BT_RX = 0;
 #define BT_TX = 1;
 
-#define BOTAO_VERDE = 8;
-#define BOTAO_VERML = 7;
+#define BOTAO_VERDE = 4;
+#define BOTAO_VERML = 5;
 
 
 void setup() {
