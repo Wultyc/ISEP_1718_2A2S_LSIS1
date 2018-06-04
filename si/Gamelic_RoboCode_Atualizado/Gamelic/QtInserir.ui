@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>QtInserir</class>
+ <widget class="QWidget" name="QtInserir">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>324</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QtInserir</string>
+  </property>
+  <widget class="QPushButton" name="button_Equipa">
+   <property name="geometry">
+    <rect>
+     <x>115</x>
+     <y>160</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Equipa</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_Prova">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>160</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Prova</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_Robo">
+   <property name="geometry">
+    <rect>
+     <x>485</x>
+     <y>160</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Robô</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>

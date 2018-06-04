@@ -117,6 +117,7 @@
     <ClCompile Include="Gamelic.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QtGuiClass.cpp" />
+    <ClCompile Include="QtInserir.cpp" />
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Gamelic.h" />
@@ -124,6 +125,7 @@
   <ItemGroup>
     <QtUic Include="Gamelic.ui" />
     <QtUic Include="QtGuiClass.ui" />
+    <QtUic Include="QtInserir.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Gamelic.qrc" />
@@ -133,6 +135,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DB.h" />
+    <QtMoc Include="QtInserir.h">
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\Eduardo\Desktop\mysql-5.7.21-winx64\mysql-5.7.21-winx64\include;C:\local\boost_1_66_0;C:\Program Files\MySQL\MySQL Connector C++ 1.1.9\include;.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+      <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles;.;$(QTDIR)\include;.\GeneratedFiles\$(ConfigurationName)\.;$(QTDIR)\include\QtCore;$(QTDIR)\include\QtGui;$(QTDIR)\include\QtANGLE;$(QTDIR)\include\QtWidgets</IncludePath>
+    </QtMoc>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
