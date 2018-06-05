@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="0">
+     <widget class="QStackedWidget" name="stackedWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="main">
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>425</x>
+          <y>150</y>
+          <width>131</width>
+          <height>101</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Bem Vindo</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="inserirEquipa">
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>200</y>
+          <width>141</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>inserir Equipa</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="inserirProva">
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>180</x>
+          <y>260</y>
+          <width>181</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>15</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>prova</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="inserirRobot"/>
+      <widget class="QWidget" name="listarEquipa"/>
+      <widget class="QWidget" name="listarProva"/>
+      <widget class="QWidget" name="listarRobot"/>
+      <widget class="QWidget" name="modificarEquipa"/>
+      <widget class="QWidget" name="modificarProva"/>
+      <widget class="QWidget" name="modificarRobot"/>
+      <widget class="QWidget" name="eliminarEquipa"/>
+      <widget class="QWidget" name="eliminarProva"/>
+      <widget class="QWidget" name="eliminarRobot"/>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuInserir">
+    <property name="geometry">
+     <rect>
+      <x>405</x>
+      <y>100</y>
+      <width>135</width>
+      <height>143</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Inserir</string>
+    </property>
+    <addaction name="inserirEquipaAction"/>
+    <addaction name="separator"/>
+    <addaction name="inserirProvaAction"/>
+    <addaction name="separator"/>
+    <addaction name="inserirRobotAction"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuListar">
+    <property name="geometry">
+     <rect>
+      <x>387</x>
+      <y>100</y>
+      <width>135</width>
+      <height>143</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Listar</string>
+    </property>
+    <addaction name="listarEquipaAction"/>
+    <addaction name="separator"/>
+    <addaction name="listarProvaAction"/>
+    <addaction name="separator"/>
+    <addaction name="listarRobotAction"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuModificar">
+    <property name="title">
+     <string>Modificar</string>
+    </property>
+    <addaction name="modificarEquipaAction"/>
+    <addaction name="separator"/>
+    <addaction name="modificarProvaAction"/>
+    <addaction name="separator"/>
+    <addaction name="modificarRobotAction"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuEliminar">
+    <property name="title">
+     <string>Eliminar</string>
+    </property>
+    <addaction name="eliminarEquipaAction"/>
+    <addaction name="separator"/>
+    <addaction name="eliminarProvaAction"/>
+    <addaction name="separator"/>
+    <addaction name="eliminarRobotAction"/>
+    <addaction name="separator"/>
+   </widget>
+   <widget class="QMenu" name="menuModo_de_Prova">
+    <property name="title">
+     <string>Modo de Prova</string>
+    </property>
+   </widget>
+   <widget class="QMenu" name="menuWelcome">
+    <property name="title">
+     <string>Welcome</string>
+    </property>
+   </widget>
+   <addaction name="menuWelcome"/>
+   <addaction name="menuInserir"/>
+   <addaction name="menuListar"/>
+   <addaction name="menuModificar"/>
+   <addaction name="menuEliminar"/>
+   <addaction name="menuModo_de_Prova"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="inserirEquipaAction">
+   <property name="text">
+    <string>Equipa</string>
+   </property>
+   <property name="toolTip">
+    <string>Inserir uma Equipa</string>
+   </property>
+  </action>
+  <action name="inserirProvaAction">
+   <property name="text">
+    <string>Prova</string>
+   </property>
+   <property name="toolTip">
+    <string>Inserir uma Prova</string>
+   </property>
+  </action>
+  <action name="inserirRobotAction">
+   <property name="text">
+    <string>Robot</string>
+   </property>
+   <property name="toolTip">
+    <string>Inserir um Robot</string>
+   </property>
+  </action>
+  <action name="listarEquipaAction">
+   <property name="text">
+    <string>Equipa</string>
+   </property>
+   <property name="toolTip">
+    <string>Listar uma Equipa</string>
+   </property>
+  </action>
+  <action name="listarProvaAction">
+   <property name="text">
+    <string>Prova</string>
+   </property>
+   <property name="toolTip">
+    <string>Listar uma Prova</string>
+   </property>
+  </action>
+  <action name="listarRobotAction">
+   <property name="text">
+    <string>Robot</string>
+   </property>
+   <property name="toolTip">
+    <string>Listar um Robot</string>
+   </property>
+  </action>
+  <action name="modificarEquipaAction">
+   <property name="text">
+    <string>Equipa</string>
+   </property>
+   <property name="toolTip">
+    <string>Modificar uma Equipa</string>
+   </property>
+  </action>
+  <action name="modificarProvaAction">
+   <property name="text">
+    <string>Prova</string>
+   </property>
+   <property name="toolTip">
+    <string>Modificar uma Prova</string>
+   </property>
+  </action>
+  <action name="modificarRobotAction">
+   <property name="text">
+    <string>Robot</string>
+   </property>
+   <property name="toolTip">
+    <string>Modificar um Robot</string>
+   </property>
+  </action>
+  <action name="eliminarEquipaAction">
+   <property name="text">
+    <string>Equipa</string>
+   </property>
+   <property name="toolTip">
+    <string>Eliminar uma Equipa</string>
+   </property>
+  </action>
+  <action name="eliminarProvaAction">
+   <property name="text">
+    <string>Prova</string>
+   </property>
+   <property name="toolTip">
+    <string>Eliminar uma Prova</string>
+   </property>
+  </action>
+  <action name="eliminarRobotAction">
+   <property name="text">
+    <string>Robot</string>
+   </property>
+   <property name="toolTip">
+    <string>Eliminar uma Robot</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
