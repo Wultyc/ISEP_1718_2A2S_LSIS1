@@ -14,9 +14,11 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
@@ -46,8 +48,25 @@ public:
     QLabel *label;
     QWidget *inserirEquipa;
     QLabel *label_2;
-    QWidget *inserirProva;
     QLabel *label_3;
+    QLabel *label_7;
+    QLabel *label_8;
+    QLabel *label_9;
+    QLabel *label_10;
+    QLabel *label_11;
+    QLabel *label_12;
+    QLabel *label_13;
+    QLineEdit *lineEdit;
+    QLineEdit *lineEdit_2;
+    QLineEdit *lineEdit_3;
+    QLineEdit *lineEdit_4;
+    QLineEdit *lineEdit_5;
+    QLineEdit *lineEdit_6;
+    QLineEdit *lineEdit_7;
+    QLineEdit *lineEdit_8;
+    QLineEdit *lineEdit_9;
+    QPushButton *pushInserirEquipa;
+    QWidget *inserirProva;
     QWidget *inserirRobot;
     QWidget *listarEquipa;
     QWidget *listarProva;
@@ -73,7 +92,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(1000, 500);
+        MainWindow->resize(916, 480);
         inserirEquipaAction = new QAction(MainWindow);
         inserirEquipaAction->setObjectName(QStringLiteral("inserirEquipaAction"));
         inserirProvaAction = new QAction(MainWindow);
@@ -119,17 +138,85 @@ public:
         inserirEquipa->setObjectName(QStringLiteral("inserirEquipa"));
         label_2 = new QLabel(inserirEquipa);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(310, 200, 141, 61));
+        label_2->setGeometry(QRect(260, 23, 131, 20));
         QFont font1;
-        font1.setPointSize(15);
+        font1.setPointSize(12);
         label_2->setFont(font1);
+        label_3 = new QLabel(inserirEquipa);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(69, 93, 91, 20));
+        label_3->setFont(font1);
+        label_7 = new QLabel(inserirEquipa);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(69, 163, 91, 20));
+        label_7->setFont(font1);
+        label_8 = new QLabel(inserirEquipa);
+        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setGeometry(QRect(69, 233, 91, 20));
+        label_8->setFont(font1);
+        label_9 = new QLabel(inserirEquipa);
+        label_9->setObjectName(QStringLiteral("label_9"));
+        label_9->setGeometry(QRect(69, 303, 91, 20));
+        label_9->setFont(font1);
+        label_10 = new QLabel(inserirEquipa);
+        label_10->setObjectName(QStringLiteral("label_10"));
+        label_10->setGeometry(QRect(509, 93, 91, 20));
+        label_10->setFont(font1);
+        label_11 = new QLabel(inserirEquipa);
+        label_11->setObjectName(QStringLiteral("label_11"));
+        label_11->setGeometry(QRect(509, 163, 91, 20));
+        label_11->setFont(font1);
+        label_12 = new QLabel(inserirEquipa);
+        label_12->setObjectName(QStringLiteral("label_12"));
+        label_12->setGeometry(QRect(509, 233, 91, 20));
+        label_12->setFont(font1);
+        label_13 = new QLabel(inserirEquipa);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setGeometry(QRect(509, 303, 91, 20));
+        label_13->setFont(font1);
+        lineEdit = new QLineEdit(inserirEquipa);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+        lineEdit->setGeometry(QRect(401, 20, 191, 26));
+        lineEdit->setFont(font1);
+        lineEdit_2 = new QLineEdit(inserirEquipa);
+        lineEdit_2->setObjectName(QStringLiteral("lineEdit_2"));
+        lineEdit_2->setGeometry(QRect(170, 90, 191, 26));
+        lineEdit_2->setFont(font1);
+        lineEdit_3 = new QLineEdit(inserirEquipa);
+        lineEdit_3->setObjectName(QStringLiteral("lineEdit_3"));
+        lineEdit_3->setGeometry(QRect(170, 160, 191, 26));
+        lineEdit_3->setFont(font1);
+        lineEdit_4 = new QLineEdit(inserirEquipa);
+        lineEdit_4->setObjectName(QStringLiteral("lineEdit_4"));
+        lineEdit_4->setGeometry(QRect(170, 230, 191, 26));
+        lineEdit_4->setFont(font1);
+        lineEdit_5 = new QLineEdit(inserirEquipa);
+        lineEdit_5->setObjectName(QStringLiteral("lineEdit_5"));
+        lineEdit_5->setGeometry(QRect(170, 300, 191, 26));
+        lineEdit_5->setFont(font1);
+        lineEdit_6 = new QLineEdit(inserirEquipa);
+        lineEdit_6->setObjectName(QStringLiteral("lineEdit_6"));
+        lineEdit_6->setGeometry(QRect(610, 90, 191, 26));
+        lineEdit_6->setFont(font1);
+        lineEdit_7 = new QLineEdit(inserirEquipa);
+        lineEdit_7->setObjectName(QStringLiteral("lineEdit_7"));
+        lineEdit_7->setGeometry(QRect(610, 160, 191, 26));
+        lineEdit_7->setFont(font1);
+        lineEdit_8 = new QLineEdit(inserirEquipa);
+        lineEdit_8->setObjectName(QStringLiteral("lineEdit_8"));
+        lineEdit_8->setGeometry(QRect(610, 230, 191, 26));
+        lineEdit_8->setFont(font1);
+        lineEdit_9 = new QLineEdit(inserirEquipa);
+        lineEdit_9->setObjectName(QStringLiteral("lineEdit_9"));
+        lineEdit_9->setGeometry(QRect(610, 300, 191, 26));
+        lineEdit_9->setFont(font1);
+        pushInserirEquipa = new QPushButton(inserirEquipa);
+        pushInserirEquipa->setObjectName(QStringLiteral("pushInserirEquipa"));
+        pushInserirEquipa->setGeometry(QRect(381, 360, 111, 41));
+        pushInserirEquipa->setFont(font1);
         stackedWidget->addWidget(inserirEquipa);
         inserirProva = new QWidget();
         inserirProva->setObjectName(QStringLiteral("inserirProva"));
-        label_3 = new QLabel(inserirProva);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(180, 260, 181, 41));
-        label_3->setFont(font1);
         stackedWidget->addWidget(inserirProva);
         inserirRobot = new QWidget();
         inserirRobot->setObjectName(QStringLiteral("inserirRobot"));
@@ -167,7 +254,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1000, 21));
+        menuBar->setGeometry(QRect(0, 0, 916, 21));
         menuInserir = new QMenu(menuBar);
         menuInserir->setObjectName(QStringLiteral("menuInserir"));
         menuInserir->setGeometry(QRect(405, 100, 135, 143));
@@ -226,7 +313,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(0);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -284,8 +371,16 @@ public:
         eliminarRobotAction->setToolTip(QApplication::translate("MainWindow", "Eliminar uma Robot", nullptr));
 #endif // QT_NO_TOOLTIP
         label->setText(QApplication::translate("MainWindow", "Bem Vindo", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "inserir Equipa", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "prova", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Nome da Equipa", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Elemento 1", nullptr));
+        label_7->setText(QApplication::translate("MainWindow", "Elemento 2", nullptr));
+        label_8->setText(QApplication::translate("MainWindow", "Elemento 3", nullptr));
+        label_9->setText(QApplication::translate("MainWindow", "Elemento 4", nullptr));
+        label_10->setText(QApplication::translate("MainWindow", "Elemento 5", nullptr));
+        label_11->setText(QApplication::translate("MainWindow", "Elemento 6", nullptr));
+        label_12->setText(QApplication::translate("MainWindow", "Elemento 7", nullptr));
+        label_13->setText(QApplication::translate("MainWindow", "Elemento 8", nullptr));
+        pushInserirEquipa->setText(QApplication::translate("MainWindow", "Inserir", nullptr));
         menuInserir->setTitle(QApplication::translate("MainWindow", "Inserir", nullptr));
         menuListar->setTitle(QApplication::translate("MainWindow", "Listar", nullptr));
         menuModificar->setTitle(QApplication::translate("MainWindow", "Modificar", nullptr));
