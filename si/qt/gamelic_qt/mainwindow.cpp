@@ -77,12 +77,13 @@ void MainWindow::on_eliminarRobotAction_triggered()
 void MainWindow::on_pushInserirEquipa_clicked()
 {
     QString nome = ui->insNomeLineE->text();
+	bd bd;
 	bd.inserirEquipa(nome.toStdString());
 
 	QString elemento1 = ui->insEle1LineE->text();
-	if (!(elemento1.isEmpty()))
-	{
-		bd.inserirElementos(elemento1.toStdString(), nome.toStdString());
-	}
+	//if (!(elemento1.isEmpty()))
+	//{
+		//bd.inserirElementos(elemento1.toStdString(), nome.toStdString());
+	//}
     //ui->insEle1LineE->setText(nome);
 }
