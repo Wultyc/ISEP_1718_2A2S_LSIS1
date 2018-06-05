@@ -264,3 +264,8 @@ si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/Makefile.Release
 si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/Makefile.Debug
 si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/Makefile
 si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/.qmake.stash
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/ui_mainwindow.h
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/Makefile.Release
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/Makefile.Debug
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/Makefile
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/.qmake.stash
