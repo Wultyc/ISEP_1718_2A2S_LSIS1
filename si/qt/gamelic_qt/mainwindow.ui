@@ -14,32 +14,11 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>1000</width>
-     <height>500</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>1000</width>
-     <height>500</height>
-    </size>
-   </property>
    <layout class="QGridLayout" name="gridLayout">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetFixedSize</enum>
-    </property>
-    <item row="1" column="0">
+    <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -374,7 +353,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Inserir Equipa</string>
+         <string>Inserir</string>
         </property>
        </widget>
       </widget>
@@ -586,9 +565,502 @@
       <widget class="QWidget" name="listarEquipa"/>
       <widget class="QWidget" name="listarProva"/>
       <widget class="QWidget" name="listarRobot"/>
-      <widget class="QWidget" name="modificarEquipa"/>
-      <widget class="QWidget" name="modificarProva"/>
-      <widget class="QWidget" name="modificarRobot"/>
+      <widget class="QWidget" name="modificarEquipa">
+       <widget class="QLabel" name="modEquipaLabelTitle">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>10</y>
+          <width>151</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Equipas Disponiveis:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="modEquipaLabelID">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>80</y>
+          <width>271</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Qual a equipa que pretende alterar? :&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="modEquipasComboBox">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>80</y>
+          <width>351</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="currentText">
+         <string>Equipa 1</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Equipa 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Equipa 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Equipa 3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Equipa 4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Equipa 5</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>145</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="modEquipaLabelNovo">
+        <property name="geometry">
+         <rect>
+          <x>160</x>
+          <y>140</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Novo Nome:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushmodEquipa_3">
+        <property name="geometry">
+         <rect>
+          <x>680</x>
+          <y>130</y>
+          <width>110</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Modificar</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>210</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>300</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>550</x>
+          <y>280</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>560</x>
+          <y>260</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>560</x>
+          <y>240</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_7">
+        <property name="geometry">
+         <rect>
+          <x>560</x>
+          <y>280</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_8">
+        <property name="geometry">
+         <rect>
+          <x>560</x>
+          <y>290</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_9">
+        <property name="geometry">
+         <rect>
+          <x>570</x>
+          <y>300</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="modEquipaLabelNovo_3">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>200</y>
+          <width>91</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Elemento 1:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="modificarProva">
+       <widget class="QLabel" name="modProvaLabelNovo_2">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>150</y>
+          <width>191</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Caracteristicas Disponiveis:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="modProvaComboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>90</y>
+          <width>351</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="currentText">
+         <string>Prova 1</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Prova 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 5</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="modProvaLabelID">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>90</y>
+          <width>271</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Que prova pretende alterar?:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="modProvaLabelTitle">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>20</y>
+          <width>151</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Provas Disponiveis:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="modProvaComboBox">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>155</y>
+          <width>351</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="currentText">
+         <string>Nome</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Nome</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ESPAÇO PARA O MARIO</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Local</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Robot</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="modProvaLabelNovo">
+        <property name="geometry">
+         <rect>
+          <x>150</x>
+          <y>210</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Novo:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modProvalineEdit">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>215</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushmodProva">
+        <property name="geometry">
+         <rect>
+          <x>600</x>
+          <y>205</y>
+          <width>110</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Modificar</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="modificarRobot">
+       <widget class="QLabel" name="modRobotLabelNovo">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>205</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Novo:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modRobotlineEdit">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>210</y>
+          <width>351</width>
+          <height>20</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="modRobotLabelNovo_2">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>145</y>
+          <width>191</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Caracteristicas Disponiveis:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="modRobotLabelTitle">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>15</y>
+          <width>151</width>
+          <height>41</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Provas Disponiveis:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="modRobotComboBox">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>85</y>
+          <width>351</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="currentText">
+         <string>Robot 1</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Robot 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Robot 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Robot 3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Robot 4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Robot 5</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QComboBox" name="modRobotComboBox_2">
+        <property name="geometry">
+         <rect>
+          <x>320</x>
+          <y>150</y>
+          <width>351</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="currentText">
+         <string>Nome</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Nome</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Equipa</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="modRobotLabelID">
+        <property name="geometry">
+         <rect>
+          <x>90</x>
+          <y>85</y>
+          <width>271</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Que robot pretende alterar?:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushmodRobot">
+        <property name="geometry">
+         <rect>
+          <x>690</x>
+          <y>200</y>
+          <width>110</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Modificar</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="eliminarEquipa"/>
       <widget class="QWidget" name="eliminarProva"/>
       <widget class="QWidget" name="eliminarRobot"/>
