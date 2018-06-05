@@ -30,11 +30,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug;C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\gamelic_qt;C:\Program Files\MySQL\MySQL Server 5.5\include;C:\Users\Junior\Downloads\mysql-connector-c++-8.0.11-windows-x86-64bit\include\jdbc;C:\Users\Junior\Downloads\boost_1_67_0\boost_1_67_0;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release;C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\gamelic_qt;C:\Program Files\MySQL\MySQL Server 5.5\include;C:\Users\Junior\Downloads\mysql-connector-c++-8.0.11-windows-x86-64bit\include\jdbc;C:\Users\Junior\Downloads\boost_1_67_0\boost_1_67_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)$(Platform)\$(Configuration)\</OutDir>
-    <IncludePath>C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug;C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\gamelic_qt;C:\Program Files\MySQL\MySQL Server 5.5\include;C:\Users\Junior\Downloads\mysql-connector-c++-8.0.11-windows-x86-64bit\include\jdbc;C:\Users\Junior\Downloads\boost_1_67_0\boost_1_67_0;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release;C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\qt\gamelic_qt;C:\Program Files\MySQL\MySQL Server 5.5\include;C:\Users\Junior\Downloads\mysql-connector-c++-8.0.11-windows-x86-64bit\include\jdbc;C:\Users\Junior\Downloads\boost_1_67_0\boost_1_67_0;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <Target Name="QtMsBuildNotFound" BeforeTargets="CustomBuild;ClCompile" Condition="!Exists('$(QtMsBuild)\qt.targets') or !Exists('$(QtMsBuild)\qt.props')">
     <Message Importance="High" Text="QtMsBuild: could not locate qt.targets, qt.props; project may not build correctly." />

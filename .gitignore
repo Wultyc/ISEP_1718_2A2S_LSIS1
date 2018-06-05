@@ -259,3 +259,8 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/ui_mainwindow.h
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/Makefile.Release
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/Makefile.Debug
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/Makefile
+si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Release/.qmake.stash
