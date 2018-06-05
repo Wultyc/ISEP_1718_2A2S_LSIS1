@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "bd.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -72,9 +73,12 @@ void MainWindow::on_eliminarRobotAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->eliminarRobot);
 }
-
 void MainWindow::on_pushInserirEquipa_clicked()
 {
-    QString nome = ui->insNomeLineE->text();
-    ui->insEle1LineE->setText(nome);
+	//insNomeLineE
+	QString nome = ui->insNomeLineE->text();
+	bd bd;
+	bd.inserirEquipa(nome.toStdString());
+	//
+	//ui->insEle1LineE->setText(nome);
 }

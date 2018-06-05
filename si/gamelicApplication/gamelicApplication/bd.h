@@ -22,4 +22,9 @@ class bd {
 
 public:
 	void connect();
+	void inserirEquipa(string nomeE);
+	void inserirElementos(string nomeEl, string nomeE);
+	void inserirRobo(string nomeR, string nomeE);
+	void inserirProva(string nomeP,string local, string nomeR);
+	void inserirStates(int state, string nomeP);
 };

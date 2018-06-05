@@ -41,8 +41,7 @@ private slots:
 
     void on_eliminarRobotAction_triggered();
 
-    void on_pushInserirEquipa_clicked();
-
+	void on_pushInserirEquipa_clicked();
 private:
     Ui::MainWindow *ui;
 };

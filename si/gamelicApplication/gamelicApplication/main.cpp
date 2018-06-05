@@ -1,13 +1,13 @@
-#include "gamelicApplication.h"
+#include "mainwindow.h"
 #include <QtWidgets/QApplication>
-#include "bd.h"
 
 int main(int argc, char *argv[])
 {
-	bd bd;
-	bd.connect();
+	
 	QApplication a(argc, argv);
-	gamelicApplication w;
-	w.show();
+	MainWindow b;
+	//gamelicApplication w;
+	b.show();
+	//w.show();
 	return a.exec();
 }
