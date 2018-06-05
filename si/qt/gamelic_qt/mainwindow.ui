@@ -18,7 +18,7 @@
     <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -341,10 +341,10 @@
        <widget class="QPushButton" name="pushInserirEquipa">
         <property name="geometry">
          <rect>
-          <x>381</x>
+          <x>385</x>
           <y>360</y>
-          <width>111</width>
-          <height>41</height>
+          <width>110</width>
+          <height>40</height>
          </rect>
         </property>
         <property name="font">
@@ -357,7 +357,125 @@
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="inserirProva"/>
+      <widget class="QWidget" name="inserirProva">
+       <widget class="QLabel" name="insLocalLabel">
+        <property name="geometry">
+         <rect>
+          <x>259</x>
+          <y>140</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Local da Prova</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="insNomeProvaLineE">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>57</y>
+          <width>241</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QLabel" name="insRobotLabel">
+        <property name="geometry">
+         <rect>
+          <x>259</x>
+          <y>220</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Nome do Robot</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="insLocalLineE">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>137</y>
+          <width>241</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QLabel" name="insNomeProvaLabel">
+        <property name="geometry">
+         <rect>
+          <x>259</x>
+          <y>60</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Nome da Prova</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="insRobotLineE">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>217</y>
+          <width>241</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushInserirProva">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>310</y>
+          <width>110</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Inserir</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="inserirRobot"/>
       <widget class="QWidget" name="listarEquipa"/>
       <widget class="QWidget" name="listarProva"/>
