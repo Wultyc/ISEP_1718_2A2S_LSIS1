@@ -75,6 +75,11 @@ public:
     QLineEdit *insRobotLineE;
     QPushButton *pushInserirProva;
     QWidget *inserirRobot;
+    QLabel *insNomeRobotLabel;
+    QLineEdit *insNomeRobotLineE;
+    QLabel *insNomeEquipaLabel;
+    QLineEdit *insNomeEquipaLineE;
+    QPushButton *pushInserirRobot;
     QWidget *listarEquipa;
     QWidget *listarProva;
     QWidget *listarRobot;
@@ -255,6 +260,26 @@ public:
         stackedWidget->addWidget(inserirProva);
         inserirRobot = new QWidget();
         inserirRobot->setObjectName(QStringLiteral("inserirRobot"));
+        insNomeRobotLabel = new QLabel(inserirRobot);
+        insNomeRobotLabel->setObjectName(QStringLiteral("insNomeRobotLabel"));
+        insNomeRobotLabel->setGeometry(QRect(259, 93, 131, 20));
+        insNomeRobotLabel->setFont(font1);
+        insNomeRobotLineE = new QLineEdit(inserirRobot);
+        insNomeRobotLineE->setObjectName(QStringLiteral("insNomeRobotLineE"));
+        insNomeRobotLineE->setGeometry(QRect(400, 90, 241, 26));
+        insNomeRobotLineE->setFont(font1);
+        insNomeEquipaLabel = new QLabel(inserirRobot);
+        insNomeEquipaLabel->setObjectName(QStringLiteral("insNomeEquipaLabel"));
+        insNomeEquipaLabel->setGeometry(QRect(259, 180, 131, 20));
+        insNomeEquipaLabel->setFont(font1);
+        insNomeEquipaLineE = new QLineEdit(inserirRobot);
+        insNomeEquipaLineE->setObjectName(QStringLiteral("insNomeEquipaLineE"));
+        insNomeEquipaLineE->setGeometry(QRect(400, 177, 241, 26));
+        insNomeEquipaLineE->setFont(font1);
+        pushInserirRobot = new QPushButton(inserirRobot);
+        pushInserirRobot->setObjectName(QStringLiteral("pushInserirRobot"));
+        pushInserirRobot->setGeometry(QRect(390, 290, 110, 40));
+        pushInserirRobot->setFont(font1);
         stackedWidget->addWidget(inserirRobot);
         listarEquipa = new QWidget();
         listarEquipa->setObjectName(QStringLiteral("listarEquipa"));
@@ -348,7 +373,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -420,6 +445,9 @@ public:
         insRobotLabel->setText(QApplication::translate("MainWindow", "Nome do Robot", nullptr));
         insNomeProvaLabel->setText(QApplication::translate("MainWindow", "Nome da Prova", nullptr));
         pushInserirProva->setText(QApplication::translate("MainWindow", "Inserir", nullptr));
+        insNomeRobotLabel->setText(QApplication::translate("MainWindow", "Nome do Robot", nullptr));
+        insNomeEquipaLabel->setText(QApplication::translate("MainWindow", "Nome da Equipa", nullptr));
+        pushInserirRobot->setText(QApplication::translate("MainWindow", "Inserir", nullptr));
         menuInserir->setTitle(QApplication::translate("MainWindow", "Inserir", nullptr));
         menuListar->setTitle(QApplication::translate("MainWindow", "Listar", nullptr));
         menuModificar->setTitle(QApplication::translate("MainWindow", "Modificar", nullptr));

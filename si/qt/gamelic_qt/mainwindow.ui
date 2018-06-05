@@ -18,7 +18,7 @@
     <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>2</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -476,7 +476,92 @@
         </property>
        </widget>
       </widget>
-      <widget class="QWidget" name="inserirRobot"/>
+      <widget class="QWidget" name="inserirRobot">
+       <widget class="QLabel" name="insNomeRobotLabel">
+        <property name="geometry">
+         <rect>
+          <x>259</x>
+          <y>93</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Nome do Robot</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="insNomeRobotLineE">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>90</y>
+          <width>241</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QLabel" name="insNomeEquipaLabel">
+        <property name="geometry">
+         <rect>
+          <x>259</x>
+          <y>180</y>
+          <width>131</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Nome da Equipa</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="insNomeEquipaLineE">
+        <property name="geometry">
+         <rect>
+          <x>400</x>
+          <y>177</y>
+          <width>241</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushInserirRobot">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>290</y>
+          <width>110</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Inserir</string>
+        </property>
+       </widget>
+      </widget>
       <widget class="QWidget" name="listarEquipa"/>
       <widget class="QWidget" name="listarProva"/>
       <widget class="QWidget" name="listarRobot"/>
