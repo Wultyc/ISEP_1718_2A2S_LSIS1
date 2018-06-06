@@ -26,10 +26,21 @@
 #define BT_TX = 9;
 
 #define BOTAO_VERDE = 4;
-#define BOTAO_VERML = 5;
+#define BOTAO_VERML = 2;
 
 int rActivate = 0;
+int rActivate_ll = 0; //antes da modificação como estava?
 int rState = -1;
+
+void changeRobotActivationState(){
+  if(digitalRead(BOTAO_VERDE) == HIGH){
+    rActivate_ll = rActivate; //Preserva o estado atual de ativação
+    rActivate = 1;            //Altera o estado de ativação
+  } else {
+    rActivate_ll = rActivate;
+    rActivate = 0;
+  }
+}
 
 int define_state(){
   return 0;
@@ -39,18 +50,7 @@ bool send_state(int state){
   return true;
 }
 
-void setup() {
-  // put your setup code here, to run once:
-
-}
-
-void loop() {
-  //Determina o estado adequado
-  rState = define_state();
-
-  //Envia ao Sistema de Informação
-  send_state(rState);
-
+void operations(int state){
   //Atua mediante o estado
   switch(rState){
     case 0: //Parado
@@ -65,5 +65,20 @@ void loop() {
       break;
     case 5: //Apagar a chama
       break;
+}
+
+void setup() {
+  attachInterrupt(digitalPinToInterrupt(BOTAO_VERML), changeRobotActivationState, CHANGE);
+}
+
+void loop() {
+  //Determina o estado adequado
+  rState = define_state();
+
+  //Envia ao Sistema de Informação
+  send_state(rState);
+
+  if(){
+    
   }
 }
