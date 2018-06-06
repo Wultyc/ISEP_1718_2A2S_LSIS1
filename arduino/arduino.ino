@@ -42,15 +42,15 @@ void changeRobotActivationState(){
   }
 }
 
-int define_state(){
+int define_state(){ //Determina o estado mais adquado
   return 0;
 }
 
-bool send_state(int state){
+bool send_state(int state){ //Envia o estado por BT
   return true;
 }
 
-void operations(int state){
+void operations(int state){ //Atua perante o estado
   //Atua mediante o estado
   switch(rState){
     case 0: //Parado
@@ -68,17 +68,36 @@ void operations(int state){
 }
 
 void setup() {
+  //Função de interrupção
   attachInterrupt(digitalPinToInterrupt(BOTAO_VERML), changeRobotActivationState, CHANGE);
+
+  //PinModes
+  
+  //Definição do estado inicial do robot
+  int rActivate = 0;
+  int rActivate_ll = 0;
 }
 
 void loop() {
-  //Determina o estado adequado
-  rState = define_state();
 
-  //Envia ao Sistema de Informação
-  send_state(rState);
-
-  if(){
+  if(rActivate == 1){ //Robot ativo
+    
+    rState = define_state();//Determina o estado adequado
+    send_state(rState); //Envia o estado atual para o SI
+    operations(rState); //Executa a operação associa ao estado rState
+    
+  } else if(rActivate == 0 && rActivate_ll != rActivate){ //Robot recem inativado
+    
+    //Desliga todo o movimento
+    /*
+    * Código de desativação
+    */
+    send_state(-1); //Envia para o SI que o robot esta inativo
+    rActivate_ll == rActivate //Iguala os estados
+    
+  } else{ //O robot já está inativo à pelo meno um ciclo
+    
+    send_state(-1);//Envia para o SI que o robot esta inativo
     
   }
 }
