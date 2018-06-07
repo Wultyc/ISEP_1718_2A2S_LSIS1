@@ -89,8 +89,8 @@ void setup() {
   pinMode(BOTAO_VERDE, INPUT)
   pinMode(BOTAO_VERML, INPUT)
   //Definição do estado inicial do robot
-  int rActivate = 0;
-  int rActivate_ll = 0;
+  int rActivate = -1;
+  int rActivate_ll = -1;
 }
 
 void loop() {
