@@ -16,6 +16,7 @@ void bd::inserirEquipa(string nomeE) {
 	prep->setString(1, nomeE);
 	prep->execute();
 	//teste Sourcetree
+	//teste Sourcetree Mario
 	delete prep;
 	delete con;
 }
