@@ -86,8 +86,6 @@ void setup() {
   pinMode(SERVO_MOTOR, OUTPUT)
   pinMode(CHAMA_PIN, INPUT)
   pinMode(CHAMA_LED, OUTPUT)
-  //pinMode(BT_RX, )
-  //pinMode(BT_TX, )
   pinMode(BOTAO_VERDE, INPUT)
   pinMode(BOTAO_VERML, INPUT)
   //Definição do estado inicial do robot
