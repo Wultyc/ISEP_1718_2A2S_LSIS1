@@ -269,3 +269,5 @@ si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/Makefile.Release
 si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/Makefile.Debug
 si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/Makefile
 si/qt/build-gamelic_qt-Desktop_Qt_5_11_0_MSVC2017_64bit-Debug/.qmake.stash
+si/gamelicApplication/gamelicApplication.sln
+si/gamelicApplication/gamelicApplication/gamelicApplication.vcxproj

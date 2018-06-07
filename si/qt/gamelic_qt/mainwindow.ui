@@ -1441,8 +1441,8 @@
    <widget class="QMenu" name="menuInserir">
     <property name="geometry">
      <rect>
-      <x>405</x>
-      <y>100</y>
+      <x>721</x>
+      <y>319</y>
       <width>135</width>
       <height>143</height>
      </rect>
