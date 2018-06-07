@@ -21,6 +21,7 @@
 
 #define CHAMA_PIN = "A5";
 #define CHAMA_LED = 7;
+#define CHAMA_PARAM = 200;
 
 #define BT_RX = 8;
 #define BT_TX = 9;
