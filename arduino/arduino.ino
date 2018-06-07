@@ -72,7 +72,24 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(BOTAO_VERML), changeRobotActivationState, CHANGE);
 
   //PinModes
-  
+  pinMode(MOTOR_A_DIR, OUTPUT)
+  pinMode(MOTOR_B_DIR, OUTPUT)
+  pinMode(MOTOR_A_PWM, OUTPUT)
+  pinMode(MOTOR_B_PWM, OUTPUT)
+  pinMode(MOTOR_A_CS, OUTPUT)
+  pinMode(MOTOR_B_CS, OUTPUT)
+  pinMode(SONAR_TRIG, OUTPUT)
+  pinMode(SONAR_ECHO_FRENTE, INPUT)
+  pinMode(SONAR_ECHO_DIREITA, INPUT)
+  pinMode(SONAR_ECHO_ESQUERDA, INPUT)
+  pinMode(VENTOINHA_INA, OUTPUT)
+  pinMode(SERVO_MOTOR, OUTPUT)
+  pinMode(CHAMA_PIN, INPUT)
+  pinMode(CHAMA_LED, OUTPUT)
+  //pinMode(BT_RX, )
+  //pinMode(BT_TX, )
+  pinMode(BOTAO_VERDE, INPUT)
+  pinMode(BOTAO_VERML, INPUT)
   //Definição do estado inicial do robot
   int rActivate = 0;
   int rActivate_ll = 0;
@@ -83,7 +100,6 @@ void loop() {
   if(rActivate == 1){ //Robot ativo
     
     rState = define_state();//Determina o estado adequado
-    send_state(rState); //Envia o estado atual para o SI
     operations(rState); //Executa a operação associa ao estado rState
     
   } else if(rActivate == 0 && rActivate_ll != rActivate){ //Robot recem inativado
@@ -92,12 +108,15 @@ void loop() {
     /*
     * Código de desativação
     */
-    send_state(-1); //Envia para o SI que o robot esta inativo
+    rState = -1;//Define o estado para -1
     rActivate_ll == rActivate //Iguala os estados
     
   } else{ //O robot já está inativo à pelo meno um ciclo
     
-    send_state(-1);//Envia para o SI que o robot esta inativo
+    rState = -1;//Define o estado para -1
     
   }
+  
+  send_state(rState); //Envia o estado atual para o SI
+  
 }
