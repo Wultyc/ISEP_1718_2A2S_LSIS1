@@ -1,5 +1,4 @@
 #include "mainwindow.h"
-#include "bd.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -76,14 +75,45 @@ void MainWindow::on_eliminarRobotAction_triggered()
 
 void MainWindow::on_pushInserirEquipa_clicked()
 {
-    QString nome = ui->insNomeLineE->text();
-	bd bd;
-	bd.inserirEquipa(nome.toStdString());
+	QString nomeQE = ui->insNomeLineE->text();
+	string nomeE = nomeQE.toStdString();
+	bd.inserirEquipa(nomeE);
+	inserirElemento(nomeE);
+}
+void MainWindow::inserirElemento(string nomeE) {
 
 	QString elemento1 = ui->insEle1LineE->text();
-	//if (!(elemento1.isEmpty()))
-	//{
-		//bd.inserirElementos(elemento1.toStdString(), nome.toStdString());
-	//}
-    //ui->insEle1LineE->setText(nome);
+	QString elemento2 = ui->insEle2LineE->text();
+	QString elemento3 = ui->insEle3LineE->text();
+	QString elemento4 = ui->insEle4LineE->text();
+	QString elemento5 = ui->insEle5LineE->text();
+	QString elemento6 = ui->insEle6LineE->text();
+	QString elemento7 = ui->insEle7LineE->text();
+	QString elemento8 = ui->insEle8LineE->text();
+
+	if (!(elemento1.isEmpty())) {
+		bd.inserirElementos(elemento1.toStdString(), nomeE);
+	}
+	if (!(elemento2.isEmpty())) {
+		bd.inserirElementos(elemento2.toStdString(), nomeE);
+	}
+	if (!(elemento3.isEmpty())) {
+		bd.inserirElementos(elemento3.toStdString(), nomeE);
+	}
+	if (!(elemento4.isEmpty())) {
+		bd.inserirElementos(elemento4.toStdString(), nomeE);
+	}
+	if (!(elemento5.isEmpty())) {
+		bd.inserirElementos(elemento5.toStdString(), nomeE);
+	}
+	if (!(elemento6.isEmpty())) {
+		bd.inserirElementos(elemento6.toStdString(), nomeE);
+	}
+	if (!(elemento7.isEmpty())) {
+		bd.inserirElementos(elemento7.toStdString(), nomeE);
+	}
+	if (!(elemento8.isEmpty())) {
+		bd.inserirElementos(elemento8.toStdString(), nomeE);
+	}
+
 }

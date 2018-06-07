@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\gamelicApplication\gamelicApplication\bd.h"
+
+using namespace std;
 
 namespace Ui {
 class MainWindow;
@@ -13,6 +16,8 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    bd bd;
+	void inserirElemento(string nomeE);
 
 private slots:
 

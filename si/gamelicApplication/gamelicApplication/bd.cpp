@@ -23,7 +23,7 @@ void bd::inserirEquipa(string nomeE) {
 
 void bd::inserirElementos(string nomeEl, string nomeE) {
 	connect();
-	prep = con->prepareStatement("INSERT INTO `robo`.`elementos`(`nome`)VALUES(?) WHERE Equipas_idEquipas = equipas.idEquipas AND equipas.nome =(?)");
+	prep = con->prepareStatement("INSERT INTO `robo`.`elementos`(`nome`)VALUES(?) WHERE equipas.nome =(?)");
 	prep->setString(1, nomeEl);
 	prep->setString(2,nomeE);
 	prep->execute();
