@@ -15,6 +15,7 @@ void bd::inserirEquipa(string nomeE) {
 	prep = con->prepareStatement("INSERT INTO `robo`.`equipas`(`nome`)VALUES(?)");
 	prep->setString(1, nomeE);
 	prep->execute();
+	//teste Sourcetree
 	delete prep;
 	delete con;
 }
