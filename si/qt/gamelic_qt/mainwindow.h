@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "C:\Users\Junior\Documents\Faculdade\2Ano\LSIS1\si\gamelicApplication\gamelicApplication\bd.h"
+#include "..\..\gamelicApplication\gamelicApplication\bd.h"
 
 using namespace std;
 
@@ -46,6 +46,8 @@ private slots:
     void on_eliminarRobotAction_triggered();
 
     void on_pushInserirEquipa_clicked();
+
+    void on_mensagemInicialAction_triggered();
 
 private:
     Ui::MainWindow *ui;

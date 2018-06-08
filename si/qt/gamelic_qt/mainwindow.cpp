@@ -117,3 +117,8 @@ void MainWindow::inserirElemento(string nomeE) {
 	}
 
 }
+
+void MainWindow::on_mensagemInicialAction_triggered()
+{
+    ui->stackedWidget->setCurrentWidget(ui->main);
+}
