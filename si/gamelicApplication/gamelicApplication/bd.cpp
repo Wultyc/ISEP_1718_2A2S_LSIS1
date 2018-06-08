@@ -61,3 +61,17 @@ void bd::inserirStates(int state, string nomeP) {
 	delete prep;
 	delete con;
 }
+
+vector<string> bd::buscarElementos() {
+	vector<string> results;
+	connect();
+	res = stmt->executeQuery("SELECT e.elemento FROM robo.elementos e WHERE e.Equipas_idEquipas = 1");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	//results.push_back("boas");
+	}
+	return results;
+	delete res;
+	delete con;
+}

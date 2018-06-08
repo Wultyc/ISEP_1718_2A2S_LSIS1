@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <vector>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -121,4 +122,26 @@ void MainWindow::inserirElemento(string nomeE) {
 void MainWindow::on_mensagemInicialAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->main);
+}
+
+void MainWindow::on_pushListarRobot_clicked()
+{
+	vector<string> elementos = bd.buscarElementos();
+	int s = 0;
+	for (int i = 0;i<5;i++) {
+
+		s++;
+		string teste = to_string(s);
+		QString testeQ = QString::fromStdString(teste);
+		QTableWidgetItem *item1 = new QTableWidgetItem(testeQ);
+
+		/*string nome = elementos.front();
+		QString testeNQ = QString::fromStdString(nome);
+		QTableWidgetItem *itemNome = new QTableWidgetItem(testeNQ);*/
+		ui->tabelaListarEquipa->setRowCount(5);
+
+		ui->tabelaListarEquipa->setItem(i, 0, item1);
+        //ui->tabelaListarEquipa->setItem(i,1,itemNome);
+    }
+
 }

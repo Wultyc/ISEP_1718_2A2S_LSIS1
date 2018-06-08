@@ -11,6 +11,7 @@ using namespace std;
 #include <cppconn/prepared_statement.h>
 
 #include <stdlib.h>
+#include <vector>
 
 class bd {
 
@@ -27,4 +28,5 @@ public:
 	void inserirRobo(string nomeR, string nomeE);
 	void inserirProva(string nomeP,string local, string nomeR);
 	void inserirStates(int state, string nomeP);
+	vector<string> buscarElementos();
 };

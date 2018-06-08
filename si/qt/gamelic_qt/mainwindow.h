@@ -49,6 +49,8 @@ private slots:
 
     void on_mensagemInicialAction_triggered();
 
+    void on_pushListarRobot_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
