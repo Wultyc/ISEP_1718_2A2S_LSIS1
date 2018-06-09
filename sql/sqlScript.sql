@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `robo`.`Elementos` (
   `idElementos` INT NOT NULL AUTO_INCREMENT,
   `elemento` VARCHAR(45) NULL,
   `Equipas_idEquipas` INT NOT NULL,
-  PRIMARY KEY (`idElementos`, `Equipas_idEquipas`),
+  PRIMARY KEY (`idElementos`),
   INDEX `fk_Elementos_Equipas1_idx` (`Equipas_idEquipas` ASC),
   CONSTRAINT `fk_Elementos_Equipas1`
     FOREIGN KEY (`Equipas_idEquipas`)

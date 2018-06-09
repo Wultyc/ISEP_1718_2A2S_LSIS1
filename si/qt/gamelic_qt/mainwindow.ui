@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -354,6 +354,19 @@
         </property>
         <property name="text">
          <string>Inserir</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="check">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>20</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Check</string>
         </property>
        </widget>
       </widget>
@@ -1508,7 +1521,7 @@
    <widget class="QMenu" name="menuListar">
     <property name="geometry">
      <rect>
-      <x>387</x>
+      <x>453</x>
       <y>100</y>
       <width>135</width>
       <height>143</height>

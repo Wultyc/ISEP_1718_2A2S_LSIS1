@@ -11,21 +11,40 @@ void bd::connect() {
 }
 
 void bd::inserirEquipa(string nomeE) {
+
 	connect();
+
 	prep = con->prepareStatement("INSERT INTO `robo`.`equipas`(`nome`)VALUES(?)");
 	prep->setString(1, nomeE);
 	prep->execute();
 	//teste Sourcetree
 	//teste Sourcetree Mario
+	prep->close();
 	delete prep;
+	con->close();
 	delete con;
 }
 
 void bd::inserirElementos(string nomeEl, string nomeE) {
+
 	connect();
-	prep = con->prepareStatement("INSERT INTO `robo`.`elementos`(`nome`)VALUES(?) WHERE equipas.nome =(?)");
+
+	int i;
+	prep = con->prepareStatement("SELECT e.idEquipas FROM `robo`.`equipas` e WHERE e.nome=(?)");
+	prep->setString(1,nomeE);
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		i = res->getInt(1);
+	}
+	res->close();
+	prep->close();
+	delete res;
+	delete prep;
+
+	prep = con->prepareStatement("INSERT INTO `robo`.`elementos`(`elemento`,`Equipas_idEquipas`)VALUES(?,?)");
 	prep->setString(1, nomeEl);
-	prep->setString(2,nomeE);
+	prep->setInt(2,i);
 	prep->execute();
 	delete prep;
 	delete con;
@@ -65,7 +84,8 @@ void bd::inserirStates(int state, string nomeP) {
 vector<string> bd::buscarElementos() {
 	vector<string> results;
 	connect();
-	res = stmt->executeQuery("SELECT e.elemento FROM robo.elementos e WHERE e.Equipas_idEquipas = 1");
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 1");
 	while (res->next()) {
 		string nome = res->getString(1);
 		results.push_back(nome);

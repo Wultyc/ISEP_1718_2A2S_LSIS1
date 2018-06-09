@@ -74,14 +74,13 @@ void MainWindow::on_eliminarRobotAction_triggered()
     ui->stackedWidget->setCurrentWidget(ui->eliminarRobot);
 }
 
-void MainWindow::on_pushInserirEquipa_clicked()
+void MainWindow::on_check_clicked()
 {
+
 	QString nomeQE = ui->insNomeLineE->text();
-	string nomeE = nomeQE.toStdString();
-	bd.inserirEquipa(nomeE);
-	inserirElemento(nomeE);
+	bd.inserirEquipa(nomeQE.toStdString());
 }
-void MainWindow::inserirElemento(string nomeE) {
+void MainWindow::on_pushInserirEquipa_clicked() {
 
 	QString elemento1 = ui->insEle1LineE->text();
 	QString elemento2 = ui->insEle2LineE->text();
@@ -91,6 +90,11 @@ void MainWindow::inserirElemento(string nomeE) {
 	QString elemento6 = ui->insEle6LineE->text();
 	QString elemento7 = ui->insEle7LineE->text();
 	QString elemento8 = ui->insEle8LineE->text();
+
+	
+	QString nomeQE = ui->insNomeLineE->text();
+	string nomeE = nomeQE.toStdString();
+
 
 	if (!(elemento1.isEmpty())) {
 		bd.inserirElementos(elemento1.toStdString(), nomeE);
@@ -128,19 +132,31 @@ void MainWindow::on_pushListarRobot_clicked()
 {
 	vector<string> elementos = bd.buscarElementos();
 	int s = 0;
-	for (int i = 0;i<5;i++) {
+	for (int i = 0;i<9;i++) {
 
-		s++;
+		/*s++;
 		string teste = to_string(s);
 		QString testeQ = QString::fromStdString(teste);
-		QTableWidgetItem *item1 = new QTableWidgetItem(testeQ);
+		QTableWidgetItem *item1 = new QTableWidgetItem(testeQ);*/
 
-		/*string nome = elementos.front();
+		/*string nome;
+		for (unsigned i = 0; i < elementos.size(); i++)
+		{
+			 nome = elementos.at[i].front();
+		}
+		for (unsigned i = 0; i < elementos.size(); i++)
+		{
+			QString testeNQ = QString::fromStdString(elementos.at[i]);
+			QTableWidgetItem *itemNome = new QTableWidgetItem(testeNQ);
+			ui->tabelaListarEquipa->setRowCount(i);
+			ui->tabelaListarEquipa->setItem(i, 1, itemNome);
+		}*/
+		string nome = elementos.front();
 		QString testeNQ = QString::fromStdString(nome);
-		QTableWidgetItem *itemNome = new QTableWidgetItem(testeNQ);*/
-		ui->tabelaListarEquipa->setRowCount(5);
+		QTableWidgetItem *itemNome = new QTableWidgetItem(testeNQ);
+		ui->tabelaListarEquipa->setRowCount(i);
 
-		ui->tabelaListarEquipa->setItem(i, 0, item1);
+		ui->tabelaListarEquipa->setItem(i, 1, itemNome);
         //ui->tabelaListarEquipa->setItem(i,1,itemNome);
     }
 
