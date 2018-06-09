@@ -1,33 +1,39 @@
+#include <Servo.h>
+
 //Parametrizacao
-#define MOTOR_A_DIR = 12;
-#define MOTOR_B_DIR = 13;
-#define MOTOR_A_PWM = 3;
-#define MOTOR_B_PWM = 11;
-//#define MOTOR_A_BRK = 9;
-//#define MOTOR_B_BRK = 8;
-#define MOTOR_A_CS = "A0";
-#define MOTOR_B_CS = "A1";
+#define MOTOR_A_DIR 12
+#define MOTOR_B_DIR 13
+#define MOTOR_A_PWM 3
+#define MOTOR_B_PWM 11
+//#define MOTOR_A_BRK 9
+//#define MOTOR_B_BRK 8
+#define MOTOR_A_CS A0
+#define MOTOR_B_CS A1
 
-#define SONAR_TRIG = 2;
-#define SONAR_ECHO_FRENTE = "A2";
-#define SONAR_ECHO_DIREITA = "A3";
-#define SONAR_ECHO_ESQUERDA = "A4";
-#define SONAR_DIST = 5;
+#define SONAR_TRIG 2
+#define SONAR_ECHO_FRENTE A2
+#define SONAR_ECHO_DIREITA A3
+#define SONAR_ECHO_ESQUERDA A4
+#define SONAR_DIST 5
 
-#define VENTOINHA_INA = 6;
+#define VENTOINHA_INA 6
 
-#define SERVO_MOTOR = 10;
-#define SERVO_DELAY = 25;
+#define SERVO_MOTOR 10
+#define SERVO_DELAY 25
+#define SERVO_MAX_ANGLE 180
+#define SERVO_MIN_ANGLE 0
 
-#define CHAMA_PIN = "A5";
-#define CHAMA_LED = 7;
-#define CHAMA_PARAM = 200;
+#define CHAMA_PIN A5
+#define CHAMA_LED 7
+#define CHAMA_PARAM 200
 
-#define BT_RX = 8;
-#define BT_TX = 9;
+#define BT_RX 8
+#define BT_TX 9
 
-#define BOTAO_VERDE = 4;
-#define BOTAO_VERML = 2;
+#define BOTAO_VERDE 4
+#define BOTAO_VERML 2
+
+Servo servo;
 
 int rActivate = 0;
 int rActivate_ll = 0; //antes da modificação como estava?
@@ -42,6 +48,10 @@ float distanceE = 0;
 long durationF = 0;
 long durationD = 0;
 long durationE = 0;
+
+int angle_chama = 0;
+int angle_servo = 0;
+int incrm_servo = 1;
 
 void changeRobotActivationState(){
   if(digitalRead(BOTAO_VERDE) == HIGH){
@@ -69,16 +79,16 @@ void getDistances(){
   durationE = pulseIn(SONAR_ECHO_ESQUERDA, HIGH);
   
   //Calculo da distancia
-  distanceF= durationF*0.034/2;
-  distanceD= durationD*0.034/2;
-  distanceE= durationE*0.034/2;
+  distanceF = durationF*0.034/2;
+  distanceD = durationD*0.034/2;
+  distanceE = durationE*0.034/2;
 }
 
-void setSpeeds(inf f, int d, int e){
+void setSpeeds(int f, int d, int e){
   
 }
 
-void setDirs(inf f, int d, int e){
+void setDirs(int f, int d, int e){
   
 }
 
@@ -129,6 +139,7 @@ void operations(int state){ //Atua perante o estado
       break;
     case 5: //Apagar a chama
       break;
+  }
 }
 
 void setup() {
@@ -156,12 +167,29 @@ void setup() {
   //Definição do estado inicial do robot
   int rActivate = -1;
   int rActivate_ll = -1;
+
+  //Angulo Inicial do Servo
+  angle_servo = 90;
+
+  //Config Servo
+  servo.attach(SERVO_MOTOR);
+  servo.write(angle_servo);
 }
 
 void loop() {
-
+  servo.write(angle_servo); //Roda o servo
   rState = define_state();//Determina o estado adequado
   operations(rState); //Define o movimento do robot
   send_state(rState); //Envia o estado atual para o SI
+
+  //Evita rotações não possiveis
+  if(angle_servo == SERVO_MAX_ANGLE){
+    incrm_servo = -1;
+  }else if (angle_servo == SERVO_MIN_ANGLE){
+    incrm_servo = 1;
+  }
+
+  //Define o angulo do prox loop
+  angle_servo += incrm_servo;
   
 }
