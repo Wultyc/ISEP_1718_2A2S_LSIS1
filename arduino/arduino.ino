@@ -12,7 +12,7 @@
 #define SONAR_ECHO_FRENTE = "A2";
 #define SONAR_ECHO_DIREITA = "A3";
 #define SONAR_ECHO_ESQUERDA = "A4";
-#define SONAR_DIST = 7;
+#define SONAR_DIST = 5;
 
 #define VENTOINHA_INA = 6;
 
@@ -21,6 +21,7 @@
 
 #define CHAMA_PIN = "A5";
 #define CHAMA_LED = 7;
+#define CHAMA_PARAM = 200;
 
 #define BT_RX = 8;
 #define BT_TX = 9;
@@ -82,7 +83,29 @@ void setDirs(inf f, int d, int e){
 }
 
 int define_state(){ //Determina o estado mais adquado
-  return 0;
+  int state;
+  getDistances();
+
+  if(rActivate == 0){
+    state = -1;
+  } else if(rActivate == 1 && rActivate_ll != rActivate){
+    rActivate_ll = rActivate; //mesmo que carregem de novo no botão verde ele não volta a este estado
+    state = 0;
+  } else if(distanceD <= SONAR_DIST && distanceD <= SONAR_DIST){
+    state = 1;
+  } else if(distanceF <= SONAR_DIST && distanceD <= SONAR_DIST && distanceE <= SONAR_DIST){
+    state = 2;
+  } else if(distanceF <= SONAR_DIST && distanceE <= SONAR_DIST){
+    state = 3;
+  } else if(distanceF <= SONAR_DIST && distanceD <= SONAR_DIST){
+    state = 4;
+  } else if(analogRead(A0) >= CHAMA_PARAM){
+    state = 5;
+  } else{
+    state = 1;
+  }
+  
+  return state;
 }
 
 bool send_state(int state){ //Envia o estado por BT
@@ -138,6 +161,7 @@ void setup() {
 void loop() {
 
   rState = define_state();//Determina o estado adequado
+  operations(rState); //Define o movimento do robot
   send_state(rState); //Envia o estado atual para o SI
   
 }
