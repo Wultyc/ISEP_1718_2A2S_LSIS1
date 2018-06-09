@@ -32,6 +32,16 @@ int rActivate = 0;
 int rActivate_ll = 0; //antes da modificação como estava?
 int rState = -1;
 
+//Distancia
+float distanceF = 0;
+float distanceD = 0;
+float distanceE = 0;
+
+//Duração
+long durationF = 0;
+long durationD = 0;
+long durationE = 0;
+
 void changeRobotActivationState(){
   if(digitalRead(BOTAO_VERDE) == HIGH){
     rActivate_ll = rActivate; //Preserva o estado atual de ativação
@@ -40,6 +50,35 @@ void changeRobotActivationState(){
     rActivate_ll = rActivate;
     rActivate = 0;
   }
+}
+
+void getDistances(){
+  //Limpeza do Pino Trig
+  digitalWrite(SONAR_TRIG, LOW);
+  delayMicroseconds(2);
+  
+  //Ativa o Pin Trig por 10 microsegundos
+  digitalWrite(SONAR_TRIG, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(SONAR_TRIG, LOW);
+  
+  //Lê os Pin Echo e retorna o tempo de viagem da onda sonoar em microsegundos
+  durationF = pulseIn(SONAR_ECHO_FRENTE, HIGH);
+  durationD = pulseIn(SONAR_ECHO_DIREITA, HIGH);
+  durationE = pulseIn(SONAR_ECHO_ESQUERDA, HIGH);
+  
+  //Calculo da distancia
+  distanceF= durationF*0.034/2;
+  distanceD= durationD*0.034/2;
+  distanceE= durationE*0.034/2;
+}
+
+void setSpeeds(inf f, int d, int e){
+  
+}
+
+void setDirs(inf f, int d, int e){
+  
 }
 
 int define_state(){ //Determina o estado mais adquado
@@ -53,6 +92,8 @@ bool send_state(int state){ //Envia o estado por BT
 void operations(int state){ //Atua perante o estado
   //Atua mediante o estado
   switch(rState){
+    case -1: //Desativado
+      break;
     case 0: //Parado
       break;
     case 1: //Andar para a Frente
@@ -72,22 +113,23 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(BOTAO_VERML), changeRobotActivationState, CHANGE);
 
   //PinModes
-  pinMode(MOTOR_A_DIR, OUTPUT)
-  pinMode(MOTOR_B_DIR, OUTPUT)
-  pinMode(MOTOR_A_PWM, OUTPUT)
-  pinMode(MOTOR_B_PWM, OUTPUT)
-  pinMode(MOTOR_A_CS, OUTPUT)
-  pinMode(MOTOR_B_CS, OUTPUT)
-  pinMode(SONAR_TRIG, OUTPUT)
-  pinMode(SONAR_ECHO_FRENTE, INPUT)
-  pinMode(SONAR_ECHO_DIREITA, INPUT)
-  pinMode(SONAR_ECHO_ESQUERDA, INPUT)
-  pinMode(VENTOINHA_INA, OUTPUT)
-  pinMode(SERVO_MOTOR, OUTPUT)
-  pinMode(CHAMA_PIN, INPUT)
-  pinMode(CHAMA_LED, OUTPUT)
-  pinMode(BOTAO_VERDE, INPUT)
-  pinMode(BOTAO_VERML, INPUT)
+  pinMode(MOTOR_A_DIR, OUTPUT);
+  pinMode(MOTOR_B_DIR, OUTPUT);
+  pinMode(MOTOR_A_PWM, OUTPUT);
+  pinMode(MOTOR_B_PWM, OUTPUT);
+  pinMode(MOTOR_A_CS, OUTPUT);
+  pinMode(MOTOR_B_CS, OUTPUT);
+  pinMode(SONAR_TRIG, OUTPUT);
+  pinMode(SONAR_ECHO_FRENTE, INPUT);
+  pinMode(SONAR_ECHO_DIREITA, INPUT);
+  pinMode(SONAR_ECHO_ESQUERDA, INPUT);
+  pinMode(VENTOINHA_INA, OUTPUT);
+  pinMode(SERVO_MOTOR, OUTPUT);
+  pinMode(CHAMA_PIN, INPUT);
+  pinMode(CHAMA_LED, OUTPUT);
+  pinMode(BOTAO_VERDE, INPUT);
+  pinMode(BOTAO_VERML, INPUT);
+  
   //Definição do estado inicial do robot
   int rActivate = -1;
   int rActivate_ll = -1;
@@ -95,26 +137,7 @@ void setup() {
 
 void loop() {
 
-  if(rActivate == 1){ //Robot ativo
-    
-    rState = define_state();//Determina o estado adequado
-    operations(rState); //Executa a operação associa ao estado rState
-    
-  } else if(rActivate == 0 && rActivate_ll != rActivate){ //Robot recem inativado
-    
-    //Desliga todo o movimento
-    /*
-    * Código de desativação
-    */
-    rState = -1;//Define o estado para -1
-    rActivate_ll == rActivate //Iguala os estados
-    
-  } else{ //O robot já está inativo à pelo meno um ciclo
-    
-    rState = -1;//Define o estado para -1
-    
-  }
-  
+  rState = define_state();//Determina o estado adequado
   send_state(rState); //Envia o estado atual para o SI
   
 }
