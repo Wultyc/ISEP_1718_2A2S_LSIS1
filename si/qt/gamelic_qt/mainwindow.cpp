@@ -130,7 +130,7 @@ void MainWindow::on_mensagemInicialAction_triggered()
 void MainWindow::on_pushListarRobot_clicked()
 {
 	vector<string> elementos = bd.buscarElementos();
-	for (int i = 0;i<8;i++) {
+	for (int i = 0;i<elementos.size();i++) {
 		QString testeNQ = QString::fromStdString(elementos[i]);
 		ui->tabelaListarEquipa->insertRow(ui->tabelaListarEquipa->rowCount());
 		ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount()-1, 1, new QTableWidgetItem(testeNQ));
