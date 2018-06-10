@@ -17,7 +17,6 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     bd bd;
-	void inserirElemento(string nomeE);
 
 private slots:
 

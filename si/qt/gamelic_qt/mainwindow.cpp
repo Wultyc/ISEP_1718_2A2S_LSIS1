@@ -1,6 +1,5 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include <vector>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -131,33 +130,10 @@ void MainWindow::on_mensagemInicialAction_triggered()
 void MainWindow::on_pushListarRobot_clicked()
 {
 	vector<string> elementos = bd.buscarElementos();
-	int s = 0;
-	for (int i = 0;i<9;i++) {
-
-		/*s++;
-		string teste = to_string(s);
-		QString testeQ = QString::fromStdString(teste);
-		QTableWidgetItem *item1 = new QTableWidgetItem(testeQ);*/
-
-		/*string nome;
-		for (unsigned i = 0; i < elementos.size(); i++)
-		{
-			 nome = elementos.at[i].front();
-		}
-		for (unsigned i = 0; i < elementos.size(); i++)
-		{
-			QString testeNQ = QString::fromStdString(elementos.at[i]);
-			QTableWidgetItem *itemNome = new QTableWidgetItem(testeNQ);
-			ui->tabelaListarEquipa->setRowCount(i);
-			ui->tabelaListarEquipa->setItem(i, 1, itemNome);
-		}*/
-		string nome = elementos.front();
-		QString testeNQ = QString::fromStdString(nome);
-		QTableWidgetItem *itemNome = new QTableWidgetItem(testeNQ);
-		ui->tabelaListarEquipa->setRowCount(i);
-
-		ui->tabelaListarEquipa->setItem(i, 1, itemNome);
-        //ui->tabelaListarEquipa->setItem(i,1,itemNome);
+	for (int i = 0;i<8;i++) {
+		QString testeNQ = QString::fromStdString(elementos[i]);
+		ui->tabelaListarEquipa->insertRow(ui->tabelaListarEquipa->rowCount());
+		ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount()-1, 1, new QTableWidgetItem(testeNQ));
     }
 
 }

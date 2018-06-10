@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>4</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -1521,8 +1521,8 @@
    <widget class="QMenu" name="menuListar">
     <property name="geometry">
      <rect>
-      <x>453</x>
-      <y>100</y>
+      <x>769</x>
+      <y>319</y>
       <width>135</width>
       <height>143</height>
      </rect>

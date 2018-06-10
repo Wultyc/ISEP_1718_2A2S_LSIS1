@@ -89,7 +89,6 @@ vector<string> bd::buscarElementos() {
 	while (res->next()) {
 		string nome = res->getString(1);
 		results.push_back(nome);
-	//results.push_back("boas");
 	}
 	return results;
 	delete res;
