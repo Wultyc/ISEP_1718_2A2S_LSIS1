@@ -1,6 +1,7 @@
 #include <Servo.h>
 
 //Parametrizacao
+//Motores (A: Direita | B: Esquerda)
 #define MOTOR_A_DIR 12
 #define MOTOR_B_DIR 13
 #define MOTOR_A_PWM 3
@@ -10,34 +11,40 @@
 #define MOTOR_A_CS A0
 #define MOTOR_B_CS A1
 
+//Sonares
 #define SONAR_TRIG 2
 #define SONAR_ECHO_FRENTE A2
 #define SONAR_ECHO_DIREITA A3
 #define SONAR_ECHO_ESQUERDA A4
 #define SONAR_DIST 5
 
+//Propeller
 #define VENTOINHA_INA 6
 
+//Servomotor
 #define SERVO_MOTOR 10
 #define SERVO_DELAY 25
 #define SERVO_MAX_ANGLE 180
 #define SERVO_MIN_ANGLE 0
 
+//Sensor de Chama
 #define CHAMA_PIN A5
 #define CHAMA_LED 7
 #define CHAMA_PARAM 200
 
+//Bluetooth
 #define BT_RX 8
 #define BT_TX 9
 
+//Botões de Ativação
 #define BOTAO_VERDE 4
 #define BOTAO_VERML 2
 
-Servo servo;
+Servo servo;  //Objeto de controlo do servo
 
-int rActivate = 0;
-int rActivate_ll = 0; //antes da modificação como estava?
-int rState = -1;
+int rActivate = 0;    //Estado de ativação
+int rActivate_ll = 0; //Indica o estado de ativação antes da ultima alteração
+int rState = -1;      //Estado
 
 //Distancia
 float distanceF = 0;
@@ -49,9 +56,9 @@ long durationF = 0;
 long durationD = 0;
 long durationE = 0;
 
-int angle_chama = 0;
-int angle_servo = 0;
-int incrm_servo = 1;
+int angle_chama = 0;  //Angulo da chama em relação ao robot
+int angle_servo = 0;  //Angulo atual do Servo
+int incrm_servo = 1;  //Incremento do anglulo do servo
 
 void changeRobotActivationState(){
   if(digitalRead(BOTAO_VERDE) == HIGH){
@@ -63,6 +70,7 @@ void changeRobotActivationState(){
   }
 }
 
+//Determina a distancia dos sonares aos objetos
 void getDistances(){
   //Limpeza do Pino Trig
   digitalWrite(SONAR_TRIG, LOW);
@@ -84,11 +92,13 @@ void getDistances(){
   distanceE = durationE*0.034/2;
 }
 
-void setSpeeds(int f, int d, int e){
+//Atribui as velocidades
+void setSpeeds(int d, int e){
   
 }
 
-void setDirs(int f, int d, int e){
+//Atribui as Direções
+void setDirs(int d, int e){
   
 }
 
