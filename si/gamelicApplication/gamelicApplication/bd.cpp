@@ -81,16 +81,47 @@ void bd::inserirStates(int state, string nomeP) {
 	delete con;
 }
 
-vector<string> bd::buscarElementos() {
+vector<string> bd::buscarElementos(int num) {
 	vector<string> results;
 	connect();
-	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 1");
+	prep = con->prepareStatement("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = ?");
+	//res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 1");
+	prep->setInt(1, num);
+	res = prep->executeQuery();
 	while (res->next()) {
 		string nome = res->getString(1);
 		results.push_back(nome);
 	}
 	return results;
 	delete res;
+	delete prep;
+	delete con;
+}
+
+int bd::buscarNumeroEquipas() {
+	int result;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT count(idEquipas) FROM `robo`.`equipas`;");
+	while (res->next()) {
+		result = res->getInt(1);
+	}
+	return result;
+	delete res;
+	delete con;
+}
+
+string bd::buscarNomeEquipa(int num) {
+	string result;
+	connect();
+	prep = con->prepareStatement("SELECT e.nome from `robo`.`equipas` e WHERE e.idEquipas = ?");
+	prep->setInt(1,num);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getString(1);
+	}
+	return result;
+	delete res;
+	delete prep;
 	delete con;
 }

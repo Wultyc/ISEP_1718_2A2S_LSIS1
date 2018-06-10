@@ -129,11 +129,21 @@ void MainWindow::on_mensagemInicialAction_triggered()
 
 void MainWindow::on_pushListarRobot_clicked()
 {
-	vector<string> elementos = bd.buscarElementos();
-	for (int i = 0;i<elementos.size();i++) {
-		QString testeNQ = QString::fromStdString(elementos[i]);
-		ui->tabelaListarEquipa->insertRow(ui->tabelaListarEquipa->rowCount());
-		ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount()-1, 1, new QTableWidgetItem(testeNQ));
-    }
-
+	string numS;
+	int num = bd.buscarNumeroEquipas();
+	for (int j = 1;j <= num;j++) {
+		vector<string> elementos = bd.buscarElementos(j);
+		numS = bd.buscarNomeEquipa(j);
+		for (int i = 0;i < elementos.size();i++) {
+			QString testeNQ = QString::fromStdString(elementos[i]);
+			QString numSQ = QString::fromStdString(numS);
+			ui->tabelaListarEquipa->insertRow(ui->tabelaListarEquipa->rowCount());
+			QTableWidgetItem * nomeEquipa = new QTableWidgetItem(numSQ);
+			QTableWidgetItem * nomeElemento = new QTableWidgetItem(testeNQ);
+			nomeEquipa->setTextAlignment(Qt::AlignCenter);
+			nomeElemento->setTextAlignment(Qt::AlignCenter);
+			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 0, nomeEquipa);
+			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 1, nomeElemento);
+		}
+	}
 }

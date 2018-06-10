@@ -28,5 +28,7 @@ public:
 	void inserirRobo(string nomeR, string nomeE);
 	void inserirProva(string nomeP,string local, string nomeR);
 	void inserirStates(int state, string nomeP);
-	vector<string> buscarElementos();
+	vector<string> buscarElementos(int num);
+	int buscarNumeroEquipas();
+	string buscarNomeEquipa(int num);
 };
