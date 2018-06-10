@@ -214,6 +214,97 @@ int bd::buscarNumeroRobo() {
 	delete con;
 }
 
+vector<int> bd::ListarIDProva() {
+	vector<int> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT idProva FROM `robo`.`prova`");
+
+	while (res->next()) {
+		int num = res->getInt(1);
+		results.push_back(num);
+	}
+	return results;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+vector<string> bd::ListarNomeProva() {
+	vector<string> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT nome FROM `robo`.`prova`");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete stmt;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+vector<string> bd::ListarLocalProva() {
+	vector<string> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT local FROM `robo`.`prova`");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete stmt;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+vector<string> bd::ListarDataProva() {
+	vector<string> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT data FROM `robo`.`prova`");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete stmt;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+string bd::buscarNomeProva(int num) {
+	string result;
+	connect();
+	prep = con->prepareStatement("SELECT e.nome from `robo`.`prova` e WHERE e.idProva = ?");
+	prep->setInt(1, num);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getString(1);
+	}
+	return result;
+	delete res;
+	delete prep;
+	delete con;
+}
+int bd::buscarNumeroProva() {
+	int result;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT count(idProva) FROM `robo`.`prova`;");
+	while (res->next()) {
+		result = res->getInt(1);
+	}
+	return result;
+	delete res;
+	delete con;
+}
+
 vector<string> bd::buscarDadosEquipa(string nomeE) {
 	vector<string> results;
 	connect();

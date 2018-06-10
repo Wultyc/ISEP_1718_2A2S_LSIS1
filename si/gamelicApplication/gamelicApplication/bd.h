@@ -42,4 +42,12 @@ public:
 	vector<int> buscarIDEquipas();
 	string buscarNomeEquipa(int num);
 	string buscarNomeRobo(int num);
+	
+	vector<int> ListarIDProva();
+	vector<string> ListarNomeProva();
+	vector<string> ListarLocalProva();
+	vector<string> ListarDataProva();
+	string buscarNomeProva(int num);
+	int buscarNumeroProva();
+
 };
