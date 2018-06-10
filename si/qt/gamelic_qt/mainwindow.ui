@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>4</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -649,33 +649,8 @@
          </font>
         </property>
         <property name="currentText">
-         <string>Equipa 1</string>
+         <string/>
         </property>
-        <item>
-         <property name="text">
-          <string>Equipa 1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 2</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 4</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 5</string>
-         </property>
-        </item>
        </widget>
        <widget class="QLineEdit" name="modEquipaLineEdit">
         <property name="geometry">
