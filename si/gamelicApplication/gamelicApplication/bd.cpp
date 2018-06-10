@@ -142,3 +142,19 @@ string bd::buscarNomeEquipa(int num) {
 	delete prep;
 	delete con;
 }
+
+vector<int> bd::buscarIDEquipas() {
+	vector<int> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT idEquipas FROM `robo`.`equipas`");
+	//res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 1");
+	while (res->next()) {
+		int num = res->getInt(1);
+		results.push_back(num);
+	}
+	return results;
+	delete res;
+	delete prep;
+	delete con;
+}

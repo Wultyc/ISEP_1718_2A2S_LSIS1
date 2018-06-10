@@ -130,10 +130,11 @@ void MainWindow::on_mensagemInicialAction_triggered()
 void MainWindow::on_pushListarRobot_clicked()
 {
 	string numS;
+	vector<int> idequipas = bd.buscarIDEquipas();
 	int num = bd.buscarNumeroEquipas();
-	for (int j = 1;j <= num;j++) {
-		vector<string> elementos = bd.buscarElementos(j);
-		numS = bd.buscarNomeEquipa(j);
+	for (int j = 1;j <= idequipas.size();j++) {
+		vector<string> elementos = bd.buscarElementos(idequipas[j-1]);
+		numS = bd.buscarNomeEquipa(idequipas[j-1]);
 		for (int i = 0;i < elementos.size();i++) {
 			QString testeNQ = QString::fromStdString(elementos[i]);
 			QString numSQ = QString::fromStdString(numS);
