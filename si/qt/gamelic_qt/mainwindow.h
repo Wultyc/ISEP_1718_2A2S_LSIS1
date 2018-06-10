@@ -52,6 +52,9 @@ private slots:
 
     void on_pushListarEquipa_clicked();
 
+	void on_modEquipasComboBox_currentIndexChanged(const QString &arg1);
+
+
 private:
     Ui::MainWindow *ui;
 };

@@ -28,13 +28,19 @@ public:
 	void inserirRobo(string nomeR, string nomeE);
 	void inserirProva(string nomeP,string local, string nomeR);
 	void inserirStates(int state, string nomeP);
+	void updateEquipa(string nomeEl, string nomeE, int num);
+
 	vector<string> buscarElementos(int num);
-	int buscarNumeroEquipas();
-	string buscarNomeEquipa(int num);
-	vector<string> ListarEquipas();
+	vector<string> listarEquipas();
+	vector<string> listarNomeRobo();
+	vector<string> buscarDadosEquipa(string nomeE);
+	vector<int> listarIDRobo();
 	vector<int> buscarIDEquipas();
-	vector<string> bd::ListarNomeRobo();
-	vector<int> bd::ListarIDRobo();
-	string bd::buscarNomeRobo(int num);
-	int bd::buscarNumeroRobo();
+	
+	int buscarIDEquipasNome(string nome);
+	int buscarNumeroEquipas();
+	int buscarNumeroRobo();
+	vector<int> buscarIDEquipas();
+	string buscarNomeEquipa(int num);
+	string buscarNomeRobo(int num);
 };
