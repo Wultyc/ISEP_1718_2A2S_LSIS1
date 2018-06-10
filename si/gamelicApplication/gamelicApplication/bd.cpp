@@ -96,7 +96,7 @@ vector<string> bd::buscarElementos(int num) {
 }
 
 
-vector<string> bd::ListarEquipas() {
+vector<string> bd::listarEquipas() {
 	vector<string> results;
 	connect();
 	stmt = con->createStatement();
@@ -155,7 +155,7 @@ vector<int> bd::buscarIDEquipas() {
 	delete con;
 }
 
-vector<string> bd::ListarNomeRobo() {
+vector<string> bd::listarNomeRobo() {
 	vector<string> results;
 	connect();
 	stmt = con->createStatement();
@@ -171,7 +171,7 @@ vector<string> bd::ListarNomeRobo() {
 	delete con;
 }
 
-vector<int> bd::ListarIDRobo() {
+vector<int> bd::listarIDRobo() {
 	vector<int> results;
 	connect();
 	stmt = con->createStatement();
@@ -211,5 +211,45 @@ int bd::buscarNumeroRobo() {
 	}
 	return result;
 	delete res;
+	delete con;
+}
+
+vector<string> bd::buscarDadosEquipa(string nomeE) {
+	vector<string> results;
+	connect();
+	prep = con->prepareStatement("SELECT el.elemento FROM `robo`.`equipas` e , `robo`.`elementos` el WHERE e.nome= (?) AND e.idEquipas = el.Equipas_idEquipas");
+	prep->setString(1, nomeE);
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		string nomeEl = res->getString(1);
+		results.push_back(nomeEl);
+	}
+	return results;
+	delete res;
+	delete prep;
+	delete con;
+}
+int bd::buscarIDEquipasNome(string nome) {
+	int num;
+	connect();
+	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = ?");
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		num = res->getInt(1);
+	}
+	return num;
+	delete res;
+	delete prep;
+	delete con;
+}
+void bd::updateEquipa(string nomeEl, string nomeE, int num) {
+	connect();
+	prep = con->prepareStatement("UPDATE `robo`.`equipas` SET nome = (?) WHERE idEquipas = (?)");
+	prep->setString(1, nomeE);
+	prep->setInt(2, num);
+	prep->execute();
+	delete prep;
 	delete con;
 }
