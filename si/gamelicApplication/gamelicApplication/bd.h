@@ -31,4 +31,5 @@ public:
 	vector<string> buscarElementos(int num);
 	int buscarNumeroEquipas();
 	string buscarNomeEquipa(int num);
+	vector<string> ListarEquipas();
 };
