@@ -98,7 +98,7 @@ void setSpeeds(int d, int e){
 }
 
 //Atribui as Direções
-void setDirs(int d, int e){
+void setDirs(int direction){
   
 }
 
