@@ -45,6 +45,7 @@ void MainWindow::on_listarRobotAction_triggered()
 
 void MainWindow::on_modificarEquipaAction_triggered()
 {
+	ui->modEquipasComboBox->clear();
     ui->stackedWidget->setCurrentWidget(ui->modificarEquipa);
 	int num = bd.buscarNumeroEquipas();
 	vector<string> equipas = bd.ListarEquipas();
