@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>9</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -599,7 +599,7 @@
          </property>
         </column>
        </widget>
-       <widget class="QPushButton" name="pushListarRobot">
+       <widget class="QPushButton" name="pushListarEquipa">
         <property name="geometry">
          <rect>
           <x>390</x>
@@ -695,7 +695,7 @@
          </property>
         </column>
        </widget>
-       <widget class="QPushButton" name="pushListarRobot_2">
+       <widget class="QPushButton" name="pushListarRobot">
         <property name="geometry">
          <rect>
           <x>390</x>
@@ -785,86 +785,6 @@
         </property>
         <property name="text">
          <string>Modificar</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_2">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>195</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_3">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>295</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_4">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>195</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_5">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>145</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_6">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>245</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_7">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>145</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_8">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>245</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="modEquipaLineEdit_9">
-        <property name="geometry">
-         <rect>
-          <x>210</x>
-          <y>295</y>
-          <width>151</width>
-          <height>26</height>
-         </rect>
         </property>
        </widget>
        <widget class="QLabel" name="modEquipaLabelNovo_3">
@@ -969,6 +889,86 @@
         </property>
         <property name="text">
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Elemento 6:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_1">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>145</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_2">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>195</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_3">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>245</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_4">
+        <property name="geometry">
+         <rect>
+          <x>210</x>
+          <y>295</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_5">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>145</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_6">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>195</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_7">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>245</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="modEquipaLineEdit_8">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>295</y>
+          <width>151</width>
+          <height>26</height>
+         </rect>
         </property>
        </widget>
       </widget>

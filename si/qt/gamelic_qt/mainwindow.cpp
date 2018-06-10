@@ -133,7 +133,7 @@ void MainWindow::on_mensagemInicialAction_triggered()
     ui->stackedWidget->setCurrentWidget(ui->main);
 }
 
-void MainWindow::on_pushListarRobot_clicked()
+void MainWindow::on_pushListarEquipa_clicked()
 {
 	string numS;
 	vector<int> idequipas = bd.buscarIDEquipas();
