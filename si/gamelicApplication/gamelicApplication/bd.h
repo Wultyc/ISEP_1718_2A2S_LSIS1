@@ -29,4 +29,5 @@ public:
 	void inserirProva(string nomeP,string local, string nomeR);
 	void inserirStates(int state, string nomeP);
 	vector<string> buscarElementos();
+	vector<string> ListarEquipas();
 };

@@ -85,12 +85,28 @@ vector<string> bd::buscarElementos() {
 	vector<string> results;
 	connect();
 	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 1");
+	res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 46");
 	while (res->next()) {
 		string nome = res->getString(1);
 		results.push_back(nome);
 	}
 	return results;
+	delete stmt;
+	delete res;
+	delete con;
+}
+
+vector<string> bd::ListarEquipas() {
+	vector<string> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT nome FROM `robo`.`equipas`");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete stmt;
 	delete res;
 	delete con;
 }
