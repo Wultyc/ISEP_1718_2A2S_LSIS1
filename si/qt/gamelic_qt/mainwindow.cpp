@@ -67,7 +67,7 @@ void MainWindow::on_modificarEquipaAction_triggered()
 	ui->modEquipasComboBox->clear();
     ui->stackedWidget->setCurrentWidget(ui->modificarEquipa);
 	int num = bd.buscarNumeroEquipas();
-	vector<string> equipas = bd.ListarEquipas();
+	vector<string> equipas = bd.listarEquipas();
     for(int i=0;i<num;i++){
 		ui->modEquipasComboBox->insertItem(i, QString::fromStdString(equipas[i]));
 	}
@@ -150,30 +150,6 @@ void MainWindow::on_pushInserirEquipa_clicked() {
 void MainWindow::on_mensagemInicialAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->main);
-<<<<<<< HEAD
-=======
-}
-
-void MainWindow::on_pushListarEquipa_clicked()
-{
-	string numS;
-	vector<int> idequipas = bd.buscarIDEquipas();
-	int num = bd.buscarNumeroEquipas();
-	for (int j = 1;j <= idequipas.size();j++) {
-		vector<string> elementos = bd.buscarElementos(idequipas[j-1]);
-		numS = bd.buscarNomeEquipa(idequipas[j-1]);
-		for (int i = 0;i < elementos.size();i++) {
-			QString testeNQ = QString::fromStdString(elementos[i]);
-			QString numSQ = QString::fromStdString(numS);
-			ui->tabelaListarEquipa->insertRow(ui->tabelaListarEquipa->rowCount());
-			QTableWidgetItem * nomeEquipa = new QTableWidgetItem(numSQ);
-			QTableWidgetItem * nomeElemento = new QTableWidgetItem(testeNQ);
-			nomeEquipa->setTextAlignment(Qt::AlignCenter);
-			nomeElemento->setTextAlignment(Qt::AlignCenter);
-			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 0, nomeEquipa);
-			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 1, nomeElemento);
-		}
-	}
 }
 
 void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
@@ -226,6 +202,4 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 	if (!(elemento8.isEmpty())) {
 		bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
 	}
-
->>>>>>> a939c448a8894bc38a54382fefd4128ba1e32b62
 }

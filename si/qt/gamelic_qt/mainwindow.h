@@ -50,14 +50,7 @@ private slots:
 
     void on_mensagemInicialAction_triggered();
 
-<<<<<<< HEAD
-=======
-    void on_pushListarEquipa_clicked();
-
 	void on_modEquipasComboBox_currentIndexChanged(const QString &arg1);
-
-
->>>>>>> a939c448a8894bc38a54382fefd4128ba1e32b62
 private:
     Ui::MainWindow *ui;
 };

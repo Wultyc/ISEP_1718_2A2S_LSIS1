@@ -35,7 +35,6 @@ public:
 	vector<string> listarNomeRobo();
 	vector<string> buscarDadosEquipa(string nomeE);
 	vector<int> listarIDRobo();
-	vector<int> buscarIDEquipas();
 	
 	int buscarIDEquipasNome(string nome);
 	int buscarNumeroEquipas();
