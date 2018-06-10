@@ -46,6 +46,11 @@ void MainWindow::on_listarRobotAction_triggered()
 void MainWindow::on_modificarEquipaAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->modificarEquipa);
+	int num = bd.buscarNumeroEquipas();
+	vector<string> equipas = bd.ListarEquipas();
+    for(int i=0;i<num;i++){
+		ui->modEquipasComboBox->insertItem(i, QString::fromStdString(equipas[i]));
+	}
 }
 
 void MainWindow::on_modificarProvaAction_triggered()
