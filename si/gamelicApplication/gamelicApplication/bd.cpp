@@ -325,6 +325,7 @@ int bd::buscarIDEquipasNome(string nome) {
 	int num;
 	connect();
 	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = ?");
+	prep->setString(1,nome);
 	res = prep->executeQuery();
 	while (res->next())
 	{

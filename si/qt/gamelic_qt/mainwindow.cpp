@@ -64,7 +64,16 @@ void MainWindow::on_listarRobotAction_triggered()
 
 void MainWindow::on_modificarEquipaAction_triggered()
 {
-	ui->modEquipasComboBox->clear();
+	ui->modEquipasComboBox->clear(); 
+	ui->modEquipaLineEdit->clear();
+	ui->modEquipaLineEdit_2->clear();
+	ui->modEquipaLineEdit_3->clear();
+	ui->modEquipaLineEdit_4->clear();
+	ui->modEquipaLineEdit_5->clear();
+	ui->modEquipaLineEdit_6->clear();
+	ui->modEquipaLineEdit_7->clear();
+	ui->modEquipaLineEdit_8->clear();
+	ui->modEquipaLineEdit_9->clear();
     ui->stackedWidget->setCurrentWidget(ui->modificarEquipa);
 	int num = bd.buscarNumeroEquipas();
 	vector<string> equipas = bd.listarEquipas();
@@ -178,7 +187,7 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 	QString elemento7 = ui->modEquipaLineEdit_8->text();
 	QString elemento8 = ui->modEquipaLineEdit_9->text();
 
-	if (!(elemento1.isEmpty())) {
+	/*if (!(elemento1.isEmpty())) {
 		bd.updateEquipa(elemento1.toStdString(), nomeE.toStdString(), numE);
 	}
 	if (!(elemento2.isEmpty())) {
@@ -201,5 +210,5 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 	}
 	if (!(elemento8.isEmpty())) {
 		bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
-	}
+	}*/
 }
