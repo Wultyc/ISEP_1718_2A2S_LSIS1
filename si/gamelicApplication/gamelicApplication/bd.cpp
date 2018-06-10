@@ -17,8 +17,6 @@ void bd::inserirEquipa(string nomeE) {
 	prep = con->prepareStatement("INSERT INTO `robo`.`equipas`(`nome`)VALUES(?)");
 	prep->setString(1, nomeE);
 	prep->execute();
-	//teste Sourcetree
-	//teste Sourcetree Mario
 	prep->close();
 	delete prep;
 	con->close();
@@ -85,7 +83,6 @@ vector<string> bd::buscarElementos(int num) {
 	vector<string> results;
 	connect();
 	prep = con->prepareStatement("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = ?");
-	//res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 1");
 	prep->setInt(1, num);
 	res = prep->executeQuery();
 	while (res->next()) {
@@ -148,7 +145,6 @@ vector<int> bd::buscarIDEquipas() {
 	connect();
 	stmt = con->createStatement();
 	res = stmt->executeQuery("SELECT idEquipas FROM `robo`.`equipas`");
-	//res = stmt->executeQuery("SELECT e.elemento FROM `robo`.`elementos` e WHERE e.Equipas_idEquipas = 1");
 	while (res->next()) {
 		int num = res->getInt(1);
 		results.push_back(num);
@@ -156,5 +152,64 @@ vector<int> bd::buscarIDEquipas() {
 	return results;
 	delete res;
 	delete prep;
+	delete con;
+}
+
+vector<string> bd::ListarNomeRobo() {
+	vector<string> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT nome FROM `robo`.`robo`");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete stmt;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+vector<int> bd::ListarIDRobo() {
+	vector<int> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT idRobo FROM `robo`.`robo`");
+	
+	while (res->next()) {
+		int num = res->getInt(1);
+		results.push_back(num);
+	}
+	return results;
+	delete res;
+	delete prep;
+	delete con;
+}
+string bd::buscarNomeRobo(int num) {
+	string result;
+	connect();
+	prep = con->prepareStatement("SELECT e.nome from `robo`.`robo` e WHERE e.idRobo = ?");
+	prep->setInt(1, num);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getString(1);
+	}
+	return result;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+int bd::buscarNumeroRobo() {
+	int result;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT count(idRobo) FROM `robo`.`robo`;");
+	while (res->next()) {
+		result = res->getInt(1);
+	}
+	return result;
+	delete res;
 	delete con;
 }

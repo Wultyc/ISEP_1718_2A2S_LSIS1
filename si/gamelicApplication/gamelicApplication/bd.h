@@ -33,4 +33,8 @@ public:
 	string buscarNomeEquipa(int num);
 	vector<string> ListarEquipas();
 	vector<int> buscarIDEquipas();
+	vector<string> bd::ListarNomeRobo();
+	vector<int> bd::ListarIDRobo();
+	string bd::buscarNomeRobo(int num);
+	int bd::buscarNumeroRobo();
 };
