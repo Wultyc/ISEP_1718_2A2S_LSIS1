@@ -31,6 +31,25 @@ void MainWindow::on_inserirRobotAction_triggered()
 void MainWindow::on_listarEquipaAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->listarEquipa);
+	ui->tabelaListarEquipa->setRowCount(0);
+	string numS;
+	vector<int> idequipas = bd.buscarIDEquipas();
+	int num = bd.buscarNumeroEquipas();
+	for (int j = 1;j <= idequipas.size();j++) {
+		vector<string> elementos = bd.buscarElementos(idequipas[j - 1]);
+		numS = bd.buscarNomeEquipa(idequipas[j - 1]);
+		for (int i = 0;i < elementos.size();i++) {
+			QString testeNQ = QString::fromStdString(elementos[i]);
+			QString numSQ = QString::fromStdString(numS);
+			ui->tabelaListarEquipa->insertRow(ui->tabelaListarEquipa->rowCount());
+			QTableWidgetItem * nomeEquipa = new QTableWidgetItem(numSQ);
+			QTableWidgetItem * nomeElemento = new QTableWidgetItem(testeNQ);
+			nomeEquipa->setTextAlignment(Qt::AlignCenter);
+			nomeElemento->setTextAlignment(Qt::AlignCenter);
+			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 0, nomeEquipa);
+			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 1, nomeElemento);
+		}
+	}
 }
 
 void MainWindow::on_listarProvaAction_triggered()
@@ -131,26 +150,4 @@ void MainWindow::on_pushInserirEquipa_clicked() {
 void MainWindow::on_mensagemInicialAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->main);
-}
-
-void MainWindow::on_pushListarEquipa_clicked()
-{
-	string numS;
-	vector<int> idequipas = bd.buscarIDEquipas();
-	int num = bd.buscarNumeroEquipas();
-	for (int j = 1;j <= idequipas.size();j++) {
-		vector<string> elementos = bd.buscarElementos(idequipas[j-1]);
-		numS = bd.buscarNomeEquipa(idequipas[j-1]);
-		for (int i = 0;i < elementos.size();i++) {
-			QString testeNQ = QString::fromStdString(elementos[i]);
-			QString numSQ = QString::fromStdString(numS);
-			ui->tabelaListarEquipa->insertRow(ui->tabelaListarEquipa->rowCount());
-			QTableWidgetItem * nomeEquipa = new QTableWidgetItem(numSQ);
-			QTableWidgetItem * nomeElemento = new QTableWidgetItem(testeNQ);
-			nomeEquipa->setTextAlignment(Qt::AlignCenter);
-			nomeElemento->setTextAlignment(Qt::AlignCenter);
-			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 0, nomeEquipa);
-			ui->tabelaListarEquipa->setItem(ui->tabelaListarEquipa->rowCount() - 1, 1, nomeElemento);
-		}
-	}
 }

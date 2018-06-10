@@ -50,8 +50,6 @@ private slots:
 
     void on_mensagemInicialAction_triggered();
 
-    void on_pushListarEquipa_clicked();
-
 private:
     Ui::MainWindow *ui;
 };

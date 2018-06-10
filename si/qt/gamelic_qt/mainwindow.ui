@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>9</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -582,11 +582,11 @@
           <x>140</x>
           <y>20</y>
           <width>621</width>
-          <height>281</height>
+          <height>351</height>
          </rect>
         </property>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>300</number>
+         <number>295</number>
         </attribute>
         <column>
          <property name="text">
@@ -599,24 +599,6 @@
          </property>
         </column>
        </widget>
-       <widget class="QPushButton" name="pushListarEquipa">
-        <property name="geometry">
-         <rect>
-          <x>390</x>
-          <y>340</y>
-          <width>110</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Listar</string>
-        </property>
-       </widget>
       </widget>
       <widget class="QWidget" name="listarProva">
        <widget class="QTableWidget" name="tabelaListarProva">
@@ -625,11 +607,11 @@
           <x>140</x>
           <y>20</y>
           <width>621</width>
-          <height>281</height>
+          <height>351</height>
          </rect>
         </property>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>150</number>
+         <number>147</number>
         </attribute>
         <column>
          <property name="text">
@@ -652,24 +634,6 @@
          </property>
         </column>
        </widget>
-       <widget class="QPushButton" name="pushListarProva">
-        <property name="geometry">
-         <rect>
-          <x>390</x>
-          <y>340</y>
-          <width>110</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Listar</string>
-        </property>
-       </widget>
       </widget>
       <widget class="QWidget" name="listarRobot">
        <widget class="QTableWidget" name="tabelaListarRobot">
@@ -678,11 +642,11 @@
           <x>140</x>
           <y>20</y>
           <width>621</width>
-          <height>281</height>
+          <height>351</height>
          </rect>
         </property>
         <attribute name="horizontalHeaderDefaultSectionSize">
-         <number>300</number>
+         <number>295</number>
         </attribute>
         <column>
          <property name="text">
@@ -694,24 +658,6 @@
           <string>Nome da Equipa</string>
          </property>
         </column>
-       </widget>
-       <widget class="QPushButton" name="pushListarRobot">
-        <property name="geometry">
-         <rect>
-          <x>390</x>
-          <y>340</y>
-          <width>110</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Listar</string>
-        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="modificarEquipa">
