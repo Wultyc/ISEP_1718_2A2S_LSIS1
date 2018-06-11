@@ -79,22 +79,9 @@ void MainWindow::on_listarRobotAction_triggered()
 
 void MainWindow::on_modificarEquipaAction_triggered()
 {
-	ui->modEquipasComboBox->clear(); 
-	ui->modEquipaLineEdit->clear();
-	ui->modEquipaLineEdit_2->clear();
-	ui->modEquipaLineEdit_3->clear();
-	ui->modEquipaLineEdit_4->clear();
-	ui->modEquipaLineEdit_5->clear();
-	ui->modEquipaLineEdit_6->clear();
-	ui->modEquipaLineEdit_7->clear();
-	ui->modEquipaLineEdit_8->clear();
-	ui->modEquipaLineEdit_9->clear();
+	
     ui->stackedWidget->setCurrentWidget(ui->modificarEquipa);
-	int num = bd.buscarNumeroEquipas();
-	vector<string> equipas = bd.listarEquipas();
-    for(int i=0;i<num;i++){
-		ui->modEquipasComboBox->insertItem(i, QString::fromStdString(equipas[i]));
-	}
+	
 }
 
 void MainWindow::on_modificarProvaAction_triggered()
@@ -176,7 +163,7 @@ void MainWindow::on_mensagemInicialAction_triggered()
     ui->stackedWidget->setCurrentWidget(ui->main);
 }
 
-void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
+/*void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 {
 	vector<string> elementos = bd.buscarDadosEquipa(arg1.toStdString());
 
@@ -226,7 +213,7 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 	if (!(elemento8.isEmpty())) {
 		bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
 	}*/
-}
+//}
 
 void MainWindow::on_pushInserirRobot_clicked() {
 
@@ -236,4 +223,63 @@ void MainWindow::on_pushInserirRobot_clicked() {
 	bd.inserirRobo(nomeRE.toStdString(),nomeE);
 	
 
+}
+
+void MainWindow::on_modEquipaCheck_clicked()
+{
+	ui->modEquipasComboBox->clear();
+	int num = bd.buscarNumeroEquipas();
+	vector<string> equipas = bd.listarEquipas();
+	for (int i = 0; i<num; i++) {
+		ui->modEquipasComboBox->insertItem(i, QString::fromStdString(equipas[i]));
+	}
+
+	vector<string> elementos = bd.buscarDadosEquipa(ui->modEquipasComboBox->currentText().toStdString());
+
+	ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+	ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+	ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
+	ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
+	ui->modEquipaLineEdit_6->setText(QString::fromStdString(elementos[4]));
+	ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
+	ui->modEquipaLineEdit_8->setText(QString::fromStdString(elementos[6]));
+	ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
+
+	/*int numE;
+	numE = bd.buscarIDEquipasNome(ui->modEquipasComboBox->currentText().toStdString());
+
+	QString nomeE = ui->modEquipaLineEdit->text();
+	QString elemento1 = ui->modEquipaLineEdit_2->text();
+	QString elemento2 = ui->modEquipaLineEdit_3->text();
+	QString elemento3 = ui->modEquipaLineEdit_4->text();
+	QString elemento4 = ui->modEquipaLineEdit_5->text();
+	QString elemento5 = ui->modEquipaLineEdit_6->text();
+	QString elemento6 = ui->modEquipaLineEdit_7->text();
+	QString elemento7 = ui->modEquipaLineEdit_8->text();
+	QString elemento8 = ui->modEquipaLineEdit_9->text();
+
+	if (!(elemento1.isEmpty())) {
+	bd.updateEquipa(elemento1.toStdString(), nomeE.toStdString(), numE);
+	}
+	if (!(elemento2.isEmpty())) {
+	bd.updateEquipa(elemento2.toStdString(), nomeE.toStdString(), numE);
+	}
+	if (!(elemento3.isEmpty())) {
+	bd.updateEquipa(elemento3.toStdString(), nomeE.toStdString(), numE);
+	}
+	if (!(elemento4.isEmpty())) {
+	bd.updateEquipa(elemento4.toStdString(), nomeE.toStdString(), numE);
+	}
+	if (!(elemento5.isEmpty())) {
+	bd.updateEquipa(elemento5.toStdString(), nomeE.toStdString(), numE);
+	}
+	if (!(elemento6.isEmpty())) {
+	bd.updateEquipa(elemento6.toStdString(), nomeE.toStdString(), numE);
+	}
+	if (!(elemento7.isEmpty())) {
+	bd.updateEquipa(elemento7.toStdString(), nomeE.toStdString(), numE);
+	}
+	if (!(elemento8.isEmpty())) {
+	bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
+	}*/
 }

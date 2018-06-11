@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>6</number>
+       <number>7</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -915,6 +915,19 @@
           <width>151</width>
           <height>26</height>
          </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="modEquipaCheck">
+        <property name="geometry">
+         <rect>
+          <x>790</x>
+          <y>30</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Check</string>
         </property>
        </widget>
       </widget>
