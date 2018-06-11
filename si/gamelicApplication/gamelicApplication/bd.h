@@ -29,7 +29,8 @@ public:
 	void inserirProva(string nomeP,string local, string nomeR);
 	void inserirStates(int state, string nomeP);
 	void updateEquipa(string nomeEl, string nomeE, int num);
-
+	
+	vector<string> buscarEquipa(int num);
 	vector<string> buscarElementos(int num);
 	vector<string> listarEquipas();
 	vector<string> listarNomeRobo();

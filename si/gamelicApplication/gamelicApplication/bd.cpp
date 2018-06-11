@@ -13,7 +13,6 @@ void bd::connect() {
 void bd::inserirEquipa(string nomeE) {
 
 	connect();
-
 	prep = con->prepareStatement("INSERT INTO `robo`.`equipas`(`nome`)VALUES(?)");
 	prep->setString(1, nomeE);
 	prep->execute();
@@ -50,13 +49,29 @@ void bd::inserirElementos(string nomeEl, string nomeE) {
 
 void bd::inserirRobo(string nomeR, string nomeE) {
 	connect();
-	prep = con->prepareStatement("INSERT INTO `robo`.`robo`(`nome`)VALUES(?) WHERE Equipas_idEquipas = equipas.idEquipas AND equipas.nome =(?)");
+
+	int i;
+	prep = con->prepareStatement("SELECT e.idEquipas FROM `robo`.`equipas` e WHERE e.nome=(?)");
+	prep->setString(1, nomeE);
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		i = res->getInt(1);
+	}
+	res->close();
+	prep->close();
+	delete res;
+	delete prep;
+
+	prep = con->prepareStatement("INSERT INTO `robo`.`robo`(`nome`,`Equipas_idEquipas`)VALUES(?,?)");
 	prep->setString(1, nomeR);
-	prep->setString(2, nomeE);
+	prep->setInt(2, i);
 	prep->execute();
 	delete prep;
-	delete con;	
+	delete con;
 }
+
+
 
 void bd::inserirProva(string nomeP, string local, string nomeR) {
 	connect();
@@ -94,6 +109,23 @@ vector<string> bd::buscarElementos(int num) {
 	delete prep;
 	delete con;
 }
+
+vector<string> bd::buscarEquipa(int num) {
+	vector<string> results;
+	connect();
+	prep = con->prepareStatement("SELECT e.nome FROM `robo`.`equipa` e WHERE e.Equipas_idEquipas = ?");
+	prep->setInt(1, num);
+	res = prep->executeQuery();
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete res;
+	delete prep;
+	delete con;
+}
+
 
 
 vector<string> bd::listarEquipas() {

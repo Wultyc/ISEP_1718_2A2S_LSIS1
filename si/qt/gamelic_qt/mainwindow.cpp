@@ -60,6 +60,25 @@ void MainWindow::on_listarProvaAction_triggered()
 void MainWindow::on_listarRobotAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->listarRobot);
+	ui->tabelaListarRobot->setRowCount(0);
+	string numS;
+	vector<int> idrobo = bd.listarIDRobo();
+	int num = bd.buscarNumeroRobo();
+	for (int j = 1; j <= idrobo.size(); j++) {
+		//vector<string> equipa = bd.buscarEquipa(idrobo[j - 1]);
+		numS = bd.buscarNomeRobo(idrobo[j - 1]);
+		for (int i = 0; i < 1; i++) {
+			//QString testeNQ = QString::fromStdString(equipa[i]);
+			QString numSQ = QString::fromStdString(numS);
+			ui->tabelaListarRobot->insertRow(ui->tabelaListarRobot->rowCount());
+			QTableWidgetItem * nomeRobo = new QTableWidgetItem(numSQ);
+			//QTableWidgetItem * nomeEquipa = new QTableWidgetItem(testeNQ);
+			nomeRobo->setTextAlignment(Qt::AlignCenter);
+			//nomeEquipa->setTextAlignment(Qt::AlignCenter);
+			ui->tabelaListarRobot->setItem(ui->tabelaListarRobot->rowCount() - 1, 0, nomeRobo);
+			//ui->tabelaListarRobot->setItem(ui->tabelaListarRobot->rowCount() - 1, 1, nomeEquipa);
+		}
+	}
 }
 
 void MainWindow::on_modificarEquipaAction_triggered()
@@ -211,4 +230,13 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 	if (!(elemento8.isEmpty())) {
 		bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
 	}*/
+}
+
+void MainWindow::on_pushInserirRobot_clicked() {
+	QString nomeQE = ui->insNomeEquipaLineE->text();
+	string nomeE = nomeQE.toStdString();
+	QString nomeRE = ui->insNomeRobotLineE->text();
+	bd.inserirRobo(nomeRE.toStdString(),nomeE);
+	
+
 }

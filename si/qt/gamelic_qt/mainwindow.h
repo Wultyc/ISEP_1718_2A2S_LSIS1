@@ -51,6 +51,10 @@ private slots:
     void on_mensagemInicialAction_triggered();
 
 	void on_modEquipasComboBox_currentIndexChanged(const QString &arg1);
+
+	void on_pushInserirRobot_clicked();
+
+
 private:
     Ui::MainWindow *ui;
 };
