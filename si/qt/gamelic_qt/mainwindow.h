@@ -46,8 +46,6 @@ private slots:
 
     void on_pushInserirEquipa_clicked();
 
-	void on_check_clicked();
-
     void on_mensagemInicialAction_triggered();
 
 	void on_pushInserirRobot_clicked();

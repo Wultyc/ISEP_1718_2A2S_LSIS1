@@ -21,11 +21,23 @@ void MainWindow::on_inserirEquipaAction_triggered()
 void MainWindow::on_inserirProvaAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->inserirProva);
+
+	ui->insProvaCombo->clear();
+	vector<string> robos = bd.listarNomeRobo();
+	for (int i = 0; i < robos.size(); i++) {
+		ui->insProvaCombo->insertItem(i, QString::fromStdString(robos[i]));
+	}
 }
 
 void MainWindow::on_inserirRobotAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->inserirRobot);
+
+	ui->insRobotCombo->clear();
+	vector<string> equipas = bd.listarEquipas();
+	for (int i = 0; i < equipas.size(); i++) {
+		ui->insRobotCombo->insertItem(i, QString::fromStdString(equipas[i]));
+	}
 }
 
 void MainWindow::on_listarEquipaAction_triggered()
@@ -109,12 +121,6 @@ void MainWindow::on_eliminarRobotAction_triggered()
     ui->stackedWidget->setCurrentWidget(ui->eliminarRobot);
 }
 
-void MainWindow::on_check_clicked()
-{
-
-	QString nomeQE = ui->insNomeLineE->text();
-	bd.inserirEquipa(nomeQE.toStdString());
-}
 void MainWindow::on_pushInserirEquipa_clicked() {
 
 	QString elemento1 = ui->insEle1LineE->text();
@@ -126,8 +132,8 @@ void MainWindow::on_pushInserirEquipa_clicked() {
 	QString elemento7 = ui->insEle7LineE->text();
 	QString elemento8 = ui->insEle8LineE->text();
 
-	
 	QString nomeQE = ui->insNomeLineE->text();
+	bd.inserirEquipa(nomeQE.toStdString());
 	string nomeE = nomeQE.toStdString();
 
 
@@ -217,7 +223,7 @@ void MainWindow::on_mensagemInicialAction_triggered()
 
 void MainWindow::on_pushInserirRobot_clicked() {
 
-	QString nomeQE = ui->insNomeEquipaLineE->text();
+	QString nomeQE = ui->insRobotCombo->currentText();
 	string nomeE = nomeQE.toStdString();
 	QString nomeRE = ui->insNomeRobotLineE->text();
 	bd.inserirRobo(nomeRE.toStdString(),nomeE);
