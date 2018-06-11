@@ -61,23 +61,19 @@ void MainWindow::on_listarRobotAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->listarRobot);
 	ui->tabelaListarRobot->setRowCount(0);
-	string numS;
-	vector<int> idrobo = bd.listarIDRobo();
-	int num = bd.buscarNumeroRobo();
-	for (int j = 1; j <= idrobo.size(); j++) {
-		//vector<string> equipa = bd.buscarEquipa(idrobo[j - 1]);
-		numS = bd.buscarNomeRobo(idrobo[j - 1]);
-		for (int i = 0; i < 1; i++) {
-			//QString testeNQ = QString::fromStdString(equipa[i]);
-			QString numSQ = QString::fromStdString(numS);
-			ui->tabelaListarRobot->insertRow(ui->tabelaListarRobot->rowCount());
-			QTableWidgetItem * nomeRobo = new QTableWidgetItem(numSQ);
-			//QTableWidgetItem * nomeEquipa = new QTableWidgetItem(testeNQ);
-			nomeRobo->setTextAlignment(Qt::AlignCenter);
-			//nomeEquipa->setTextAlignment(Qt::AlignCenter);
-			ui->tabelaListarRobot->setItem(ui->tabelaListarRobot->rowCount() - 1, 0, nomeRobo);
-			//ui->tabelaListarRobot->setItem(ui->tabelaListarRobot->rowCount() - 1, 1, nomeEquipa);
-		}
+	vector<string> nomeRobot = bd.listarNomeRobo();
+	for (int j = 1; j <= nomeRobot.size(); j++) {
+		string nomeS = nomeRobot[j - 1];
+		string equipa = bd.buscarNomeEquipa(bd.buscarIDEquipaRobot(nomeS));
+		QString nomeSQ = QString::fromStdString(nomeS);
+		QString equipaQ = QString::fromStdString(equipa);
+		ui->tabelaListarRobot->insertRow(ui->tabelaListarRobot->rowCount());
+		QTableWidgetItem * nomeRobo = new QTableWidgetItem(nomeSQ);
+		QTableWidgetItem * nomeEquipa = new QTableWidgetItem(equipaQ);
+		nomeRobo->setTextAlignment(Qt::AlignCenter);
+		nomeEquipa->setTextAlignment(Qt::AlignCenter);
+		ui->tabelaListarRobot->setItem(ui->tabelaListarRobot->rowCount() - 1, 0, nomeRobo);
+		ui->tabelaListarRobot->setItem(ui->tabelaListarRobot->rowCount() - 1, 1, nomeEquipa);
 	}
 }
 
@@ -233,6 +229,7 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 }
 
 void MainWindow::on_pushInserirRobot_clicked() {
+
 	QString nomeQE = ui->insNomeEquipaLineE->text();
 	string nomeE = nomeQE.toStdString();
 	QString nomeRE = ui->insNomeRobotLineE->text();

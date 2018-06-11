@@ -126,6 +126,21 @@ vector<string> bd::buscarEquipa(int num) {
 	delete con;
 }
 
+int bd::buscarIDEquipaRobot(string nome) {
+	int result;
+	connect();
+	prep = con->prepareStatement("SELECT e.Equipas_idEquipas FROM `robo`.`robo` e WHERE e.nome = ?");
+	prep->setString(1, nome);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getInt(1);
+	}
+	return result;
+	delete res;
+	delete prep;
+	delete con;
+}
+
 
 
 vector<string> bd::listarEquipas() {
