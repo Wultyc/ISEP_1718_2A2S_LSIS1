@@ -75,10 +75,24 @@ void bd::inserirRobo(string nomeR, string nomeE) {
 
 void bd::inserirProva(string nomeP, string local, string nomeR) {
 	connect();
-	prep = con->prepareStatement("INSERT INTO `robo`.`prova`(`nome`,`local`)VALUES(?,?) WHERE Robo_idRobo = robo.idRobo AND robo.nome =(?)");
+
+	int i;
+	prep = con->prepareStatement("SELECT idRobo FROM `robo`.`robo` WHERE nome=(?)");
+	prep->setString(1, nomeR);
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		i = res->getInt(1);
+	}
+	res->close();
+	prep->close();
+	delete res;
+	delete prep;
+
+	prep = con->prepareStatement("INSERT INTO `robo`.`prova`(`nome`,`local`,`Robo_idRobo`)VALUES(?,?,?)");
 	prep->setString(1, nomeP);
 	prep->setString(2, local);
-	prep->setString(3, nomeR);
+	prep->setInt(3, i);
 	prep->execute();
 	delete prep;
 	delete con;

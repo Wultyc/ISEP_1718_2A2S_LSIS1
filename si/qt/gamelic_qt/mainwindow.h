@@ -52,6 +52,10 @@ private slots:
 
 	void on_modEquipaCheck_clicked();
 
+	void on_pushInserirProva_clicked();
+
+
+
 private:
     Ui::MainWindow *ui;
 };

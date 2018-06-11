@@ -231,6 +231,19 @@ void MainWindow::on_pushInserirRobot_clicked() {
 
 }
 
+void MainWindow::on_pushInserirProva_clicked()
+{
+
+	QString nomeQR = ui->insProvaCombo->currentText();
+	string nomeR = nomeQR.toStdString();
+	QString nomeQP = ui->insNomeProvaLineE->text();
+	string nomeP = nomeQP.toStdString();
+	QString local = ui->insLocalLineE->text();
+	bd.inserirProva(nomeP,local.toStdString(), nomeR);
+
+}
+
+
 void MainWindow::on_modEquipaCheck_clicked()
 {
 	ui->modEquipasComboBox->clear();
@@ -289,3 +302,5 @@ void MainWindow::on_modEquipaCheck_clicked()
 	bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
 	}*/
 }
+
+
