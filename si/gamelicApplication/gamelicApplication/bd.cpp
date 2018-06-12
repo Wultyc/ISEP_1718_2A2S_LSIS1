@@ -155,6 +155,21 @@ int bd::buscarIDEquipaRobot(string nome) {
 	delete con;
 }
 
+int bd::buscarIDRobotProva(string nome) {
+	int result;
+	connect();
+	prep = con->prepareStatement("SELECT e.idRobo FROM `robo`.`robo` e WHERE e.nome = ?");
+	prep->setString(1, nome);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getInt(1);
+	}
+	return result;
+	delete res;
+	delete prep;
+	delete con;
+}
+
 
 
 vector<string> bd::listarEquipas() {
@@ -382,27 +397,60 @@ vector<string> bd::buscarDadosEquipa(string nomeE) {
 	delete prep;
 	delete con;
 }
-int bd::buscarIDEquipasNome(string nome) {
-	int num;
-	connect();
-	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = ?");
-	prep->setString(1,nome);
-	res = prep->executeQuery();
-	while (res->next())
-	{
-		num = res->getInt(1);
-	}
-	return num;
-	delete res;
-	delete prep;
-	delete con;
-}
-void bd::updateEquipa(string nomeEl, string nomeE, int num) {
+
+void bd::updateEquipa(string nomeE, int num) {
+
 	connect();
 	prep = con->prepareStatement("UPDATE `robo`.`equipas` SET nome = (?) WHERE idEquipas = (?)");
 	prep->setString(1, nomeE);
 	prep->setInt(2, num);
 	prep->execute();
+
+	delete prep;
+	delete con;
+}
+
+void bd::updateElemento(int idElemento, string nomeElNovo) {
+	connect();
+	prep = con->prepareStatement("UPDATE `robo`.`elementos` SET elemento = (?) WHERE idElementos = (?)");
+	prep->setString(1, nomeElNovo);
+	prep->setInt(2, idElemento);
+	prep->execute();
+
+	delete prep;
+	delete con;
+}
+vector<int> bd::buscarIDElementos(int idEquipa) {
+
+	connect();
+	prep = con->prepareStatement("SELECT idElementos FROM `robo`.`elementos` WHERE Equipas_idEquipas=(?)");
+	prep->setInt(1, idEquipa);
+
+	vector<int> idElemento;
+
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		idElemento.push_back(res->getInt(1));
+	}
+	return idElemento;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+int bd::buscarIDEquipasNome(string nomeE) {
+	int idEquipa;
+	connect();
+	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = (?)");
+	prep->setString(1, nomeE);
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		idEquipa = res->getInt(1);
+	}
+	return idEquipa;
+	delete res;
 	delete prep;
 	delete con;
 }
