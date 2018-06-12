@@ -71,6 +71,9 @@ int incrm_servo = 1;  //Incremento do anglulo do servo
 int servo_enabled = 0;
 
 void changeRobotActivationState(){
+  Serial.print("Interrupt ");
+  Serial.print(digitalRead(BOTAO_START));
+  Serial.print("\n");
   if(digitalRead(BOTAO_START) == HIGH){
     rActivate_ll = rActivate; //Preserva o estado atual de ativação
     rActivate = 1;            //Altera o estado de ativação
@@ -140,12 +143,12 @@ int define_state(){ //Determina o estado mais adequado
   int state;
   getDistances();
 
-  if(rActivate == 0){
+  if(rActivate == -1){
     state = -1;
   } else if(rActivate == 1 && rActivate_ll != rActivate){
     rActivate_ll = rActivate; //mesmo que carreguem de novo no botão verde ele não volta a este estado
     state = 0;
-  } else if(distanceD <= SONAR_DIST && distanceD <= SONAR_DIST){
+  } else if(distanceE <= SONAR_DIST && distanceD <= SONAR_DIST){
     state = 1;
   } else if(distanceF <= SONAR_DIST && distanceD <= SONAR_DIST && distanceE <= SONAR_DIST){
     state = 2;
@@ -162,11 +165,50 @@ int define_state(){ //Determina o estado mais adequado
   return state;
 }
 
-void send_state(int state){ //Envia o estado por BT
-  BTserial.write(state);
+void send_state(){ //Envia o estado por BT
+  BTserial.write(rState);
 }
 
-void operations(int state){ //Atua perante o estado
+void send_state_byUSB(bool sendHeader){ //Envia o estado por BT
+  if(sendHeader == true){
+    Serial.print("rState\trActivate\trActivate_ll\tdurationF\tdurationD\tdurationE\tangle_chama\tangle_servo\tincrm_servo\tservo_enabled\tA desativar\tD E\tF D E\tF E\tF D\tchama\n");
+  }
+  Serial.print(rState);
+  Serial.print("\t");
+  Serial.print(rActivate);
+  Serial.print("\t");
+  Serial.print(rActivate_ll);
+  Serial.print("\t");
+  Serial.print(durationF);
+  Serial.print("\t");
+  Serial.print(durationD);
+  Serial.print("\t");
+  Serial.print(durationE);
+  Serial.print("\t");
+  Serial.print(angle_chama);
+  Serial.print("\t");
+  Serial.print(angle_servo);
+  Serial.print("\t");
+  Serial.print(incrm_servo);
+  Serial.print("\t");
+  Serial.print(servo_enabled);
+  Serial.print("\t");
+  Serial.print((rActivate == 1 && rActivate_ll != rActivate));
+  Serial.print("\t");
+  Serial.print((distanceE <= SONAR_DIST && distanceD <= SONAR_DIST));
+  Serial.print("\t");
+  Serial.print((distanceF <= SONAR_DIST && distanceD <= SONAR_DIST && distanceE <= SONAR_DIST));
+  Serial.print("\t");
+  Serial.print((distanceF <= SONAR_DIST && distanceE <= SONAR_DIST));
+  Serial.print("\t");
+  Serial.print((distanceF <= SONAR_DIST && distanceD <= SONAR_DIST));
+  Serial.print("\t");
+  Serial.print((analogRead(A0) >= CHAMA_PARAM));
+  Serial.print("\n");
+
+}
+
+void operations(){ //Atua perante o estado
   //Atua mediante o estado
   switch(rState){
     case -1: //Desativado
@@ -201,8 +243,13 @@ void operations(int state){ //Atua perante o estado
       break;
     case 5: //Apagar a chama
       setSpeeds(MOTOR_MOVE_FORWARD, 0); //Desliga Motores
-      digitalWrite(VENTOINHA_INA, LOW);
+      digitalWrite(VENTOINHA_INA, HIGH);
       servo_enabled = 1;
+      break;
+    default:
+      setSpeeds(MOTOR_MOVE_FORWARD, 0); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 0;
       break;
   }
 }
@@ -210,6 +257,7 @@ void operations(int state){ //Atua perante o estado
 void setup() {
   //Inicializa a comunicação Serial via Bluetooth
   BTserial.begin(38400); 
+  Serial.begin(9600);
   
   //Função de interrupção
   attachInterrupt(digitalPinToInterrupt(BOTAO_INTRP), changeRobotActivationState, CHANGE);
@@ -242,12 +290,15 @@ void setup() {
   //Config Servo
   servo.attach(SERVO_PIN);
   servo.write(angle_servo);
+  
+  send_state_byUSB(true); //Envia o estado atual para o SI
 }
 
 void loop() {
   rState = define_state();//Determina o estado adequado
-  operations(rState); //Define o movimento do robot
-  send_state(rState); //Envia o estado atual para o SI
+  operations(); //Define o movimento do robot
+  send_state(); //Envia o estado atual para o SI
+  send_state_byUSB(false); //Envia o estado atual para o SI
 
   if(servo_enabled == 1){
     //Evita rotações não possiveis
