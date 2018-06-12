@@ -1,4 +1,5 @@
 #include <Servo.h>
+#include <SoftwareSerial.h>
 
 //Parametrizacao
 //Motores (A: Direita | B: Esquerda)
@@ -10,6 +11,12 @@
 //#define MOTOR_B_BRK 8
 #define MOTOR_A_CS A0
 #define MOTOR_B_CS A1
+#define MOTOR_MOVE_STOP 0  //Constantes de apoio
+#define MOTOR_MOVE_FORWARD 1
+#define MOTOR_MOVE_BACKWARD 2
+#define MOTOR_MOVE_RIGHT 3
+#define MOTOR_MOVE_LEFT 4
+#define MOTOR_VEL 128
 
 //Sonares
 #define SONAR_TRIG 5
@@ -22,7 +29,7 @@
 #define VENTOINHA_INA 6
 
 //Servomotor
-#define SERVO_MOTOR 10
+#define SERVO_PIN 10
 #define SERVO_DELAY 25
 #define SERVO_MAX_ANGLE 180
 #define SERVO_MIN_ANGLE 0
@@ -37,10 +44,11 @@
 #define BT_TX 9
 
 //Botões de Ativação
-#define BOTAO_VERDE 4
-#define BOTAO_VERML 2
+#define BOTAO_START 4
+#define BOTAO_INTRP 2
 
 Servo servo;  //Objeto de controlo do servo
+SoftwareSerial BTserial(BT_RX, BT_TX); //Definição do Bluetooth
 
 int rActivate = 0;    //Estado de ativação
 int rActivate_ll = 0; //Indica o estado de ativação antes da ultima alteração
@@ -59,9 +67,10 @@ long durationE = 0;
 int angle_chama = 0;  //Angulo da chama em relação ao robot
 int angle_servo = 0;  //Angulo atual do Servo
 int incrm_servo = 1;  //Incremento do anglulo do servo
+int servo_enabled = 0;
 
 void changeRobotActivationState(){
-  if(digitalRead(BOTAO_VERDE) == HIGH){
+  if(digitalRead(BOTAO_START) == HIGH){
     rActivate_ll = rActivate; //Preserva o estado atual de ativação
     rActivate = 1;            //Altera o estado de ativação
   } else {
@@ -93,23 +102,47 @@ void getDistances(){
 }
 
 //Atribui as velocidades
-void setSpeeds(int d, int e){
+void setSpeeds(int dir, int vel){
+  int a, b;
+  //Desliga os motores
+  analogWrite(MOTOR_A_PWM, 0);
+  analogWrite(MOTOR_B_PWM, 0);
   
+  switch(dir){
+    case MOTOR_MOVE_FORWARD:
+      a = HIGH;
+      b = HIGH;
+      break;
+    case MOTOR_MOVE_BACKWARD:
+      a = LOW;
+      b = LOW;
+      break;
+    case MOTOR_MOVE_RIGHT:
+      a = LOW;
+      b = HIGH;
+      break;
+    case MOTOR_MOVE_LEFT:
+      a = HIGH;
+      b = LOW;
+      break;
+  }
+  //Direciona os motores
+  digitalWrite(MOTOR_A_DIR, a);
+  digitalWrite(MOTOR_B_DIR, b);
+  
+  //Liga novamente os motores
+  analogWrite(MOTOR_A_PWM, vel);
+  analogWrite(MOTOR_B_PWM, vel);
 }
 
-//Atribui as Direções
-void setDirs(int direction){
-  
-}
-
-int define_state(){ //Determina o estado mais adquado
+int define_state(){ //Determina o estado mais adequado
   int state;
   getDistances();
 
   if(rActivate == 0){
     state = -1;
   } else if(rActivate == 1 && rActivate_ll != rActivate){
-    rActivate_ll = rActivate; //mesmo que carregem de novo no botão verde ele não volta a este estado
+    rActivate_ll = rActivate; //mesmo que carreguem de novo no botão verde ele não volta a este estado
     state = 0;
   } else if(distanceD <= SONAR_DIST && distanceD <= SONAR_DIST){
     state = 1;
@@ -128,33 +161,57 @@ int define_state(){ //Determina o estado mais adquado
   return state;
 }
 
-bool send_state(int state){ //Envia o estado por BT
-  return true;
+void send_state(int state){ //Envia o estado por BT
+  BTserial.write(state);
 }
 
 void operations(int state){ //Atua perante o estado
   //Atua mediante o estado
   switch(rState){
     case -1: //Desativado
+      setSpeeds(MOTOR_MOVE_FORWARD, 0); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 0;
       break;
     case 0: //Parado
+      setSpeeds(MOTOR_MOVE_FORWARD, 0); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 0;
       break;
     case 1: //Andar para a Frente
+      setSpeeds(MOTOR_MOVE_FORWARD, MOTOR_VEL); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 1;
       break;
     case 2: //Andar para a Trás
+      setSpeeds(MOTOR_MOVE_BACKWARD, MOTOR_VEL); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 1;
       break;
     case 3: //Rodar para a direita
+      setSpeeds(MOTOR_MOVE_RIGHT, MOTOR_VEL); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 1;
       break;
     case 4: //Rodar para a esquerda
+      setSpeeds(MOTOR_MOVE_LEFT, MOTOR_VEL); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 1;
       break;
     case 5: //Apagar a chama
+      setSpeeds(MOTOR_MOVE_FORWARD, 0); //Desliga Motores
+      digitalWrite(VENTOINHA_INA, LOW);
+      servo_enabled = 1;
       break;
   }
 }
 
 void setup() {
+  //Inicializa a comunicação Serial via Bluetooth
+  BTserial.begin(38400); 
+  
   //Função de interrupção
-  attachInterrupt(digitalPinToInterrupt(BOTAO_VERML), changeRobotActivationState, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(BOTAO_INTRP), changeRobotActivationState, CHANGE);
 
   //PinModes
   pinMode(MOTOR_A_DIR, OUTPUT);
@@ -168,11 +225,11 @@ void setup() {
   pinMode(SONAR_ECHO_DIREITA, INPUT);
   pinMode(SONAR_ECHO_ESQUERDA, INPUT);
   pinMode(VENTOINHA_INA, OUTPUT);
-  pinMode(SERVO_MOTOR, OUTPUT);
+  pinMode(SERVO_PIN, OUTPUT);
   pinMode(CHAMA_PIN, INPUT);
   pinMode(CHAMA_LED, OUTPUT);
-  pinMode(BOTAO_VERDE, INPUT);
-  pinMode(BOTAO_VERML, INPUT);
+  pinMode(BOTAO_START, INPUT);
+  pinMode(BOTAO_INTRP, INPUT);
   
   //Definição do estado inicial do robot
   int rActivate = -1;
@@ -182,24 +239,27 @@ void setup() {
   angle_servo = 90;
 
   //Config Servo
-  servo.attach(SERVO_MOTOR);
+  servo.attach(SERVO_PIN);
   servo.write(angle_servo);
 }
 
 void loop() {
-  servo.write(angle_servo); //Roda o servo
   rState = define_state();//Determina o estado adequado
   operations(rState); //Define o movimento do robot
   send_state(rState); //Envia o estado atual para o SI
 
-  //Evita rotações não possiveis
-  if(angle_servo == SERVO_MAX_ANGLE){
-    incrm_servo = -1;
-  }else if (angle_servo == SERVO_MIN_ANGLE){
-    incrm_servo = 1;
+  if(servo_enabled == 1){
+    //Evita rotações não possiveis
+    incrm_servo = (angle_servo == SERVO_MAX_ANGLE) ? -1 : incrm_servo;
+    incrm_servo = (angle_servo == SERVO_MIN_ANGLE) ? 1 : incrm_servo;
+
+    angle_servo += incrm_servo; //Define o angulo
+    servo.write(angle_servo); //Roda o servo
   }
 
-  //Define o angulo do prox loop
-  angle_servo += incrm_servo;
+
+
+  
+  
   
 }
