@@ -2,7 +2,8 @@
 #include <SoftwareSerial.h>
 
 //Parametrizacao
-//Motores (A: Direita | B: Esquerda)
+
+//Motores (A: Esquerda | B: Direita)
 #define MOTOR_A_DIR 12
 #define MOTOR_B_DIR 13
 #define MOTOR_A_PWM 3
