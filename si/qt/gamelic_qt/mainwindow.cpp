@@ -67,6 +67,29 @@ void MainWindow::on_listarEquipaAction_triggered()
 void MainWindow::on_listarProvaAction_triggered()
 {
     ui->stackedWidget->setCurrentWidget(ui->listarProva);
+	ui->tabelaListarProva->setRowCount(0);
+	vector<string> nomeProva = bd.ListarNomeProva();
+	vector<string> nomeLocal = bd.ListarLocalProva();
+	vector<string> nomeRobo = bd.listarNomeRobo();
+	for (int j = 1; j <= nomeProva.size(); j++) {
+		string nomeS = nomeProva[j - 1];
+		string local = nomeLocal[j - 1];
+		string roboS = nomeRobo[j];
+		string robo = bd.buscarNomeRobo(bd.buscarIDRobotProva(roboS));
+		QString nomeSQ = QString::fromStdString(nomeS);
+		QString localQ = QString::fromStdString(local);
+		QString roboQ = QString::fromStdString(robo);
+		ui->tabelaListarProva->insertRow(ui->tabelaListarProva->rowCount());
+		QTableWidgetItem * nomeProva = new QTableWidgetItem(nomeSQ);
+		QTableWidgetItem * nomeLocal = new QTableWidgetItem(localQ);
+		QTableWidgetItem * nomeRobo = new QTableWidgetItem(roboQ);
+		nomeProva->setTextAlignment(Qt::AlignCenter);
+		nomeLocal->setTextAlignment(Qt::AlignCenter);
+		nomeRobo->setTextAlignment(Qt::AlignCenter);
+		ui->tabelaListarProva->setItem(ui->tabelaListarProva->rowCount() - 1, 0, nomeProva);
+		ui->tabelaListarProva->setItem(ui->tabelaListarProva->rowCount() - 1, 2, nomeLocal);
+		ui->tabelaListarProva->setItem(ui->tabelaListarProva->rowCount() - 1, 3, nomeRobo);
+	}
 }
 
 void MainWindow::on_listarRobotAction_triggered()

@@ -52,5 +52,6 @@ public:
 	int buscarNumeroProva();
 
 	int buscarIDEquipaRobot(string nome);
+	int buscarIDRobotProva(string nome);
 
 };
