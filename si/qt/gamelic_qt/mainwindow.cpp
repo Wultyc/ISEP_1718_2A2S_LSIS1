@@ -286,9 +286,12 @@ void MainWindow::on_modEquipaCheck_clicked()
 	ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
 	ui->modEquipaLineEdit_8->setText(QString::fromStdString(elementos[6]));
 	ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
+}
 
-	/*int numE;
-	numE = bd.buscarIDEquipasNome(ui->modEquipasComboBox->currentText().toStdString());
+void MainWindow::on_pushmodEquipa_3_clicked()
+{
+	int idEquipa;
+	idEquipa = bd.buscarIDEquipasNome(ui->modEquipasComboBox->currentText().toStdString());
 
 	QString nomeE = ui->modEquipaLineEdit->text();
 	QString elemento1 = ui->modEquipaLineEdit_2->text();
@@ -300,30 +303,35 @@ void MainWindow::on_modEquipaCheck_clicked()
 	QString elemento7 = ui->modEquipaLineEdit_8->text();
 	QString elemento8 = ui->modEquipaLineEdit_9->text();
 
+	bd.updateEquipa(nomeE.toStdString(), idEquipa);
+
+	vector<int> idElementos = bd.buscarIDElementos(idEquipa);
+
+
+
 	if (!(elemento1.isEmpty())) {
-	bd.updateEquipa(elemento1.toStdString(), nomeE.toStdString(), numE);
+		bd.updateElemento(idElementos[0], elemento1.toStdString());
 	}
 	if (!(elemento2.isEmpty())) {
-	bd.updateEquipa(elemento2.toStdString(), nomeE.toStdString(), numE);
+		bd.updateElemento(idElementos[1], elemento2.toStdString());
 	}
 	if (!(elemento3.isEmpty())) {
-	bd.updateEquipa(elemento3.toStdString(), nomeE.toStdString(), numE);
+		bd.updateElemento(idElementos[2], elemento3.toStdString());
 	}
 	if (!(elemento4.isEmpty())) {
-	bd.updateEquipa(elemento4.toStdString(), nomeE.toStdString(), numE);
+		bd.updateElemento(idElementos[3], elemento4.toStdString());
 	}
 	if (!(elemento5.isEmpty())) {
-	bd.updateEquipa(elemento5.toStdString(), nomeE.toStdString(), numE);
+		bd.updateElemento(idElementos[4], elemento5.toStdString());
 	}
 	if (!(elemento6.isEmpty())) {
-	bd.updateEquipa(elemento6.toStdString(), nomeE.toStdString(), numE);
+		bd.updateElemento(idElementos[5], elemento6.toStdString());
 	}
 	if (!(elemento7.isEmpty())) {
-	bd.updateEquipa(elemento7.toStdString(), nomeE.toStdString(), numE);
+		bd.updateElemento(idElementos[6], elemento7.toStdString());
 	}
 	if (!(elemento8.isEmpty())) {
-	bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
-	}*/
+		bd.updateElemento(idElementos[7], elemento8.toStdString());
+	}
 }
-
 

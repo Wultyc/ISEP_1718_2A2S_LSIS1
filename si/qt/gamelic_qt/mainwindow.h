@@ -54,6 +54,7 @@ private slots:
 
 	void on_pushInserirProva_clicked();
 
+	void on_pushmodEquipa_3_clicked();
 
 
 private:

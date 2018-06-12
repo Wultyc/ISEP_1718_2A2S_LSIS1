@@ -28,30 +28,33 @@ public:
 	void inserirRobo(string nomeR, string nomeE);
 	void inserirProva(string nomeP,string local, string nomeR);
 	void inserirStates(int state, string nomeP);
-	void updateEquipa(string nomeEl, string nomeE, int num);
-	
+	void updateEquipa(string nomeE, int num);
+	void updateElemento(int idElemento, string nomeElNovo);
+
 	vector<string> buscarEquipa(int num);
 	vector<string> buscarElementos(int num);
 	vector<string> listarEquipas();
 	vector<string> listarNomeRobo();
 	vector<string> buscarDadosEquipa(string nomeE);
-	vector<int> listarIDRobo();
-	
-	int buscarIDEquipasNome(string nome);
-	int buscarNumeroEquipas();
-	int buscarNumeroRobo();
-	vector<int> buscarIDEquipas();
-	string buscarNomeEquipa(int num);
-	string buscarNomeRobo(int num);
-	
-	vector<int> ListarIDProva();
 	vector<string> ListarNomeProva();
 	vector<string> ListarLocalProva();
 	vector<string> ListarDataProva();
-	string buscarNomeProva(int num);
-	int buscarNumeroProva();
 
+	vector<int> listarIDRobo();
+	vector<int> buscarIDEquipas();
+	vector<int> buscarIDElementos(int idEquipa);
+	vector<int> ListarIDProva();
+
+	int buscarIDEquipasNome(string nome);
+	int buscarNumeroEquipas();
+	int buscarNumeroRobo();
+	int buscarNumeroProva();
 	int buscarIDEquipaRobot(string nome);
 	int buscarIDRobotProva(string nome);
+
+	string buscarNomeEquipa(int num);
+	string buscarNomeRobo(int num);
+	string buscarNomeProva(int num);
+	
 
 };
