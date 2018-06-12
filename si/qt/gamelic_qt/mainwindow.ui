@@ -18,11 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-<<<<<<< HEAD
        <number>7</number>
-=======
-       <number>12</number>
->>>>>>> 1bb1c135bf505a03d4d8957095685e5c2563f3ca
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">

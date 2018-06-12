@@ -294,7 +294,7 @@ vector<int> bd::ListarIDProva() {
 	vector<int> results;
 	connect();
 	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT idProva FROM `robo`.`prova`");
+	res = stmt->executeQuery("SELECT idProva FROM `robo`.`prova` order by idProva ASC");
 
 	while (res->next()) {
 		int num = res->getInt(1);
@@ -333,6 +333,51 @@ vector<string> bd::ListarLocalProva() {
 	}
 	return results;
 	delete stmt;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+string bd::listarLocalProva(int id) {
+	string result;
+	connect();
+	prep = con->prepareStatement("SELECT local FROM `robo`.`prova` WHERE idProva=?");
+	prep->setInt(1, id);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getString(1);
+	}
+	return result;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+int bd::buscarIDRobot(int id) {
+	int result;
+	connect();
+	prep = con->prepareStatement("SELECT Robo_idRobo FROM `robo`.`prova` WHERE idProva=?");
+	prep->setInt(1, id);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getInt(1);
+	}
+	return result;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+string bd::buscarRobot(int id) {
+	string result;
+	connect();
+	prep = con->prepareStatement("SELECT nome FROM `robo`.`robo` WHERE idRobo=?");
+	prep->setInt(1, id);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getString(1);
+	}
+	return result;
 	delete res;
 	delete prep;
 	delete con;

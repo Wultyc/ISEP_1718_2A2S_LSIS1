@@ -38,7 +38,10 @@ public:
 	vector<string> buscarDadosEquipa(string nomeE);
 	vector<string> ListarNomeProva();
 	vector<string> ListarLocalProva();
+	string listarLocalProva(int id);
 	vector<string> ListarDataProva();
+	int buscarIDRobot(int id);
+	string buscarRobot(int id);
 
 	vector<int> listarIDRobo();
 	vector<int> buscarIDEquipas();

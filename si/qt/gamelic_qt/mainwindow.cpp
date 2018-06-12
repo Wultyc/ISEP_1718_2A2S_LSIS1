@@ -67,17 +67,14 @@ void MainWindow::on_listarProvaAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->listarProva);
 	ui->tabelaListarProva->setRowCount(0);
-	vector<string> nomeProva = bd.ListarNomeProva();
-	vector<string> nomeLocal = bd.ListarLocalProva();
-	vector<string> nomeRobo = bd.listarNomeRobo();
-	for (int j = 1; j <= nomeProva.size(); j++) {
-		string nomeS = nomeProva[j - 1];
-		string local = nomeLocal[j - 1];
-		string roboS = nomeRobo[j];
-		string robo = bd.buscarNomeRobo(bd.buscarIDRobotProva(roboS));
+	vector<int> idProva = bd.ListarIDProva();
+	for (int j = 0; j < idProva.size(); j++) {
+		string nomeS = bd.buscarNomeProva(idProva[j]);
+		string local = bd.listarLocalProva(idProva[j]);
+		string roboS = bd.buscarRobot(bd.buscarIDRobot(idProva[j]));
 		QString nomeSQ = QString::fromStdString(nomeS);
 		QString localQ = QString::fromStdString(local);
-		QString roboQ = QString::fromStdString(robo);
+		QString roboQ = QString::fromStdString(roboS);
 		ui->tabelaListarProva->insertRow(ui->tabelaListarProva->rowCount());
 		QTableWidgetItem * nomeProva = new QTableWidgetItem(nomeSQ);
 		QTableWidgetItem * nomeLocal = new QTableWidgetItem(localQ);
@@ -113,9 +110,15 @@ void MainWindow::on_listarRobotAction_triggered()
 
 void MainWindow::on_modificarEquipaAction_triggered()
 {
-
 	ui->stackedWidget->setCurrentWidget(ui->modificarEquipa);
+	ui->modEquipasComboBox->clear();
+	vector<string> equipas = bd.listarEquipas();
 
+	for (int i = 0; i < equipas.size(); i++) {
+		ui->modEquipasComboBox->insertItem(i, QString::fromStdString(equipas[i]));
+	}
+
+	vector<string> elementos = bd.buscarDadosEquipa(ui->modEquipasComboBox->currentText().toStdString());
 }
 
 void MainWindow::on_modificarProvaAction_triggered()
@@ -281,10 +284,11 @@ void MainWindow::on_mensagemInicialAction_triggered()
 	ui->stackedWidget->setCurrentWidget(ui->main);
 }
 
-/*void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
+void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 {
 	vector<string> elementos = bd.buscarDadosEquipa(arg1.toStdString());
 
+	
 	ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
 	ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
 	ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
@@ -293,9 +297,9 @@ void MainWindow::on_mensagemInicialAction_triggered()
 	ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
 	ui->modEquipaLineEdit_8->setText(QString::fromStdString(elementos[6]));
 	ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
-
+	
 	int numE;
-	numE = bd.buscarIDEquipasNome(arg1.toStdString());
+	/*numE = bd.buscarIDEquipasNome(arg1.toStdString());
 
 	QString nomeE = ui->modEquipaLineEdit->text();
 	QString elemento1 = ui->modEquipaLineEdit_2->text();
@@ -306,7 +310,7 @@ void MainWindow::on_mensagemInicialAction_triggered()
 	QString elemento6 = ui->modEquipaLineEdit_7->text();
 	QString elemento7 = ui->modEquipaLineEdit_8->text();
 	QString elemento8 = ui->modEquipaLineEdit_9->text();
-
+	*/
 	/*if (!(elemento1.isEmpty())) {
 		bd.updateEquipa(elemento1.toStdString(), nomeE.toStdString(), numE);
 	}
@@ -331,7 +335,8 @@ void MainWindow::on_mensagemInicialAction_triggered()
 	if (!(elemento8.isEmpty())) {
 		bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
 	}*/
-	//}
+}
+
 void MainWindow::on_pushInserirRobot_clicked() {
 
 	QString nomeQE = ui->insRobotCombo->currentText();
@@ -440,4 +445,3 @@ void MainWindow::on_pushmodEquipa_3_clicked()
 		bd.updateElemento(idElementos[7], elemento8.toStdString());
 	}
 }
-
