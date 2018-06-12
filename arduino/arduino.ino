@@ -12,11 +12,11 @@
 #define MOTOR_B_CS A1
 
 //Sonares
-#define SONAR_TRIG 2
+#define SONAR_TRIG 5
 #define SONAR_ECHO_FRENTE A2
 #define SONAR_ECHO_DIREITA A3
 #define SONAR_ECHO_ESQUERDA A4
-#define SONAR_DIST 5
+#define SONAR_DIST 5 //distancia do robot em cm
 
 //Propeller
 #define VENTOINHA_INA 6
