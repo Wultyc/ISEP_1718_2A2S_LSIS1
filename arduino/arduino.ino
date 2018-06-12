@@ -51,8 +51,8 @@
 Servo servo;  //Objeto de controlo do servo
 SoftwareSerial BTserial(BT_RX, BT_TX); //Definição do Bluetooth
 
-int rActivate = 0;    //Estado de ativação
-int rActivate_ll = 0; //Indica o estado de ativação antes da ultima alteração
+int rActivate = -1;    //Estado de ativação
+int rActivate_ll = -1; //Indica o estado de ativação antes da ultima alteração
 int rState = -1;      //Estado
 
 //Distancia
@@ -171,7 +171,7 @@ void send_state(){ //Envia o estado por BT
 
 void send_state_byUSB(bool sendHeader){ //Envia o estado por BT
   if(sendHeader == true){
-    Serial.print("rState\trActivate\trActivate_ll\tdurationF\tdurationD\tdurationE\tangle_chama\tangle_servo\tincrm_servo\tservo_enabled\tA desativar\tD E\tF D E\tF E\tF D\tchama\n");
+    Serial.print("rState\trActivate\trActivate_ll\tdistanceF\tdistanceD\tdistanceE\tangle_chama\tangle_servo\tincrm_servo\tservo_enabled\tA desativar\tD E\tF D E\tF E\tF D\tchama\n");
   }
   Serial.print(rState);
   Serial.print("\t");
@@ -179,11 +179,11 @@ void send_state_byUSB(bool sendHeader){ //Envia o estado por BT
   Serial.print("\t");
   Serial.print(rActivate_ll);
   Serial.print("\t");
-  Serial.print(durationF);
+  Serial.print(distanceF);
   Serial.print("\t");
-  Serial.print(durationD);
+  Serial.print(distanceD);
   Serial.print("\t");
-  Serial.print(durationE);
+  Serial.print(distanceE);
   Serial.print("\t");
   Serial.print(angle_chama);
   Serial.print("\t");
@@ -205,7 +205,6 @@ void send_state_byUSB(bool sendHeader){ //Envia o estado por BT
   Serial.print("\t");
   Serial.print((analogRead(A0) >= CHAMA_PARAM));
   Serial.print("\n");
-
 }
 
 void operations(){ //Atua perante o estado
