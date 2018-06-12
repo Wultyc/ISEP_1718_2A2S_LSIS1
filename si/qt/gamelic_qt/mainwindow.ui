@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>926</width>
-    <height>480</height>
+    <width>1000</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>12</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -44,7 +44,7 @@
        <widget class="QLabel" name="insNomeLabel">
         <property name="geometry">
          <rect>
-          <x>260</x>
+          <x>320</x>
           <y>21</y>
           <width>131</width>
           <height>20</height>
@@ -62,7 +62,7 @@
        <widget class="QLabel" name="insEle1Label">
         <property name="geometry">
          <rect>
-          <x>79</x>
+          <x>139</x>
           <y>91</y>
           <width>91</width>
           <height>20</height>
@@ -80,7 +80,7 @@
        <widget class="QLabel" name="insEle2Label">
         <property name="geometry">
          <rect>
-          <x>79</x>
+          <x>139</x>
           <y>161</y>
           <width>91</width>
           <height>20</height>
@@ -98,7 +98,7 @@
        <widget class="QLabel" name="insEle3Label">
         <property name="geometry">
          <rect>
-          <x>79</x>
+          <x>139</x>
           <y>231</y>
           <width>91</width>
           <height>20</height>
@@ -116,7 +116,7 @@
        <widget class="QLabel" name="insEle4Label">
         <property name="geometry">
          <rect>
-          <x>79</x>
+          <x>139</x>
           <y>301</y>
           <width>91</width>
           <height>20</height>
@@ -134,7 +134,7 @@
        <widget class="QLabel" name="insEle5Label">
         <property name="geometry">
          <rect>
-          <x>519</x>
+          <x>579</x>
           <y>92</y>
           <width>91</width>
           <height>20</height>
@@ -152,7 +152,7 @@
        <widget class="QLabel" name="insEle6Label">
         <property name="geometry">
          <rect>
-          <x>519</x>
+          <x>579</x>
           <y>162</y>
           <width>91</width>
           <height>20</height>
@@ -170,7 +170,7 @@
        <widget class="QLabel" name="insEle7Label">
         <property name="geometry">
          <rect>
-          <x>519</x>
+          <x>579</x>
           <y>232</y>
           <width>91</width>
           <height>20</height>
@@ -188,7 +188,7 @@
        <widget class="QLabel" name="insEle8Label">
         <property name="geometry">
          <rect>
-          <x>519</x>
+          <x>579</x>
           <y>302</y>
           <width>91</width>
           <height>20</height>
@@ -206,7 +206,7 @@
        <widget class="QLineEdit" name="insNomeLineE">
         <property name="geometry">
          <rect>
-          <x>401</x>
+          <x>461</x>
           <y>20</y>
           <width>191</width>
           <height>26</height>
@@ -221,7 +221,7 @@
        <widget class="QLineEdit" name="insEle1LineE">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>90</y>
           <width>191</width>
           <height>26</height>
@@ -236,7 +236,7 @@
        <widget class="QLineEdit" name="insEle2LineE">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>160</y>
           <width>191</width>
           <height>26</height>
@@ -251,7 +251,7 @@
        <widget class="QLineEdit" name="insEle3LineE">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>230</y>
           <width>191</width>
           <height>26</height>
@@ -266,7 +266,7 @@
        <widget class="QLineEdit" name="insEle4LineE">
         <property name="geometry">
          <rect>
-          <x>180</x>
+          <x>240</x>
           <y>300</y>
           <width>191</width>
           <height>26</height>
@@ -281,7 +281,7 @@
        <widget class="QLineEdit" name="insEle5LineE">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>90</y>
           <width>191</width>
           <height>26</height>
@@ -296,7 +296,7 @@
        <widget class="QLineEdit" name="insEle6LineE">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>160</y>
           <width>191</width>
           <height>26</height>
@@ -311,7 +311,7 @@
        <widget class="QLineEdit" name="insEle7LineE">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>230</y>
           <width>191</width>
           <height>26</height>
@@ -326,7 +326,7 @@
        <widget class="QLineEdit" name="insEle8LineE">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>300</y>
           <width>191</width>
           <height>26</height>
@@ -341,7 +341,7 @@
        <widget class="QPushButton" name="pushInserirEquipa">
         <property name="geometry">
          <rect>
-          <x>385</x>
+          <x>445</x>
           <y>360</y>
           <width>110</width>
           <height>40</height>
@@ -361,8 +361,8 @@
        <widget class="QLabel" name="insLocalLabel">
         <property name="geometry">
          <rect>
-          <x>266</x>
-          <y>138</y>
+          <x>317</x>
+          <y>148</y>
           <width>111</width>
           <height>20</height>
          </rect>
@@ -379,8 +379,8 @@
        <widget class="QLineEdit" name="insNomeProvaLineE">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>55</y>
+          <x>451</x>
+          <y>65</y>
           <width>241</width>
           <height>26</height>
          </rect>
@@ -394,8 +394,8 @@
        <widget class="QLabel" name="insRobotLabel">
         <property name="geometry">
          <rect>
-          <x>259</x>
-          <y>219</y>
+          <x>310</x>
+          <y>229</y>
           <width>131</width>
           <height>20</height>
          </rect>
@@ -412,8 +412,8 @@
        <widget class="QLineEdit" name="insLocalLineE">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>135</y>
+          <x>451</x>
+          <y>145</y>
           <width>241</width>
           <height>26</height>
          </rect>
@@ -427,8 +427,8 @@
        <widget class="QLabel" name="insNomeProvaLabel">
         <property name="geometry">
          <rect>
-          <x>259</x>
-          <y>58</y>
+          <x>310</x>
+          <y>68</y>
           <width>111</width>
           <height>20</height>
          </rect>
@@ -445,8 +445,8 @@
        <widget class="QPushButton" name="pushInserirProva">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>310</y>
+          <x>445</x>
+          <y>320</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -463,8 +463,8 @@
        <widget class="QComboBox" name="insProvaCombo">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>216</y>
+          <x>451</x>
+          <y>226</y>
           <width>241</width>
           <height>26</height>
          </rect>
@@ -475,7 +475,7 @@
        <widget class="QLabel" name="insNomeRobotLabel">
         <property name="geometry">
          <rect>
-          <x>257</x>
+          <x>307</x>
           <y>92</y>
           <width>131</width>
           <height>20</height>
@@ -493,7 +493,7 @@
        <widget class="QLineEdit" name="insNomeRobotLineE">
         <property name="geometry">
          <rect>
-          <x>400</x>
+          <x>450</x>
           <y>89</y>
           <width>241</width>
           <height>26</height>
@@ -508,7 +508,7 @@
        <widget class="QLabel" name="insNomeEquipaLabel">
         <property name="geometry">
          <rect>
-          <x>257</x>
+          <x>307</x>
           <y>180</y>
           <width>131</width>
           <height>20</height>
@@ -526,7 +526,7 @@
        <widget class="QPushButton" name="pushInserirRobot">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>445</x>
           <y>290</y>
           <width>110</width>
           <height>40</height>
@@ -544,7 +544,7 @@
        <widget class="QComboBox" name="insRobotCombo">
         <property name="geometry">
          <rect>
-          <x>400</x>
+          <x>450</x>
           <y>177</y>
           <width>241</width>
           <height>26</height>
@@ -556,7 +556,7 @@
        <widget class="QTableWidget" name="tabelaListarEquipa">
         <property name="geometry">
          <rect>
-          <x>140</x>
+          <x>190</x>
           <y>20</y>
           <width>621</width>
           <height>351</height>
@@ -581,7 +581,7 @@
        <widget class="QTableWidget" name="tabelaListarProva">
         <property name="geometry">
          <rect>
-          <x>140</x>
+          <x>190</x>
           <y>20</y>
           <width>621</width>
           <height>351</height>
@@ -616,7 +616,7 @@
        <widget class="QTableWidget" name="tabelaListarRobot">
         <property name="geometry">
          <rect>
-          <x>140</x>
+          <x>190</x>
           <y>20</y>
           <width>621</width>
           <height>351</height>
@@ -695,7 +695,7 @@
        <widget class="QPushButton" name="pushmodEquipa_3">
         <property name="geometry">
          <rect>
-          <x>390</x>
+          <x>445</x>
           <y>340</y>
           <width>110</width>
           <height>40</height>
@@ -713,7 +713,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_3">
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>170</x>
           <y>140</y>
           <width>91</width>
           <height>31</height>
@@ -726,7 +726,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_4">
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>170</x>
           <y>290</y>
           <width>91</width>
           <height>31</height>
@@ -739,7 +739,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_5">
         <property name="geometry">
          <rect>
-          <x>520</x>
+          <x>580</x>
           <y>140</y>
           <width>91</width>
           <height>31</height>
@@ -752,7 +752,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_6">
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>170</x>
           <y>190</y>
           <width>91</width>
           <height>31</height>
@@ -765,7 +765,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_7">
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>170</x>
           <y>240</y>
           <width>91</width>
           <height>31</height>
@@ -778,7 +778,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_8">
         <property name="geometry">
          <rect>
-          <x>520</x>
+          <x>580</x>
           <y>240</y>
           <width>91</width>
           <height>31</height>
@@ -791,7 +791,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_9">
         <property name="geometry">
          <rect>
-          <x>520</x>
+          <x>580</x>
           <y>290</y>
           <width>91</width>
           <height>31</height>
@@ -804,7 +804,7 @@
        <widget class="QLabel" name="modEquipaLabelNovo_10">
         <property name="geometry">
          <rect>
-          <x>520</x>
+          <x>580</x>
           <y>190</y>
           <width>91</width>
           <height>31</height>
@@ -817,7 +817,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_2">
         <property name="geometry">
          <rect>
-          <x>210</x>
+          <x>270</x>
           <y>145</y>
           <width>151</width>
           <height>26</height>
@@ -827,7 +827,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_3">
         <property name="geometry">
          <rect>
-          <x>210</x>
+          <x>270</x>
           <y>195</y>
           <width>151</width>
           <height>26</height>
@@ -837,7 +837,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_4">
         <property name="geometry">
          <rect>
-          <x>210</x>
+          <x>270</x>
           <y>245</y>
           <width>151</width>
           <height>26</height>
@@ -847,7 +847,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_5">
         <property name="geometry">
          <rect>
-          <x>210</x>
+          <x>270</x>
           <y>295</y>
           <width>151</width>
           <height>26</height>
@@ -857,7 +857,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_6">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>145</y>
           <width>151</width>
           <height>26</height>
@@ -867,7 +867,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_7">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>195</y>
           <width>151</width>
           <height>26</height>
@@ -877,7 +877,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_8">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>245</y>
           <width>151</width>
           <height>26</height>
@@ -887,7 +887,7 @@
        <widget class="QLineEdit" name="modEquipaLineEdit_9">
         <property name="geometry">
          <rect>
-          <x>620</x>
+          <x>680</x>
           <y>295</y>
           <width>151</width>
           <height>26</height>
@@ -912,8 +912,8 @@
        <widget class="QLabel" name="modProvaLabelNovo_2">
         <property name="geometry">
          <rect>
-          <x>183</x>
-          <y>130</y>
+          <x>233</x>
+          <y>150</y>
           <width>191</width>
           <height>31</height>
          </rect>
@@ -925,8 +925,8 @@
        <widget class="QComboBox" name="modProvaComboBox_2">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>70</y>
+          <x>450</x>
+          <y>90</y>
           <width>351</width>
           <height>26</height>
          </rect>
@@ -968,8 +968,8 @@
        <widget class="QLabel" name="modProvaLabelID">
         <property name="geometry">
          <rect>
-          <x>170</x>
-          <y>70</y>
+          <x>220</x>
+          <y>90</y>
           <width>211</width>
           <height>21</height>
          </rect>
@@ -981,8 +981,8 @@
        <widget class="QComboBox" name="modProvaComboBox">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>135</y>
+          <x>450</x>
+          <y>155</y>
           <width>351</width>
           <height>26</height>
          </rect>
@@ -1019,8 +1019,8 @@
        <widget class="QLabel" name="modProvaLabelNovo">
         <property name="geometry">
          <rect>
-          <x>331</x>
-          <y>190</y>
+          <x>381</x>
+          <y>210</y>
           <width>41</width>
           <height>31</height>
          </rect>
@@ -1032,8 +1032,8 @@
        <widget class="QLineEdit" name="modProvalineEdit">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>195</y>
+          <x>450</x>
+          <y>215</y>
           <width>351</width>
           <height>26</height>
          </rect>
@@ -1042,8 +1042,8 @@
        <widget class="QPushButton" name="pushmodProva">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>290</y>
+          <x>445</x>
+          <y>310</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1062,8 +1062,8 @@
        <widget class="QLabel" name="modRobotLabelNovo">
         <property name="geometry">
          <rect>
-          <x>331</x>
-          <y>190</y>
+          <x>381</x>
+          <y>210</y>
           <width>41</width>
           <height>31</height>
          </rect>
@@ -1075,8 +1075,8 @@
        <widget class="QLineEdit" name="modRobotlineEdit">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>195</y>
+          <x>450</x>
+          <y>215</y>
           <width>351</width>
           <height>26</height>
          </rect>
@@ -1085,8 +1085,8 @@
        <widget class="QLabel" name="modRobotLabelNovo_2">
         <property name="geometry">
          <rect>
-          <x>183</x>
-          <y>130</y>
+          <x>233</x>
+          <y>150</y>
           <width>191</width>
           <height>31</height>
          </rect>
@@ -1098,8 +1098,8 @@
        <widget class="QComboBox" name="modRobotComboBox">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>70</y>
+          <x>450</x>
+          <y>90</y>
           <width>351</width>
           <height>26</height>
          </rect>
@@ -1141,8 +1141,8 @@
        <widget class="QComboBox" name="modRobotComboBox_2">
         <property name="geometry">
          <rect>
-          <x>400</x>
-          <y>135</y>
+          <x>450</x>
+          <y>155</y>
           <width>351</width>
           <height>26</height>
          </rect>
@@ -1169,8 +1169,8 @@
        <widget class="QLabel" name="modRobotLabelID">
         <property name="geometry">
          <rect>
-          <x>170</x>
-          <y>70</y>
+          <x>220</x>
+          <y>90</y>
           <width>211</width>
           <height>21</height>
          </rect>
@@ -1182,8 +1182,8 @@
        <widget class="QPushButton" name="pushmodRobot">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>290</y>
+          <x>445</x>
+          <y>310</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1199,25 +1199,10 @@
        </widget>
       </widget>
       <widget class="QWidget" name="eliminarEquipa">
-       <widget class="QListView" name="eliEquipaslistView">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>50</y>
-          <width>581</width>
-          <height>211</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-       </widget>
        <widget class="QLabel" name="eliEquipaslabelTitulo">
         <property name="geometry">
          <rect>
-          <x>420</x>
+          <x>470</x>
           <y>10</y>
           <width>61</width>
           <height>21</height>
@@ -1230,8 +1215,8 @@
        <widget class="QLabel" name="eliEquipaslabel">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>293</y>
+          <x>290</x>
+          <y>310</y>
           <width>131</width>
           <height>31</height>
          </rect>
@@ -1240,11 +1225,11 @@
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Equipa a eliminar:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="eliEquipascomboBox">
+       <widget class="QComboBox" name="eliEquipasComboBox">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>295</y>
+          <x>445</x>
+          <y>312</y>
           <width>311</width>
           <height>26</height>
          </rect>
@@ -1283,8 +1268,8 @@
        <widget class="QPushButton" name="pusheliEquipas">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>345</y>
+          <x>445</x>
+          <y>362</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1298,13 +1283,36 @@
          <string>Eliminar</string>
         </property>
        </widget>
-      </widget>
-      <widget class="QWidget" name="eliminarProva">
-       <widget class="QComboBox" name="eliProvascomboBox">
+       <widget class="QTableWidget" name="tabelaEliminarEquipa">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>295</y>
+          <x>175</x>
+          <y>50</y>
+          <width>650</width>
+          <height>240</height>
+         </rect>
+        </property>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>300</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Nome da Equipa</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Nome do Elemento</string>
+         </property>
+        </column>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="eliminarProva">
+       <widget class="QComboBox" name="eliProvasComboBox">
+        <property name="geometry">
+         <rect>
+          <x>445</x>
+          <y>312</y>
           <width>311</width>
           <height>26</height>
          </rect>
@@ -1343,8 +1351,8 @@
        <widget class="QPushButton" name="pusheliProvas">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>345</y>
+          <x>445</x>
+          <y>362</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1361,8 +1369,8 @@
        <widget class="QLabel" name="eliProvaslabel">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>293</y>
+          <x>290</x>
+          <y>310</y>
           <width>131</width>
           <height>31</height>
          </rect>
@@ -1371,20 +1379,10 @@
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Prova a eliminar:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
-       <widget class="QListView" name="eliProvaslistView">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>50</y>
-          <width>581</width>
-          <height>211</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QLabel" name="eliProvaslabelTitulo">
         <property name="geometry">
          <rect>
-          <x>420</x>
+          <x>470</x>
           <y>10</y>
           <width>61</width>
           <height>21</height>
@@ -1394,12 +1392,45 @@
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Provas:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
+       <widget class="QTableWidget" name="tabelaEliminarProva">
+        <property name="geometry">
+         <rect>
+          <x>175</x>
+          <y>50</y>
+          <width>650</width>
+          <height>240</height>
+         </rect>
+        </property>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>155</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Nome da Prova</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Data da Prova</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Local da Prova</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Robot Utilizado</string>
+         </property>
+        </column>
+       </widget>
       </widget>
       <widget class="QWidget" name="eliminarRobot">
        <widget class="QLabel" name="eliRobotlabelTitulo">
         <property name="geometry">
          <rect>
-          <x>420</x>
+          <x>470</x>
           <y>10</y>
           <width>61</width>
           <height>21</height>
@@ -1409,21 +1440,11 @@
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;Robots:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
        </widget>
-       <widget class="QListView" name="eliRobotlistView">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>50</y>
-          <width>581</width>
-          <height>211</height>
-         </rect>
-        </property>
-       </widget>
        <widget class="QLabel" name="eliRobotlabel">
         <property name="geometry">
          <rect>
-          <x>230</x>
-          <y>293</y>
+          <x>290</x>
+          <y>310</y>
           <width>131</width>
           <height>31</height>
          </rect>
@@ -1435,8 +1456,8 @@
        <widget class="QPushButton" name="pusheliRobot">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>345</y>
+          <x>445</x>
+          <y>362</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1450,11 +1471,11 @@
          <string>Eliminar</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="eliRobotcomboBox">
+       <widget class="QComboBox" name="eliRobotComboBox">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>295</y>
+          <x>445</x>
+          <y>312</y>
           <width>311</width>
           <height>26</height>
          </rect>
@@ -1490,6 +1511,29 @@
          </property>
         </item>
        </widget>
+       <widget class="QTableWidget" name="tabelaEliminarRobot">
+        <property name="geometry">
+         <rect>
+          <x>175</x>
+          <y>50</y>
+          <width>641</width>
+          <height>240</height>
+         </rect>
+        </property>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>305</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Nome do Robot</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Nome da Equipa</string>
+         </property>
+        </column>
+       </widget>
       </widget>
      </widget>
     </item>
@@ -1500,7 +1544,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>926</width>
+     <width>1000</width>
      <height>21</height>
     </rect>
    </property>
