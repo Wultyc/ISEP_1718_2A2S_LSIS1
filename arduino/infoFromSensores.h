@@ -1,5 +1,5 @@
 #include "params.h" //Parametros de configuração
-#include "debug.h" //Funções de debug
+#include "debug_inputs.h" //Funções de debug
 
 //Determina a distancia dos sonares aos objetos
 void getDistances(int distance[]){
@@ -30,9 +30,9 @@ int define_state(int rActivate, int rActivate_ll){ //Determina o estado mais ade
   int chama = analogRead(CHAMA_PIN);
   int distances[3] = {0,0,0};
   
-  getDistances(); //Obtem as distancias
+  getDistances(distances); //Obtem as distancias
   
-  //debug_inputs(false, distances, distances, chama) //Debug da info dos sensores
+  debug_inputs(false, distances, chama); //Debug da info dos sensores
   
   if(rActivate == -1){
     state = -1;

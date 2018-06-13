@@ -2,10 +2,10 @@
 #include <SoftwareSerial.h>
 
 #include "params.h" //Parametros de configuração
-#include "actionsToComponents.h" //Funções de modificação de estado dos componentes
-#include "infoFromSensores.h" //Funções de obtenção de informação dos sensores
 #include "debug.h" //Funções de debug
 
+#include "actionsToComponents.h" //Funções de modificação de estado dos componentes
+#include "infoFromSensores.h" //Funções de obtenção de informação dos sensores
 
 Servo servo;  //Objeto de controlo do servo
 SoftwareSerial BTserial(BT_RX, BT_TX); //Definição do Bluetooth
@@ -64,9 +64,9 @@ void setup() {
   pinMode(BOTAO_INTRP, INPUT);
   
   //Definição do estado inicial do robot
-  int rActivate = -1;
-  int rActivate_ll = -1;
-
+  rActivate = -1;
+  rActivate_ll = -1;
+  
   //Config Servo
   servo.attach(SERVO_PIN);
   servo.write(angle_servo);
@@ -75,8 +75,6 @@ void setup() {
 
   //Debug
   //debug_main(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Debug dos estados
-  //debug_inputs(true, {0,0,0}, 0); //debug input
-  //debug_outputs(true, 0, 0, 0);  //debug output
 }
 
 void loop() {
