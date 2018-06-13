@@ -107,11 +107,11 @@ int operations(int state){ //Atua perante o estado
       servo_enabled = 1;
       break;
   }
-      debug_outputs(false, dirM, velM, velV);
+  //debug_outputs(false, dirM, velM, velV);
 
-      //Escreve as alterações nos pinos
-      setSpeeds(dirM, velM);
-      digitalWrite(VENTOINHA_INA, velV);
+  //Escreve as alterações nos pinos
+  setSpeeds(dirM, velM);
+  digitalWrite(VENTOINHA_INA, velV);
 
   return servo_enabled;
 }
