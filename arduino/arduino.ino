@@ -72,8 +72,10 @@ void setup() {
   servo.write(angle_servo);
   angle_servo = 90;
   servo_enabled = 0;
-  
-  send_state_byUSB(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
+
+  //Debug
+  //send_state_byUSB(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
+  //debug_inputs(true, {0,0,0}, 0};
 }
 
 void loop() {

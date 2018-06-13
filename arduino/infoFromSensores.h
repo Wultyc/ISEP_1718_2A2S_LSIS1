@@ -1,6 +1,7 @@
 #include "params.h" //Parametros de configuração
-//Determina a distancia dos sonares aos objetos
+#include "debug.h" //Funções de debug
 
+//Determina a distancia dos sonares aos objetos
 void getDistances(int distance[]){
   //Limpeza do Pino Trig
   digitalWrite(SONAR_TRIG, LOW);
@@ -26,9 +27,13 @@ void getDistances(int distance[]){
 
 int define_state(int rActivate, int rActivate_ll){ //Determina o estado mais adequado
   int state;
+  int chama = analogRead(CHAMA_PIN);
   int distances[3] = {0,0,0};
-  getDistances(distances);
-
+  
+  getDistances(); //Obtem as distancias
+  
+  //debug_inputs(false, distances, distances, chama) //Debug da info dos sensores
+  
   if(rActivate == -1){
     state = -1;
   } else if(rActivate == 1 && rActivate_ll != rActivate){
@@ -41,7 +46,7 @@ int define_state(int rActivate, int rActivate_ll){ //Determina o estado mais ade
     state = 3;
   } else if( (distances[0] <= SONAR_DIST && distances[2] <= SONAR_DIST) || distances[3] >= SONAR_ROOM){
     state = 4;
-  } else if(analogRead(CHAMA_PIN) >= CHAMA_PARAM){
+  } else if(chama >= CHAMA_PARAM){
     state = 5;
   } else{
     state = 1;

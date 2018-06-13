@@ -1,4 +1,5 @@
 #include "params.h" //Parametros de configuração
+#include "debug.h" //Funções de debug
 //Atribui as velocidades
 void setSpeeds(int dir, int vel){
   int a, b;
