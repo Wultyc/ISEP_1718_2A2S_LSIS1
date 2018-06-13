@@ -33,13 +33,13 @@ int define_state(int rActivate, int rActivate_ll){ //Determina o estado mais ade
     state = -1;
   } else if(rActivate == 1 && rActivate_ll != rActivate){
     state = 0;
-  } else if(distances[2] <= SONAR_DIST && distances[1] <= SONAR_DIST){
+  } else if( (distances[2] <= SONAR_DIST && distances[1] <= SONAR_DIST) || distances[1] >= SONAR_ROOM){
     state = 1;
   } else if(distances[0] <= SONAR_DIST && distances[1] <= SONAR_DIST && distances[2] <= SONAR_DIST){
     state = 2;
-  } else if(distances[0] <= SONAR_DIST && distances[4] <= SONAR_DIST){
+  } else if( (distances[0] <= SONAR_DIST && distances[3] <= SONAR_DIST) || distances[2] >= SONAR_ROOM){
     state = 3;
-  } else if(distances[0] <= SONAR_DIST && distances[3] <= SONAR_DIST){
+  } else if( (distances[0] <= SONAR_DIST && distances[2] <= SONAR_DIST) || distances[3] >= SONAR_ROOM){
     state = 4;
   } else if(analogRead(CHAMA_PIN) >= CHAMA_PARAM){
     state = 5;
