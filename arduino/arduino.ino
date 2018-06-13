@@ -67,12 +67,11 @@ void setup() {
   int rActivate = -1;
   int rActivate_ll = -1;
 
-  //Angulo Inicial do Servo
-  angle_servo = 90;
-
   //Config Servo
   servo.attach(SERVO_PIN);
   servo.write(angle_servo);
+  angle_servo = 90;
+  servo_enabled = 0;
   
   send_state_byUSB(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
 }

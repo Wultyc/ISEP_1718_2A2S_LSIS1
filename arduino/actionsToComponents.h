@@ -33,6 +33,21 @@ void setSpeeds(int dir, int vel){
   analogWrite(MOTOR_B_PWM, vel);
 }
 
+int setDefaultOutput(){
+  //Direciona os motores
+  digitalWrite(MOTOR_A_DIR, HIGH);
+  digitalWrite(MOTOR_B_DIR, HIGH);
+  
+  //Liga novamente os motores
+  analogWrite(MOTOR_A_PWM, 0);
+  analogWrite(MOTOR_B_PWM, 0);
+
+  //Desliga o Propeler
+  digitalWrite(VENTOINHA_INA, LOW);
+
+  //retorna o valor para o servo
+  return 0;
+}
 
 /*********************************************************************************************/
 int operations(int state){ //Atua perante o estado
