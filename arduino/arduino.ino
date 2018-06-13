@@ -74,15 +74,17 @@ void setup() {
   servo_enabled = 0;
 
   //Debug
-  //send_state_byUSB(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
-  //debug_inputs(true, {0,0,0}, 0};
+  debug_main(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Debug dos estados
+  debug_inputs(true, {0,0,0}, 0); //debug input
+  debug_outputs(true, 0, 0, 0);  //debug output
 }
 
 void loop() {
   rState = define_state(rActivate, rActivate_ll);//Determina o estado adequado
   servo_enabled = operations(rState); //Define o movimento do robot
   send_state(rState); //Envia o estado atual para o SI
-  send_state_byUSB(false, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
+  
+  debug_main(false, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
 
   if(servo_enabled == 1){
     //Evita rotações não possiveis

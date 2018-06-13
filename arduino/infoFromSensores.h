@@ -32,7 +32,7 @@ int define_state(int rActivate, int rActivate_ll){ //Determina o estado mais ade
   
   getDistances(); //Obtem as distancias
   
-  //debug_inputs(false, distances, distances, chama) //Debug da info dos sensores
+  debug_inputs(false, distances, distances, chama) //Debug da info dos sensores
   
   if(rActivate == -1){
     state = -1;
