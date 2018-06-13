@@ -4,6 +4,7 @@
 #include "params.h" //Parametros de configuração
 #include "actionsToComponents.h" //Funções de modificação de estado dos componentes
 #include "infoFromSensores.h" //Funções de obtenção de informação dos sensores
+#include "debug.h" //Funções de debug
 
 
 Servo servo;  //Objeto de controlo do servo
@@ -73,14 +74,14 @@ void setup() {
   servo.attach(SERVO_PIN);
   servo.write(angle_servo);
   
-  //send_state_byUSB(true); //Envia o estado atual para o SI
+  send_state_byUSB(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
 }
 
 void loop() {
   rState = define_state(rActivate, rActivate_ll);//Determina o estado adequado
   servo_enabled = operations(rState); //Define o movimento do robot
   send_state(rState); //Envia o estado atual para o SI
-  //send_state_byUSB(false); //Envia o estado atual para o SI
+  send_state_byUSB(false, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Envia o estado atual para o SI
 
   if(servo_enabled == 1){
     //Evita rotações não possiveis
