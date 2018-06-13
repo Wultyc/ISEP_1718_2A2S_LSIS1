@@ -1,8 +1,8 @@
 #include <Servo.h>
 #include <SoftwareSerial.h>
 
-#include "params.h"; //Parametros de configuração
-#include "actionsToComponents.h"; //Funções de modificação de estado dos componentes
+#include "params.h" //Parametros de configuração
+#include "actionsToComponents.h" //Funções de modificação de estado dos componentes
 #include "infoFromSensores.h" //Funções de obtenção de informação dos sensores
 
 
@@ -12,16 +12,6 @@ SoftwareSerial BTserial(BT_RX, BT_TX); //Definição do Bluetooth
 int rActivate = -1;    //Estado de ativação
 int rActivate_ll = -1; //Indica o estado de ativação antes da ultima alteração
 int rState = -1;      //Estado
-
-//Distancia
-float distanceF = 0;
-float distanceD = 0;
-float distanceE = 0;
-
-//Duração
-long durationF = 0;
-long durationD = 0;
-long durationE = 0;
 
 int angle_chama = 0;  //Angulo da chama em relação ao robot
 int angle_servo = 0;  //Angulo atual do Servo

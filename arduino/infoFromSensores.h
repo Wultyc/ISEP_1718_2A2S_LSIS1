@@ -1,4 +1,4 @@
-#include "params.h"; //Parametros de configuração
+#include "params.h" //Parametros de configuração
 //Determina a distancia dos sonares aos objetos
 
 void getDistances(int distance[]){

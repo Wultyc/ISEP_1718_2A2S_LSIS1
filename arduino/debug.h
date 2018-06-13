@@ -1,5 +1,7 @@
-#include "params.h"; //Parametros de configuração
-/*void send_state_byUSB(bool sendHeader){ //Envia o estado por BT
+#include "params.h" //Parametros de configuração
+/*void send_state_byUSB(bool sendHeader, int rActivate = -1;    //Estado de ativação
+int rActivate_ll = -1; //Indica o estado de ativação antes da ultima alteração
+int rState = -1, int durationF, int durationD, durationE, int angle_chama, int angle_servo, int incrm_servo, int servo_enabled){ //Envia o estado por BT
   if(sendHeader == true){
     Serial.print("rState\trActivate\trActivate_ll\tdistanceF\tdistanceD\tdistanceE\tangle_chama\tangle_servo\tincrm_servo\tservo_enabled\tA desativar\tD E\tF D E\tF E\tF D\tchama\n");
   }
