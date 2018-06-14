@@ -179,17 +179,14 @@ void MainWindow::on_eliminarProvaAction_triggered()
 	ui->stackedWidget->setCurrentWidget(ui->eliminarProva);
 
 	ui->tabelaEliminarProva->setRowCount(0);
-	vector<string> nomeProva = bd.ListarNomeProva();
-	vector<string> nomeLocal = bd.ListarLocalProva();
-	vector<string> nomeRobo = bd.listarNomeRobo();
-	for (int j = 1; j <= nomeProva.size(); j++) {
-		string nomeS = nomeProva[j - 1];
-		string local = nomeLocal[j - 1];
-		string roboS = nomeRobo[j];
-		string robo = bd.buscarNomeRobo(bd.buscarIDRobotProva(roboS));
+	vector<int> idProva = bd.ListarIDProva();
+	for (int j = 1; j <= idProva.size(); j++) {
+		string nomeS = bd.buscarNomeProva(idProva[j]);
+		string local = bd.listarLocalProva(idProva[j]);
+		string roboS = bd.buscarRobot(bd.buscarIDRobot(idProva[j]));
 		QString nomeSQ = QString::fromStdString(nomeS);
 		QString localQ = QString::fromStdString(local);
-		QString roboQ = QString::fromStdString(robo);
+		QString roboQ = QString::fromStdString(roboS);
 		ui->tabelaEliminarProva->insertRow(ui->tabelaEliminarProva->rowCount());
 		QTableWidgetItem * nomeProva = new QTableWidgetItem(nomeSQ);
 		QTableWidgetItem * nomeLocal = new QTableWidgetItem(localQ);
@@ -202,11 +199,11 @@ void MainWindow::on_eliminarProvaAction_triggered()
 		ui->tabelaEliminarProva->setItem(ui->tabelaEliminarProva->rowCount() - 1, 3, nomeRobo);
 	}
 
-	ui->eliProvasComboBox->clear();
+	/*ui->eliProvasComboBox->clear();
 	vector<string> provas = bd.ListarNomeProva();
 	for (int i = 0; i < provas.size(); i++) {
 		ui->eliProvasComboBox->insertItem(i, QString::fromStdString(provas[i]));
-	}
+	}*/
 }
 
 void MainWindow::on_eliminarRobotAction_triggered()
@@ -459,4 +456,12 @@ void MainWindow::on_pushmodEquipa_3_clicked()
 	if (!(elemento8.isEmpty())) {
 		bd.updateElemento(idElementos[7], elemento8.toStdString());
 	}
+}
+
+void MainWindow::on_pusheliEquipas_clicked()
+{
+	string nome = ui->eliEquipasComboBox->currentText().toStdString();
+	bd.eliminarEquipa(bd.buscarIDEquipasNome(nome));
+	//bd.eliminarElementos(bd.buscarIDEquipasNome(nome));
+    
 }

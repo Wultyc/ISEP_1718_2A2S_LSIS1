@@ -487,7 +487,7 @@ vector<int> bd::buscarIDElementos(int idEquipa) {
 int bd::buscarIDEquipasNome(string nomeE) {
 	int idEquipa;
 	connect();
-	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = (?)");
+	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = ?");
 	prep->setString(1, nomeE);
 	res = prep->executeQuery();
 	while (res->next())
@@ -499,3 +499,21 @@ int bd::buscarIDEquipasNome(string nomeE) {
 	delete prep;
 	delete con;
 }
+
+void bd::eliminarEquipa(int id) {
+	connect();
+	prep = con->prepareStatement("DELETE FROM `robo`.`equipas` WHERE idEquipas = ?");
+	prep->setInt(1, id);
+	prep->execute();
+	delete prep;
+	delete con;
+}
+
+/*void bd::eliminarElementos(int id) {
+	connect();
+	prep = con->prepareStatement("DELETE FROM `robo`.`elementos` WHERE Equipas_idEquipas = ?");
+	prep->setInt(1, id);
+	prep->execute();
+	delete prep;
+	delete con;
+}*/

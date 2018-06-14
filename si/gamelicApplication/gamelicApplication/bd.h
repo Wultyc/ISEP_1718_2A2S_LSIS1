@@ -59,5 +59,7 @@ public:
 	string buscarNomeRobo(int num);
 	string buscarNomeProva(int num);
 	
+	void eliminarEquipa(int id);
+	void eliminarElementos(int id);
 
 };

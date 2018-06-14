@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>11</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -1226,31 +1226,6 @@
           <pointsize>10</pointsize>
          </font>
         </property>
-        <item>
-         <property name="text">
-          <string>Equipa 1</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 2</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 3</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 4</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Equipa 5</string>
-         </property>
-        </item>
        </widget>
        <widget class="QPushButton" name="pusheliEquipas">
         <property name="geometry">
@@ -1292,6 +1267,24 @@
           <string>Nome do Elemento</string>
          </property>
         </column>
+       </widget>
+       <widget class="QLabel" name="labelTeste">
+        <property name="geometry">
+         <rect>
+          <x>720</x>
+          <y>400</y>
+          <width>171</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Teste</string>
+        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="eliminarProva">
