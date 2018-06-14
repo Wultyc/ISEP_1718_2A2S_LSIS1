@@ -179,17 +179,14 @@ void MainWindow::on_eliminarProvaAction_triggered()
 	ui->stackedWidget->setCurrentWidget(ui->eliminarProva);
 
 	ui->tabelaEliminarProva->setRowCount(0);
-	vector<string> nomeProva = bd.ListarNomeProva();
-	vector<string> nomeLocal = bd.ListarLocalProva();
-	vector<string> nomeRobo = bd.listarNomeRobo();
-	for (int j = 1; j <= nomeProva.size(); j++) {
-		string nomeS = nomeProva[j - 1];
-		string local = nomeLocal[j - 1];
-		string roboS = nomeRobo[j];
-		string robo = bd.buscarNomeRobo(bd.buscarIDRobotProva(roboS));
+	vector<int> idProva = bd.ListarIDProva();
+	for (int j = 1; j <= idProva.size(); j++) {
+		string nomeS = bd.buscarNomeProva(idProva[j]);
+		string local = bd.listarLocalProva(idProva[j]);
+		string roboS = bd.buscarRobot(bd.buscarIDRobot(idProva[j]));
 		QString nomeSQ = QString::fromStdString(nomeS);
 		QString localQ = QString::fromStdString(local);
-		QString roboQ = QString::fromStdString(robo);
+		QString roboQ = QString::fromStdString(roboS);
 		ui->tabelaEliminarProva->insertRow(ui->tabelaEliminarProva->rowCount());
 		QTableWidgetItem * nomeProva = new QTableWidgetItem(nomeSQ);
 		QTableWidgetItem * nomeLocal = new QTableWidgetItem(localQ);
@@ -202,11 +199,11 @@ void MainWindow::on_eliminarProvaAction_triggered()
 		ui->tabelaEliminarProva->setItem(ui->tabelaEliminarProva->rowCount() - 1, 3, nomeRobo);
 	}
 
-	ui->eliProvasComboBox->clear();
+	/*ui->eliProvasComboBox->clear();
 	vector<string> provas = bd.ListarNomeProva();
 	for (int i = 0; i < provas.size(); i++) {
 		ui->eliProvasComboBox->insertItem(i, QString::fromStdString(provas[i]));
-	}
+	}*/
 }
 
 void MainWindow::on_eliminarRobotAction_triggered()
@@ -286,17 +283,72 @@ void MainWindow::on_mensagemInicialAction_triggered()
 
 void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 {
+	ui->modEquipaLineEdit_2->clear();
+	ui->modEquipaLineEdit_3->clear();
+	ui->modEquipaLineEdit_4->clear();
+	ui->modEquipaLineEdit_5->clear();
+	ui->modEquipaLineEdit_6->clear();
+	ui->modEquipaLineEdit_7->clear();
+	ui->modEquipaLineEdit_8->clear();
+	ui->modEquipaLineEdit_9->clear();
 	vector<string> elementos = bd.buscarDadosEquipa(arg1.toStdString());
-
 	
-	ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
-	ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
-	ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
-	ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
-	ui->modEquipaLineEdit_6->setText(QString::fromStdString(elementos[4]));
-	ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
-	ui->modEquipaLineEdit_8->setText(QString::fromStdString(elementos[6]));
-	ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
+	switch (elementos.size()) {
+	default:
+
+			break;
+	case 1:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		break;
+	case 2:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+		break;
+	case 3:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+		ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
+	case 4:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+		ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
+		ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
+		break;
+	case 5:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+		ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
+		ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
+		ui->modEquipaLineEdit_6->setText(QString::fromStdString(elementos[4]));
+		break;
+	case 6:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+		ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
+		ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
+		ui->modEquipaLineEdit_6->setText(QString::fromStdString(elementos[4]));
+		ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
+		break;
+	case 7:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+		ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
+		ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
+		ui->modEquipaLineEdit_6->setText(QString::fromStdString(elementos[4]));
+		ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
+		ui->modEquipaLineEdit_8->setText(QString::fromStdString(elementos[6]));
+		break;
+	case 8:
+		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
+		ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
+		ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
+		ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
+		ui->modEquipaLineEdit_6->setText(QString::fromStdString(elementos[4]));
+		ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
+		ui->modEquipaLineEdit_8->setText(QString::fromStdString(elementos[6]));
+		ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
+		break;
+	}
 	
 	int numE;
 	/*numE = bd.buscarIDEquipasNome(arg1.toStdString());
@@ -359,46 +411,6 @@ void MainWindow::on_pushInserirProva_clicked()
 
 }
 
-
-void MainWindow::on_modEquipaCheck_clicked()
-{
-
-	ui->modEquipasComboBox->update();
-
-
-	int num = bd.buscarNumeroEquipas();
-	vector<string> equipas = bd.listarEquipas();
-
-	for (int i = 0; i < num; i++) {
-		ui->modEquipasComboBox->insertItem(i, QString::fromStdString(equipas[i]));
-	}
-
-	vector<string> elementos = bd.buscarDadosEquipa(ui->modEquipasComboBox->currentText().toStdString());
-
-	ui->modEquipaLineEdit_2->update();
-
-	/*ui->modEquipaLineEdit->clear();
-	ui->modEquipaLineEdit_2->clear();
-	ui->modEquipaLineEdit_3->clear();
-	ui->modEquipaLineEdit_4->clear();
-	ui->modEquipaLineEdit_5->clear();
-	ui->modEquipaLineEdit_6->clear();
-	ui->modEquipaLineEdit_7->clear();
-	ui->modEquipaLineEdit_8->clear();
-	ui->modEquipaLineEdit_9->clear();*/
-
-
-	ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
-	ui->modEquipaLineEdit_3->setText(QString::fromStdString(elementos[1]));
-	ui->modEquipaLineEdit_4->setText(QString::fromStdString(elementos[2]));
-	ui->modEquipaLineEdit_5->setText(QString::fromStdString(elementos[3]));
-	ui->modEquipaLineEdit_6->setText(QString::fromStdString(elementos[4]));
-	ui->modEquipaLineEdit_7->setText(QString::fromStdString(elementos[5]));
-	ui->modEquipaLineEdit_8->setText(QString::fromStdString(elementos[6]));
-	ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
-
-}
-
 void MainWindow::on_pushmodEquipa_3_clicked()
 {
 	int idEquipa;
@@ -444,4 +456,12 @@ void MainWindow::on_pushmodEquipa_3_clicked()
 	if (!(elemento8.isEmpty())) {
 		bd.updateElemento(idElementos[7], elemento8.toStdString());
 	}
+}
+
+void MainWindow::on_pusheliEquipas_clicked()
+{
+	string nome = ui->eliEquipasComboBox->currentText().toStdString();
+	bd.eliminarEquipa(bd.buscarIDEquipasNome(nome));
+	//bd.eliminarElementos(bd.buscarIDEquipasNome(nome));
+    
 }

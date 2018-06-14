@@ -50,14 +50,14 @@ private slots:
 
 	void on_pushInserirRobot_clicked();
 
-	void on_modEquipaCheck_clicked();
-
 	void on_pushInserirProva_clicked();
 
 	void on_pushmodEquipa_3_clicked();
 
 
     void on_modEquipasComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_pusheliEquipas_clicked();
 
 private:
     Ui::MainWindow *ui;
