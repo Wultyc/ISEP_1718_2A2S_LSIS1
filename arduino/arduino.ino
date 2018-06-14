@@ -10,27 +10,14 @@
 Servo servo;  //Objeto de controlo do servo
 SoftwareSerial BTserial(BT_RX, BT_TX); //Definição do Bluetooth
 
-int rActivate = -1;    //Estado de ativação
-int rActivate_ll = -1; //Indica o estado de ativação antes da ultima alteração
+int rActivate = 0;    //Estado de ativação
+int rActivate_ll = 0; //Indica o estado de ativação antes da ultima alteração
 int rState = -1;      //Estado
 
 int angle_chama = 0;  //Angulo da chama em relação ao robot
 int angle_servo = 0;  //Angulo atual do Servo
 int incrm_servo = 1;  //Incremento do anglulo do servo
 int servo_enabled = 0;
-
-void changeRobotActivationState(){
-  Serial.print("Interrupt ");
-  Serial.print(digitalRead(BOTAO_START));
-  Serial.print("\n");
-  if(digitalRead(BOTAO_START) == HIGH){
-    rActivate_ll = rActivate; //Preserva o estado atual de ativação
-    rActivate = 1;            //Altera o estado de ativação
-  } else {
-    rActivate_ll = rActivate;
-    rActivate = 0;
-  }
-}
 
 //Envia o estado por BT
 void send_state(int state){ 
@@ -41,9 +28,6 @@ void setup() {
   //Inicializa a comunicação Serial via Bluetooth
   BTserial.begin(38400); 
   Serial.begin(9600);
-  
-  //Função de interrupção
-  attachInterrupt(digitalPinToInterrupt(BOTAO_INTRP), changeRobotActivationState, CHANGE);
 
   //PinModes
   pinMode(MOTOR_A_DIR, OUTPUT);
@@ -56,7 +40,7 @@ void setup() {
   pinMode(SONAR_ECHO_FRENTE, INPUT);
   pinMode(SONAR_ECHO_DIREITA, INPUT);
   pinMode(SONAR_ECHO_ESQUERDA, INPUT);
-  pinMode(VENTOINHA_INA, OUTPUT);
+  //pinMode(VENTOINHA_INA, OUTPUT);
   pinMode(SERVO_PIN, OUTPUT);
   pinMode(CHAMA_PIN, INPUT);
   pinMode(CHAMA_LED, OUTPUT);
@@ -64,20 +48,31 @@ void setup() {
   pinMode(BOTAO_INTRP, INPUT);
   
   //Definição do estado inicial do robot
-  rActivate = -1;
-  rActivate_ll = -1;
+  rActivate = 0;
+  rActivate_ll = 0;
+  setDefaultOutput();
   
   //Config Servo
   servo.attach(SERVO_PIN);
   servo.write(angle_servo);
   angle_servo = 90;
-  servo_enabled = 0;
+  servo_enabled = 1;
 
   //Debug
   //debug_main(true, rActivate, rActivate_ll, rState, angle_chama, angle_servo, incrm_servo, servo_enabled); //Debug dos estados
 }
 
 void loop() {
+
+  if(digitalRead(BOTAO_START) == HIGH){
+    rActivate_ll = rActivate; //Preserva o estado atual de ativação
+    rActivate = 1;            //Altera o estado de ativação
+    Serial.print("Ativa");
+  } else if(digitalRead(BOTAO_INTRP) == HIGH){
+    rActivate_ll = rActivate;
+    rActivate = 0;
+  }
+  
   rState = define_state(rActivate, rActivate_ll);//Determina o estado adequado
   servo_enabled = operations(rState); //Define o movimento do robot
   send_state(rState); //Envia o estado atual para o SI
@@ -94,4 +89,10 @@ void loop() {
   }
 
   rActivate_ll = rActivate;  
+
+  delay(REACT_TIME);
+  
 }
+
+ 
+

@@ -26,15 +26,15 @@ void getDistances(int distance[]){
 /*************************************************************************************/
 
 int define_state(int rActivate, int rActivate_ll){ //Determina o estado mais adequado
-  int state;
+  int state, distFlag;
   int chama = analogRead(CHAMA_PIN);
   int distances[3] = {0,0,0};
   
   getDistances(distances); //Obtem as distancias
   
   debug_inputs(false, distances, chama); //Debug da info dos sensores
-  
-  if(rActivate == -1){
+
+  if(rActivate == 0){
     state = -1;
   } else if(rActivate == 1 && rActivate_ll != rActivate){
     state = 0;
