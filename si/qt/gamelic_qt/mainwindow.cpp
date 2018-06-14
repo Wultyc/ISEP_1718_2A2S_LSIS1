@@ -124,6 +124,18 @@ void MainWindow::on_modificarEquipaAction_triggered()
 void MainWindow::on_modificarProvaAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->modificarProva);
+	ui->modProvaComboBox_2->clear();
+	ui->modProvaComboBox->clear();
+	vector<string> provas = bd.listarProvas();
+	vector <string> specs = bd.caracteristicas();
+	for (int j = 0; j < 4; j++) {
+		ui->modProvaComboBox->insertItem(j, QString::fromStdString(specs[j]));
+	}
+	for (int i = 0; i < provas.size(); i++) {
+		ui->modProvaComboBox_2->insertItem(i, QString::fromStdString(provas[i]));
+	}
+
+	
 }
 
 void MainWindow::on_modificarRobotAction_triggered()
@@ -469,4 +481,43 @@ void MainWindow::on_pusheliProvas_clicked()
 {
 	string nome = ui->eliProvasComboBox->currentText().toStdString();
 	bd.eliminarEquipa(bd.buscarIDProvasNome(nome));
+}
+
+void MainWindow::on_pushmodProva_clicked() {
+
+	int idProva;
+	idProva = bd.buscarIDProvasNome(ui->modProvaComboBox_2->currentText().toStdString());
+	
+
+	if ((ui->modProvaComboBox->currentText().toStdString()) == "Nome") {
+		QString nome = ui->modProvalineEdit->text();
+		bd.updateNomeProva(nome.toStdString(), idProva);
+	}
+
+	if ((ui->modProvaComboBox->currentText().toStdString()) == "Local") {
+		QString local = ui->modProvalineEdit->text();
+		bd.updateLocal(local.toStdString(), idProva);
+	}
+	
+	if ((ui->modProvaComboBox->currentText().toStdString()) == "Robo") {
+		QString robo = ui->modProvalineEdit->text();
+		int id= bd.updateRobo1(robo.toStdString());
+		bd.updateRobo2(id,idProva);
+	}
+
+
+	/*switch (cara.size()) {
+	default:
+
+		break;
+	case 1:
+		QString nome = ui->modProvalineEdit->text();
+		bd.updateNomeProva(nome.toStdString(), idProva);
+		break;
+	}*/
+	
+	
+	
+	
+
 }

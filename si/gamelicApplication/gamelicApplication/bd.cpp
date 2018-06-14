@@ -188,6 +188,31 @@ vector<string> bd::listarEquipas() {
 	delete con;
 }
 
+vector <string> bd::listarProvas() {
+	vector<string> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT nome FROM `robo`.`prova`");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete stmt;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+vector<string> bd::caracteristicas() {
+	vector <string> caract;
+	caract.push_back("Nome");
+	caract.push_back("Data");
+	caract.push_back("Local");
+	caract.push_back("Robo");
+	return caract;
+}
+
 int bd::buscarNumeroEquipas() {
 	int result;
 	connect();
@@ -443,6 +468,8 @@ vector<string> bd::buscarDadosEquipa(string nomeE) {
 	delete con;
 }
 
+
+
 void bd::updateEquipa(string nomeE, int num) {
 
 	connect();
@@ -542,3 +569,58 @@ void bd::eliminarProva(int id) {
 	delete prep;
 	delete con;
 }*/
+
+
+void bd::updateNomeProva(string nomeE, int num) {
+
+	connect();
+	prep = con->prepareStatement("UPDATE `robo`.`prova` SET nome = (?) WHERE idProva = (?)");
+	prep->setString(1, nomeE);
+	prep->setInt(2, num);
+	prep->execute();
+
+	delete prep;
+	delete con;
+}
+
+void bd::updateLocal(string nomeE, int num) {
+
+	connect();
+	prep = con->prepareStatement("UPDATE `robo`.`prova` SET local = (?) WHERE idProva = (?)");
+	prep->setString(1, nomeE);
+	prep->setInt(2, num);
+	prep->execute();
+
+	delete prep;
+	delete con;
+}
+
+int bd::updateRobo1(string nomeR) {
+	int idRobo;
+	connect();
+
+	prep = con->prepareStatement("SELECT idRobo FROM `robo`.`robo` WHERE nome = (?)");
+	prep->setString(1, nomeR);
+	prep->execute();
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		idRobo = res->getInt(1);
+	}
+	return idRobo;
+	
+}
+
+void bd::updateRobo2(int id, int num) {
+	
+	connect();
+
+	
+	prep = con->prepareStatement("UPDATE `robo`.`prova` SET Robo_idRobo = (?) WHERE idProva = (?)");
+	prep->setInt(1, id);
+	prep->setInt(2, num);
+	prep->execute();
+
+	delete prep;
+	delete con;
+}
