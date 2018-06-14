@@ -180,7 +180,7 @@ void MainWindow::on_eliminarProvaAction_triggered()
 
 	ui->tabelaEliminarProva->setRowCount(0);
 	vector<int> idProva = bd.ListarIDProva();
-	for (int j = 1; j <= idProva.size(); j++) {
+	for (int j = 0; j < idProva.size(); j++) {
 		string nomeS = bd.buscarNomeProva(idProva[j]);
 		string local = bd.listarLocalProva(idProva[j]);
 		string roboS = bd.buscarRobot(bd.buscarIDRobot(idProva[j]));
@@ -199,11 +199,11 @@ void MainWindow::on_eliminarProvaAction_triggered()
 		ui->tabelaEliminarProva->setItem(ui->tabelaEliminarProva->rowCount() - 1, 3, nomeRobo);
 	}
 
-	/*ui->eliProvasComboBox->clear();
+	ui->eliProvasComboBox->clear();
 	vector<string> provas = bd.ListarNomeProva();
 	for (int i = 0; i < provas.size(); i++) {
 		ui->eliProvasComboBox->insertItem(i, QString::fromStdString(provas[i]));
-	}*/
+	}
 }
 
 void MainWindow::on_eliminarRobotAction_triggered()
@@ -464,4 +464,9 @@ void MainWindow::on_pusheliEquipas_clicked()
 	bd.eliminarEquipa(bd.buscarIDEquipasNome(nome));
 	//bd.eliminarElementos(bd.buscarIDEquipasNome(nome));
     
+}
+void MainWindow::on_pusheliProvas_clicked()
+{
+	string nome = ui->eliProvasComboBox->currentText().toStdString();
+	bd.eliminarEquipa(bd.buscarIDProvasNome(nome));
 }

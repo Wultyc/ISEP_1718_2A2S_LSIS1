@@ -59,6 +59,8 @@ private slots:
 
     void on_pusheliEquipas_clicked();
 
+    void on_pusheliProvas_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

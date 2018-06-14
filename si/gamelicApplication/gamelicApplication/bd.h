@@ -49,6 +49,7 @@ public:
 	vector<int> ListarIDProva();
 
 	int buscarIDEquipasNome(string nome);
+	int buscarIDProvasNome(string nome);
 	int buscarNumeroEquipas();
 	int buscarNumeroRobo();
 	int buscarNumeroProva();
@@ -60,6 +61,6 @@ public:
 	string buscarNomeProva(int num);
 	
 	void eliminarEquipa(int id);
-	void eliminarElementos(int id);
+	void eliminarProva(int id);
 
 };

@@ -310,7 +310,7 @@ vector<string> bd::ListarNomeProva() {
 	vector<string> results;
 	connect();
 	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT nome FROM `robo`.`prova`");
+	res = stmt->executeQuery("SELECT nome FROM `robo`.`prova` order by idProva ASC");
 	while (res->next()) {
 		string nome = res->getString(1);
 		results.push_back(nome);
@@ -500,9 +500,34 @@ int bd::buscarIDEquipasNome(string nomeE) {
 	delete con;
 }
 
+int bd::buscarIDProvasNome(string nomeE) {
+	int idEquipa;
+	connect();
+	prep = con->prepareStatement("SELECT idProva FROM `robo`.`prova` WHERE nome = ?");
+	prep->setString(1, nomeE);
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		idEquipa = res->getInt(1);
+	}
+	return idEquipa;
+	delete res;
+	delete prep;
+	delete con;
+}
+
 void bd::eliminarEquipa(int id) {
 	connect();
 	prep = con->prepareStatement("DELETE FROM `robo`.`equipas` WHERE idEquipas = ?");
+	prep->setInt(1, id);
+	prep->execute();
+	delete prep;
+	delete con;
+}
+
+void bd::eliminarProva(int id) {
+	connect();
+	prep = con->prepareStatement("DELETE FROM `robo`.`prova` WHERE idProva = ?");
 	prep->setInt(1, id);
 	prep->execute();
 	delete prep;
