@@ -67,10 +67,11 @@ void loop() {
   if(digitalRead(BOTAO_START) == HIGH){
     rActivate_ll = rActivate; //Preserva o estado atual de ativação
     rActivate = 1;            //Altera o estado de ativação
-    Serial.print("Ativa");
+    Serial.print("Ativo\t");
   } else if(digitalRead(BOTAO_INTRP) == HIGH){
     rActivate_ll = rActivate;
     rActivate = 0;
+    Serial.print("Desativo\t");
   }
   
   rState = define_state(rActivate, rActivate_ll);//Determina o estado adequado
