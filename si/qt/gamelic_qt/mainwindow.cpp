@@ -126,6 +126,10 @@ void MainWindow::on_modificarProvaAction_triggered()
 	ui->stackedWidget->setCurrentWidget(ui->modificarProva);
 	ui->modProvaComboBox_2->clear();
 	ui->modProvaComboBox->clear();
+	ui->modRobotComboBox->clear();
+	//ui->modComboBoxRobot->setDisabled(true);
+	//ui->modComboBoxRobot->hide();
+
 	vector<string> provas = bd.listarProvas();
 	vector <string> specs = bd.caracteristicas();
 	for (int j = 0; j < 4; j++) {
@@ -134,7 +138,10 @@ void MainWindow::on_modificarProvaAction_triggered()
 	for (int i = 0; i < provas.size(); i++) {
 		ui->modProvaComboBox_2->insertItem(i, QString::fromStdString(provas[i]));
 	}
-
+	vector<string> robots = bd.listarNomeRobo();
+	for (int i = 0; i < robots.size(); i++) {
+		ui->modComboBoxRobot->insertItem(i, QString::fromStdString(robots[i]));
+	}
 	
 }
 
@@ -508,7 +515,7 @@ void MainWindow::on_pushmodProva_clicked() {
 	}
 	
 	if ((ui->modProvaComboBox->currentText().toStdString()) == "Robo") {
-		QString robo = ui->modProvalineEdit->text();
+		QString robo = ui->modComboBoxRobot->currentText();
 		int id= bd.updateRobo1(robo.toStdString());
 		bd.updateRobo2(id,idProva);
 	}
@@ -524,4 +531,21 @@ void MainWindow::on_pushmodProva_clicked() {
 		break;
 	}*/
 
+}
+
+void MainWindow::on_modProvaComboBox_currentIndexChanged(const QString &arg1)
+{
+	string opcao = ui->modProvaComboBox->currentText().toStdString();
+	if (opcao == "Robo") {
+		ui->modProvalineEdit->setDisabled(true);
+		ui->modProvalineEdit->hide();
+		ui->modComboBoxRobot->setDisabled(false);
+		ui->modComboBoxRobot->show();
+	}
+	else {
+		ui->modComboBoxRobot->setDisabled(true);
+		ui->modComboBoxRobot->hide();
+		ui->modProvalineEdit->setDisabled(false);
+		ui->modProvalineEdit->show();
+	}
 }

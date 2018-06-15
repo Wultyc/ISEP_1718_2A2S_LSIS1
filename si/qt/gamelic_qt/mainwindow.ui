@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>12</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -1044,6 +1044,16 @@
          <string>Modificar</string>
         </property>
        </widget>
+       <widget class="QComboBox" name="modComboBoxRobot">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>215</y>
+          <width>351</width>
+          <height>26</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="modificarRobot">
        <widget class="QLabel" name="modRobotLabelNovo">
@@ -1267,24 +1277,6 @@
           <string>Nome do Elemento</string>
          </property>
         </column>
-       </widget>
-       <widget class="QLabel" name="labelTeste">
-        <property name="geometry">
-         <rect>
-          <x>720</x>
-          <y>400</y>
-          <width>171</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Teste</string>
-        </property>
        </widget>
       </widget>
       <widget class="QWidget" name="eliminarProva">
