@@ -519,8 +519,7 @@ void MainWindow::on_pusheliRobot_clicked()
 
 void MainWindow::on_pushmodProva_clicked() {
 
-	int idProva;
-	idProva = bd.buscarIDProvasNome(ui->modProvaComboBox_2->currentText().toStdString());
+	int idProva = bd.buscarIDProvasNome(ui->modProvaComboBox_2->currentText().toStdString());
 	
 
 	if ((ui->modProvaComboBox->currentText().toStdString()) == "Nome") {
@@ -544,21 +543,18 @@ void MainWindow::on_pushmodProva_clicked() {
 
 void MainWindow::on_pushmodRobot_clicked() {
 
-	int idRobo;
-	idRobo = bd.buscarIDRoboNome(ui->modRobotComboBox->currentText().toStdString());
-
-
-	if ((ui->modProvaComboBox->currentText().toStdString()) == "Nome") {
-		QString nome = ui->modProvalineEdit->text();
-		bd.updateNomeRobo(nome.toStdString(), idRobo);
+	int idRobo = bd.buscarIDRoboNome(ui->modRobotComboBox->currentText().toStdString());
+	
+	if ((ui->modRoboComboBox_2->currentText().toStdString()) == "Nome") {
+		QString nome1 = ui->modRobotlineEdit->text();
+		bd.updateNomeRobo(nome1.toStdString(), idRobo);
 	}
-
-	if ((ui->modProvaComboBox->currentText().toStdString()) == "Equipa") {
+	if ((ui->modRoboComboBox_2->currentText().toStdString()) == "Equipa") {
 		QString robo = ui->modComboBoxRobot_2->currentText();
-		int id = bd.updateEquipa1(robo.toStdString());
+		int id = bd.buscarIDEquipasNome(robo.toStdString());
 		bd.updateEquipa2(id, idRobo);
 	}
-
+	
 }
 
 
@@ -579,10 +575,9 @@ void MainWindow::on_modProvaComboBox_currentIndexChanged(const QString &arg1)
 	}
 }
 
-void MainWindow::on_modComboBoxRobot_2_activated(const QString &arg1)
+void MainWindow::on_modRoboComboBox_2_currentIndexChanged(const QString &arg1)
 {
-
-	string opcao = ui->modComboBoxRobot_2->currentText().toStdString();
+	string opcao = ui->modRoboComboBox_2->currentText().toStdString();
 	if (opcao == "Equipa") {
 		ui->modRobotlineEdit->setDisabled(true);
 		ui->modRobotlineEdit->hide();

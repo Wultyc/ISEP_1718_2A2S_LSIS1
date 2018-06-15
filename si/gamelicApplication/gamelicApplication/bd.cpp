@@ -568,7 +568,7 @@ int bd::buscarIDProvasNome(string nomeE) {
 int bd::buscarIDRoboNome(string nomeE) {
 	int idRobo;
 	connect();
-	prep = con->prepareStatement("SELECT idRobo FROM `robo`.`rpbp` WHERE nome = ?");
+	prep = con->prepareStatement("SELECT idRobo FROM `robo`.`robo` WHERE nome = ?");
 	prep->setString(1, nomeE);
 	res = prep->executeQuery();
 	while (res->next())
@@ -680,33 +680,13 @@ void bd::updateNomeRobo(string nomeE, int num) {
 	prep->setString(1, nomeE);
 	prep->setInt(2, num);
 	prep->execute();
-
 	delete prep;
 	delete con;
-}
-
-
-int bd::updateEquipa1(string nomeR) {
-	int idEquipa;
-	connect();
-
-	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = (?)");
-	prep->setString(1, nomeR);
-	prep->execute();
-	res = prep->executeQuery();
-	while (res->next())
-	{
-		idEquipa = res->getInt(1);
-	}
-	return idEquipa;
-
 }
 
 void bd::updateEquipa2(int id, int num) {
 
 	connect();
-
-
 	prep = con->prepareStatement("UPDATE `robo`.`robo` SET Equipas_idEquipas = (?) WHERE idRobo = (?)");
 	prep->setInt(1, id);
 	prep->setInt(2, num);

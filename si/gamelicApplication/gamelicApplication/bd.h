@@ -35,7 +35,6 @@ public:
 	int updateRobo1(string nomeR);
 	void updateRobo2(int id, int num);
 	void updateNomeRobo(string nomeE, int num);
-	int bd::updateEquipa1(string nomeR);
 	void bd::updateEquipa2(int id, int num);
 
 
