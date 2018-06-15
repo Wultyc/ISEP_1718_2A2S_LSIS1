@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>9</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -1135,7 +1135,7 @@
          </property>
         </item>
        </widget>
-       <widget class="QComboBox" name="modRobotComboBox_2">
+       <widget class="QComboBox" name="modRoboComboBox_2">
         <property name="geometry">
          <rect>
           <x>450</x>
@@ -1192,6 +1192,16 @@
         </property>
         <property name="text">
          <string>Modificar</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="modComboBoxRobot_2">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>215</y>
+          <width>351</width>
+          <height>26</height>
+         </rect>
         </property>
        </widget>
       </widget>

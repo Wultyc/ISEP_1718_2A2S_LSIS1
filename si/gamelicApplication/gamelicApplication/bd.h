@@ -34,6 +34,10 @@ public:
 	void updateLocal(string nomeE, int num);
 	int updateRobo1(string nomeR);
 	void updateRobo2(int id, int num);
+	void updateNomeRobo(string nomeE, int num);
+	int bd::updateEquipa1(string nomeR);
+	void bd::updateEquipa2(int id, int num);
+
 
 	vector<string> buscarEquipa(int num);
 	vector<string> buscarElementos(int num);
@@ -53,6 +57,8 @@ public:
 	vector<int> ListarIDProva();
 	vector <string> listarProvas();
 	vector<string> caracteristicas();
+	vector <string> listarRobos();
+	vector<string> caracteristicas2();
 
 	int buscarIDEquipasNome(string nome);
 	int buscarIDProvasNome(string nome);
@@ -61,6 +67,7 @@ public:
 	int buscarNumeroProva();
 	int buscarIDEquipaRobot(string nome);
 	int buscarIDRobotProva(string nome);
+	int buscarIDRoboNome(string nomeE);
 
 	string buscarNomeEquipa(int num);
 	string buscarNomeRobo(int num);

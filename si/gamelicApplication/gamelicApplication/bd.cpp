@@ -204,12 +204,34 @@ vector <string> bd::listarProvas() {
 	delete con;
 }
 
+vector <string> bd::listarRobos() {
+	vector<string> results;
+	connect();
+	stmt = con->createStatement();
+	res = stmt->executeQuery("SELECT nome FROM `robo`.`robo`");
+	while (res->next()) {
+		string nome = res->getString(1);
+		results.push_back(nome);
+	}
+	return results;
+	delete stmt;
+	delete res;
+	delete prep;
+	delete con;
+}
+
 vector<string> bd::caracteristicas() {
 	vector <string> caract;
 	caract.push_back("Nome");
 	caract.push_back("Data");
 	caract.push_back("Local");
 	caract.push_back("Robo");
+	return caract;
+}
+vector<string> bd::caracteristicas2() {
+	vector <string> caract;
+	caract.push_back("Nome");
+	caract.push_back("Equipa");
 	return caract;
 }
 
@@ -543,6 +565,23 @@ int bd::buscarIDProvasNome(string nomeE) {
 	delete con;
 }
 
+int bd::buscarIDRoboNome(string nomeE) {
+	int idRobo;
+	connect();
+	prep = con->prepareStatement("SELECT idRobo FROM `robo`.`rpbp` WHERE nome = ?");
+	prep->setString(1, nomeE);
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		idRobo = res->getInt(1);
+	}
+	return idRobo;
+	delete res;
+	delete prep;
+	delete con;
+}
+
+
 void bd::eliminarEquipa(int id) {
 	connect();
 	prep = con->prepareStatement("DELETE FROM `robo`.`equipas` WHERE idEquipas = ?");
@@ -626,6 +665,49 @@ void bd::updateRobo2(int id, int num) {
 
 	
 	prep = con->prepareStatement("UPDATE `robo`.`prova` SET Robo_idRobo = (?) WHERE idProva = (?)");
+	prep->setInt(1, id);
+	prep->setInt(2, num);
+	prep->execute();
+
+	delete prep;
+	delete con;
+}
+
+void bd::updateNomeRobo(string nomeE, int num) {
+
+	connect();
+	prep = con->prepareStatement("UPDATE `robo`.`robo` SET nome = (?) WHERE idRobo = (?)");
+	prep->setString(1, nomeE);
+	prep->setInt(2, num);
+	prep->execute();
+
+	delete prep;
+	delete con;
+}
+
+
+int bd::updateEquipa1(string nomeR) {
+	int idEquipa;
+	connect();
+
+	prep = con->prepareStatement("SELECT idEquipas FROM `robo`.`equipas` WHERE nome = (?)");
+	prep->setString(1, nomeR);
+	prep->execute();
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		idEquipa = res->getInt(1);
+	}
+	return idEquipa;
+
+}
+
+void bd::updateEquipa2(int id, int num) {
+
+	connect();
+
+
+	prep = con->prepareStatement("UPDATE `robo`.`robo` SET Equipas_idEquipas = (?) WHERE idRobo = (?)");
 	prep->setInt(1, id);
 	prep->setInt(2, num);
 	prep->execute();

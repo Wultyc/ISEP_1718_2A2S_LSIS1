@@ -67,6 +67,11 @@ private slots:
 
     void on_modProvaComboBox_currentIndexChanged(const QString &arg1);
 
+	void on_modComboBoxRobot_2_activated(const QString &arg1);
+	
+	void on_pushmodRobot_clicked();
+	
+
 private:
     Ui::MainWindow *ui;
 };

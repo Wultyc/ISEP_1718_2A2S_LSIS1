@@ -126,7 +126,7 @@ void MainWindow::on_modificarProvaAction_triggered()
 	ui->stackedWidget->setCurrentWidget(ui->modificarProva);
 	ui->modProvaComboBox_2->clear();
 	ui->modProvaComboBox->clear();
-	ui->modRobotComboBox->clear();
+	ui->modComboBoxRobot->clear();
 	//ui->modComboBoxRobot->setDisabled(true);
 	//ui->modComboBoxRobot->hide();
 
@@ -148,7 +148,26 @@ void MainWindow::on_modificarProvaAction_triggered()
 void MainWindow::on_modificarRobotAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->modificarRobot);
+	ui->modComboBoxRobot_2->clear();
+	ui->modRoboComboBox_2->clear();
+	ui->modRobotComboBox->clear();
+	//ui->modComboBoxRobot->setDisabled(true);
+	//ui->modComboBoxRobot->hide();
+
+	vector<string> robos = bd.listarRobos();
+	vector <string> specs2 = bd.caracteristicas2();
+	for (int j = 0; j < 2; j++) {
+		ui->modRoboComboBox_2->insertItem(j, QString::fromStdString(specs2[j]));
+	}
+	for (int i = 0; i < robos.size(); i++) {
+		ui->modRobotComboBox->insertItem(i, QString::fromStdString(robos[i]));
+	}
+	vector<string> equipas = bd.listarEquipas();
+	for (int i = 0; i < equipas.size(); i++) {
+		ui->modComboBoxRobot_2->insertItem(i, QString::fromStdString(equipas[i]));
+	}
 }
+
 
 void MainWindow::on_eliminarEquipaAction_triggered()
 {
@@ -521,17 +540,27 @@ void MainWindow::on_pushmodProva_clicked() {
 	}
 
 
-	/*switch (cara.size()) {
-	default:
+}
 
-		break;
-	case 1:
+void MainWindow::on_pushmodRobot_clicked() {
+
+	int idRobo;
+	idRobo = bd.buscarIDRoboNome(ui->modRobotComboBox->currentText().toStdString());
+
+
+	if ((ui->modProvaComboBox->currentText().toStdString()) == "Nome") {
 		QString nome = ui->modProvalineEdit->text();
-		bd.updateNomeProva(nome.toStdString(), idProva);
-		break;
-	}*/
+		bd.updateNomeRobo(nome.toStdString(), idRobo);
+	}
+
+	if ((ui->modProvaComboBox->currentText().toStdString()) == "Equipa") {
+		QString robo = ui->modComboBoxRobot_2->currentText();
+		int id = bd.updateEquipa1(robo.toStdString());
+		bd.updateEquipa2(id, idRobo);
+	}
 
 }
+
 
 void MainWindow::on_modProvaComboBox_currentIndexChanged(const QString &arg1)
 {
@@ -547,5 +576,23 @@ void MainWindow::on_modProvaComboBox_currentIndexChanged(const QString &arg1)
 		ui->modComboBoxRobot->hide();
 		ui->modProvalineEdit->setDisabled(false);
 		ui->modProvalineEdit->show();
+	}
+}
+
+void MainWindow::on_modComboBoxRobot_2_activated(const QString &arg1)
+{
+
+	string opcao = ui->modComboBoxRobot_2->currentText().toStdString();
+	if (opcao == "Equipa") {
+		ui->modRobotlineEdit->setDisabled(true);
+		ui->modRobotlineEdit->hide();
+		ui->modComboBoxRobot_2->setDisabled(false);
+		ui->modComboBoxRobot_2->show();
+	}
+	else {
+		ui->modComboBoxRobot_2->setDisabled(true);
+		ui->modComboBoxRobot_2->hide();
+		ui->modRobotlineEdit->setDisabled(false);
+		ui->modRobotlineEdit->show();
 	}
 }
