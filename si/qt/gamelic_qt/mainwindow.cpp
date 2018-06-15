@@ -480,8 +480,16 @@ void MainWindow::on_pusheliEquipas_clicked()
 void MainWindow::on_pusheliProvas_clicked()
 {
 	string nome = ui->eliProvasComboBox->currentText().toStdString();
-	bd.eliminarEquipa(bd.buscarIDProvasNome(nome));
+	bd.eliminarProva(bd.buscarIDProvasNome(nome));
 }
+
+void MainWindow::on_pusheliRobot_clicked()
+{
+	string nome = ui->eliRobotComboBox->currentText().toStdString();
+	bd.eliminarRobot(bd.updateRobo1(nome));
+}
+
+
 
 void MainWindow::on_pushmodProva_clicked() {
 
@@ -515,9 +523,5 @@ void MainWindow::on_pushmodProva_clicked() {
 		bd.updateNomeProva(nome.toStdString(), idProva);
 		break;
 	}*/
-	
-	
-	
-	
 
 }

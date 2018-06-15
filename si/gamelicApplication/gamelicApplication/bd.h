@@ -68,5 +68,6 @@ public:
 	
 	void eliminarEquipa(int id);
 	void eliminarProva(int id);
+	void eliminarRobot(int id);
 
 };

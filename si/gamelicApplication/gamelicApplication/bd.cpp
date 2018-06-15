@@ -561,6 +561,15 @@ void bd::eliminarProva(int id) {
 	delete con;
 }
 
+void bd::eliminarRobot(int id) {
+	connect();
+	prep = con->prepareStatement("DELETE FROM `robo`.`robo` WHERE idRobo = ?");
+	prep->setInt(1, id);
+	prep->execute();
+	delete prep;
+	delete con;
+}
+
 /*void bd::eliminarElementos(int id) {
 	connect();
 	prep = con->prepareStatement("DELETE FROM `robo`.`elementos` WHERE Equipas_idEquipas = ?");

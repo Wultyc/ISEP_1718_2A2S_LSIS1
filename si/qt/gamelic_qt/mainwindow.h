@@ -63,6 +63,8 @@ private slots:
 
     void on_pusheliProvas_clicked();
 
+    void on_pusheliRobot_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
