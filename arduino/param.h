@@ -42,7 +42,7 @@
 
 //Botões de Ativação
 #define BOTAO_START 4
-#define BOTAO_INTRP 2
+#define BOTAO_STOP 2
 
 //Tempo de reação
 #define REACT_TIME 1000
