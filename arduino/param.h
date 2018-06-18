@@ -15,7 +15,9 @@
 #define MOTOR_VEL 128
 
 //Sonares
-#define SONAR_TRIG 5
+#define SONAR_TRIG_ESQUERDA 5
+#define SONAR_TRIG_DIREITA 8
+#define SONAR_TRIG_FRENTE 9
 #define SONAR_ECHO_FRENTE A2
 #define SONAR_ECHO_DIREITA A3
 #define SONAR_ECHO_ESQUERDA A4
@@ -37,8 +39,8 @@
 #define CHAMA_PARAM 200
 
 //Bluetooth
-#define BT_RX 8
-#define BT_TX 9
+#define BT_RX 0
+#define BT_TX 1
 
 //Botões de Ativação
 #define BOTAO_START 4
