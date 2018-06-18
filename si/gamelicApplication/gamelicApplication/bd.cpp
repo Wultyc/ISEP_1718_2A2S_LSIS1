@@ -46,7 +46,20 @@ void bd::inserirElementos(string nomeEl, string nomeE) {
 	delete prep;
 	delete con;
 }
-
+string bd::buscarData(int num){
+	string result;
+	connect();
+	prep = con->prepareStatement("SELECT e.data from `robo`.`prova` e WHERE e.idProva = ?");
+	prep->setInt(1, num);
+	res = prep->executeQuery();
+	while (res->next()) {
+		result = res->getString(1);
+	}
+	return result;
+	delete res;
+	delete prep;
+	delete con;
+}
 void bd::inserirRobo(string nomeR, string nomeE) {
 	connect();
 
@@ -73,7 +86,7 @@ void bd::inserirRobo(string nomeR, string nomeE) {
 
 
 
-void bd::inserirProva(string nomeP, string local, string nomeR) {
+void bd::inserirProva(string nomeP, int ano, int mes, int dia, string local, string nomeR) {
 	connect();
 
 	int i;
@@ -89,10 +102,13 @@ void bd::inserirProva(string nomeP, string local, string nomeR) {
 	delete res;
 	delete prep;
 
-	prep = con->prepareStatement("INSERT INTO `robo`.`prova`(`nome`,`local`,`Robo_idRobo`)VALUES(?,?,?)");
+	string datado = to_string(ano) + "-" + to_string(mes) + "-" + to_string(dia);
+
+	prep = con->prepareStatement("INSERT INTO `robo`.`prova`(`nome`,`data`,`local`,`Robo_idRobo`)VALUES(?,?,?,?)");
 	prep->setString(1, nomeP);
-	prep->setString(2, local);
-	prep->setInt(3, i);
+	prep->setString(2,datado);
+	prep->setString(3, local);
+	prep->setInt(4, i);
 	prep->execute();
 	delete prep;
 	delete con;
@@ -694,4 +710,53 @@ void bd::updateEquipa2(int id, int num) {
 
 	delete prep;
 	delete con;
+}
+
+
+
+vector<int> bd::MesesI() {
+	vector <int> caract;
+	for (int i = 1; i < 32; i++) {
+		caract.push_back(i);
+	}
+
+	return caract;
+}
+
+
+
+vector<int> bd::Mes() {
+	vector <int> caract;
+
+	for (int i = 1; i < 13; i++) {
+		caract.push_back(i);
+	}
+
+	return caract;
+}
+
+vector<int> bd::Ano() {
+	vector <int> caract;
+
+	for (int i = 2018; i < 2030; i++) {
+		caract.push_back(i);
+	}
+
+
+	return caract;
+}
+
+
+void bd::updateData(string data, int idProva) {
+	connect();
+
+	prep = con->prepareStatement("UPDATE `robo`.`prova` SET data = (?) WHERE idProva = (?)");
+	prep->setString(1, data);
+	prep->setInt(2, idProva);
+	prep->execute();
+
+	delete prep;
+	delete con;
+
+
 }

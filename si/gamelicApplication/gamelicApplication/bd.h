@@ -26,7 +26,7 @@ public:
 	void inserirEquipa(string nomeE);
 	void inserirElementos(string nomeEl, string nomeE);
 	void inserirRobo(string nomeR, string nomeE);
-	void inserirProva(string nomeP,string local, string nomeR);
+	void inserirProva(string nomeP, int ano, int mes, int dia, string local, string nomeR);
 	void inserirStates(int state, string nomeP);
 	void updateEquipa(string nomeE, int num);
 	void updateElemento(int idElemento, string nomeElNovo);
@@ -35,7 +35,8 @@ public:
 	int updateRobo1(string nomeR);
 	void updateRobo2(int id, int num);
 	void updateNomeRobo(string nomeE, int num);
-	void bd::updateEquipa2(int id, int num);
+	void updateEquipa2(int id, int num);
+	void updateData(string data, int num);
 
 
 	vector<string> buscarEquipa(int num);
@@ -49,6 +50,7 @@ public:
 	vector<string> ListarDataProva();
 	int buscarIDRobot(int id);
 	string buscarRobot(int id);
+	string buscarData(int id);
 
 	vector<int> listarIDRobo();
 	vector<int> buscarIDEquipas();
@@ -58,6 +60,9 @@ public:
 	vector<string> caracteristicas();
 	vector <string> listarRobos();
 	vector<string> caracteristicas2();
+	vector<int> MesesI();
+	vector<int> Mes();
+	vector<int> Ano();
 
 	int buscarIDEquipasNome(string nome);
 	int buscarIDProvasNome(string nome);

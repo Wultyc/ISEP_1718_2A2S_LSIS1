@@ -44,11 +44,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <QtRcc Include="gamelicApplication.qrc">
-      <Filter>Resource Files</Filter>
-    </QtRcc>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="bd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -65,5 +60,10 @@
     <QtMoc Include="..\..\qt\gamelic_qt\mainwindow.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <QtRcc Include="gamelicApplication.qrc">
+      <Filter>Resource Files</Filter>
+    </QtRcc>
   </ItemGroup>
 </Project>

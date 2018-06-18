@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow)
@@ -21,11 +22,31 @@ void MainWindow::on_inserirEquipaAction_triggered()
 void MainWindow::on_inserirProvaAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->inserirProva);
-
+	ui->mesComboBox->clear();
+	ui->diaComboBox->clear();
+	ui->anoComboBox->clear();
 	ui->insProvaCombo->clear();
 	vector<string> robos = bd.listarNomeRobo();
+	vector<int> diaI = bd.MesesI();
+	vector<int> mes = bd.Mes();
+	vector<int> ano = bd.Ano();
+	
+
+	for (int i = 0; i < mes.size(); i++) {
+		ui->mesComboBox->insertItem(i, QString::fromStdString(to_string(mes[i])));
+		}
+
+	for (int i = 0; i < diaI.size(); i++) {
+		ui->diaComboBox->insertItem(i, QString::fromStdString(to_string(diaI[i])));
+	}
+	
+	for (int i = 0; i < ano.size(); i++) {
+		ui->anoComboBox->insertItem(i, QString::fromStdString(to_string(ano[i])));
+	}
+
 	for (int i = 0; i < robos.size(); i++) {
 		ui->insProvaCombo->insertItem(i, QString::fromStdString(robos[i]));
+		
 	}
 }
 
@@ -70,19 +91,24 @@ void MainWindow::on_listarProvaAction_triggered()
 	vector<int> idProva = bd.ListarIDProva();
 	for (int j = 0; j < idProva.size(); j++) {
 		string nomeS = bd.buscarNomeProva(idProva[j]);
+		string data = bd.buscarData(idProva[j]);
 		string local = bd.listarLocalProva(idProva[j]);
 		string roboS = bd.buscarRobot(bd.buscarIDRobot(idProva[j]));
 		QString nomeSQ = QString::fromStdString(nomeS);
+		QString dataQ = QString::fromStdString(data);
 		QString localQ = QString::fromStdString(local);
 		QString roboQ = QString::fromStdString(roboS);
 		ui->tabelaListarProva->insertRow(ui->tabelaListarProva->rowCount());
 		QTableWidgetItem * nomeProva = new QTableWidgetItem(nomeSQ);
+		QTableWidgetItem * dataProva = new QTableWidgetItem(dataQ);
 		QTableWidgetItem * nomeLocal = new QTableWidgetItem(localQ);
 		QTableWidgetItem * nomeRobo = new QTableWidgetItem(roboQ);
 		nomeProva->setTextAlignment(Qt::AlignCenter);
+		dataProva->setTextAlignment(Qt::AlignCenter);
 		nomeLocal->setTextAlignment(Qt::AlignCenter);
 		nomeRobo->setTextAlignment(Qt::AlignCenter);
 		ui->tabelaListarProva->setItem(ui->tabelaListarProva->rowCount() - 1, 0, nomeProva);
+		ui->tabelaListarProva->setItem(ui->tabelaListarProva->rowCount() - 1, 1, dataProva);
 		ui->tabelaListarProva->setItem(ui->tabelaListarProva->rowCount() - 1, 2, nomeLocal);
 		ui->tabelaListarProva->setItem(ui->tabelaListarProva->rowCount() - 1, 3, nomeRobo);
 	}
@@ -124,6 +150,9 @@ void MainWindow::on_modificarEquipaAction_triggered()
 void MainWindow::on_modificarProvaAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->modificarProva);
+	ui->anoComboBox_2->clear();
+	ui->mesComboBox_2->clear();
+	ui->diaComboBox_2->clear();
 	ui->modProvaComboBox_2->clear();
 	ui->modProvaComboBox->clear();
 	ui->modComboBoxRobot->clear();
@@ -141,6 +170,23 @@ void MainWindow::on_modificarProvaAction_triggered()
 	vector<string> robots = bd.listarNomeRobo();
 	for (int i = 0; i < robots.size(); i++) {
 		ui->modComboBoxRobot->insertItem(i, QString::fromStdString(robots[i]));
+	}
+
+	vector<int> diaI = bd.MesesI();
+	vector<int> mes = bd.Mes();
+	vector<int> ano = bd.Ano();
+
+
+	for (int i = 0; i < mes.size(); i++) {
+		ui->mesComboBox_2->insertItem(i, QString::fromStdString(to_string(mes[i])));
+	}
+
+	for (int i = 0; i < diaI.size(); i++) {
+		ui->diaComboBox_2->insertItem(i, QString::fromStdString(to_string(diaI[i])));
+	}
+
+	for (int i = 0; i < ano.size(); i++) {
+		ui->anoComboBox_2->insertItem(i, QString::fromStdString(to_string(ano[i])));
 	}
 	
 }
@@ -445,7 +491,13 @@ void MainWindow::on_pushInserirProva_clicked()
 	QString nomeQP = ui->insNomeProvaLineE->text();
 	string nomeP = nomeQP.toStdString();
 	QString local = ui->insLocalLineE->text();
-	bd.inserirProva(nomeP, local.toStdString(), nomeR);
+	QString ano = ui->anoComboBox->currentText();
+	int anoP = ano.toInt();
+	QString mes = ui->mesComboBox->currentText();
+	int mesP = mes.toInt();
+	QString dia = ui->diaComboBox->currentText();
+	int diaP = dia.toInt();
+	bd.inserirProva(nomeP,anoP,mesP,diaP,local.toStdString(), nomeR);
 
 }
 
@@ -538,6 +590,15 @@ void MainWindow::on_pushmodProva_clicked() {
 		bd.updateRobo2(id,idProva);
 	}
 
+	if ((ui->modProvaComboBox->currentText().toStdString()) == "Data") {
+		
+
+		QString ano = ui->anoComboBox_2->currentText();
+		QString mes = ui->mesComboBox_2->currentText();
+		QString dia = ui->diaComboBox_2->currentText();
+		string data = ano.toStdString() + "-" + mes.toStdString() + "-" + dia.toStdString();
+		bd.updateData(data, idProva);
+	}
 
 }
 
@@ -566,13 +627,38 @@ void MainWindow::on_modProvaComboBox_currentIndexChanged(const QString &arg1)
 		ui->modProvalineEdit->hide();
 		ui->modComboBoxRobot->setDisabled(false);
 		ui->modComboBoxRobot->show();
+		ui->anoComboBox_2->setDisabled(true);
+		ui->anoComboBox_2->hide();
+		ui->mesComboBox_2->setDisabled(true);
+		ui->mesComboBox_2->hide();
+		ui->diaComboBox_2->setDisabled(true);
+		ui->diaComboBox_2->hide();
+	}
+	else if (opcao == "Data") {
+		ui->modProvalineEdit->setDisabled(true);
+		ui->modProvalineEdit->hide();
+		ui->modComboBoxRobot->setDisabled(true);
+		ui->modComboBoxRobot->hide();
+		ui->anoComboBox_2->setDisabled(false);
+		ui->anoComboBox_2->show();
+		ui->mesComboBox_2->setDisabled(false);
+		ui->mesComboBox_2->show();
+		ui->diaComboBox_2->setDisabled(false);
+		ui->diaComboBox_2->show();
 	}
 	else {
+		ui->anoComboBox_2->setDisabled(true);
+		ui->anoComboBox_2->hide();
+		ui->mesComboBox_2->setDisabled(true);
+		ui->mesComboBox_2->hide();
+		ui->diaComboBox_2->setDisabled(true);
+		ui->diaComboBox_2->hide();
 		ui->modComboBoxRobot->setDisabled(true);
 		ui->modComboBoxRobot->hide();
 		ui->modProvalineEdit->setDisabled(false);
 		ui->modProvalineEdit->show();
 	}
+	
 }
 
 void MainWindow::on_modRoboComboBox_2_currentIndexChanged(const QString &arg1)
