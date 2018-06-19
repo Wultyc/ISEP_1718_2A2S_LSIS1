@@ -15,7 +15,7 @@ int angle_servo = 0;  //Angulo atual do Servo
 int incrm_servo = 1;  //Incremento do anglulo do servo
 int servo_enabled = 0; //Define se o servo roda ou não
 
-int velP = 128;
+int velP = 128; int delayP = 100; int delayS = 1000; 
 
 String estados[7] = {"Desativado","Parado","Fente","Tras","Direita","Esquerda","Apagar Chama"};
 
@@ -32,6 +32,13 @@ int getDistance(int trig, int echo){
   //Lê os Pin Echo e retorna o tempo de viagem da onda sonoar em microsegundos
   int dist = pulseIn(echo, HIGH)*0.034/2;
   return dist;
+}
+
+void roboPara(){
+  //Motor A
+  analogWrite(MOTOR_A_PWM, 0);
+  //Motor B
+  analogWrite(MOTOR_B_PWM, 0);
 }
 
 void setup() {
@@ -64,6 +71,12 @@ void setup() {
   angle_servo = 90;
   servo.write(angle_servo);
 
+  //Output inicial
+  velA = 0; velB = 0;
+  dirA = 0; dirB = 0;
+  velProp = 0; dalayRobot = 0;
+  servo_enabled = 0;
+
 }
 
 void loop() {
@@ -85,41 +98,44 @@ void loop() {
       if(btnStart == HIGH){
         estado = 1;
       }
-      break;
-    case 1: //Parado
       velA = 0; velB = 0;
       dirA = 0; dirB = 0;
       velProp = 0; dalayRobot = 0;
       servo_enabled = 0;
       break;
-    case 2: //Andar em Frente
-      velA = 0; velB = 0;
-      dirA = 0; dirB = 0;
-      velProp = 0; dalayRobot = 0;
+    case 1: //Andar em Frente
+      roboPara();
+      velA = velP; velB = velP;
+      dirA = HIGH; dirB = HIGH;
+      velProp = LOW; dalayRobot = delayP;
       servo_enabled = 1;
       break;
-    case 3: //Andar para tras
-      velA = 0; velB = 0;
-      dirA = 0; dirB = 0;
-      velProp = 0; dalayRobot = 0;
+    case 2: //Andar para tras
+      roboPara();
+      velA = velP; velB = velP;
+      dirA = LOW; dirB = LOW;
+      velProp = LOW; dalayRobot = delayP;
       servo_enabled = 1;
       break;
-    case 4: //Rodar à direita
-      velA = 0; velB = 0;
-      dirA = 0; dirB = 0;
-      velProp = 0; dalayRobot = 0;
+    case 3: //Rodar à direita
+      roboPara();
+      velA = velP; velB = velP;
+      dirA = LOW; dirB = HIGH;
+      velProp = LOW; dalayRobot = delayP;
       servo_enabled = 1;
       break;
-    case 5: //Rodar à equerda
-      velA = 0; velB = 0;
-      dirA = 0; dirB = 0;
-      velProp = 0; dalayRobot = 0;
+    case 4: //Rodar à equerda
+      roboPara();
+      velA = velP; velB = velP;
+      dirA = HIGH; dirB = LOW;
+      velProp = LOW; dalayRobot = delayP;
       servo_enabled = 1;
       break;
-    case 6: //Apagar a chama
+    case 5: //Apagar a chama
+      roboPara();
       velA = 0; velB = 0;
       dirA = 0; dirB = 0;
-      velProp = 0; dalayRobot = 0;
+      velProp = 255; dalayRobot = delayP;
       servo_enabled = 0;
       break;
   }

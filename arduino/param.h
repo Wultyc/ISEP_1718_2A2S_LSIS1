@@ -21,8 +21,8 @@
 #define SONAR_ECHO_FRENTE A2
 #define SONAR_ECHO_DIREITA A3
 #define SONAR_ECHO_ESQUERDA A4
-#define SONAR_DIST 5 //distancia minima do robot à parede em cm
-#define SONAR_ROOM 10 //distancia que o robot considera um quarto em cm
+#define SONAR_DIST_MIN 15 //distancia minima do robot à parede em cm
+#define SONAR_ROOM 60     //distancia que o robot considera um quarto em cm
 
 //Propeller
 #define VENTOINHA_INA 6
