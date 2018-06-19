@@ -15,7 +15,24 @@ int angle_servo = 0;  //Angulo atual do Servo
 int incrm_servo = 1;  //Incremento do anglulo do servo
 int servo_enabled = 0; //Define se o servo roda ou não
 
+int velP = 128;
+
 String estados[7] = {"Desativado","Parado","Fente","Tras","Direita","Esquerda","Apagar Chama"};
+
+int getDistance(int trig, int echo){
+  //Limpeza do Pino Trig
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  
+  //Ativa o Pin Trig por 10 microsegundos
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  
+  //Lê os Pin Echo e retorna o tempo de viagem da onda sonoar em microsegundos
+  int dist = pulseIn(echo, HIGH)*0.034/2;
+  return dist;
+}
 
 void setup() {
   //Inicializa a comunicação Serial via Bluetooth
@@ -54,42 +71,65 @@ void loop() {
   btnStart = digitalRead(BOTAO_START);
   btnStop = digitalRead(BOTAO_STOP);
   
-  //Limpeza do Pino Trig
-  digitalWrite(SONAR_TRIG, LOW);
-  delayMicroseconds(2);
-  
-  //Ativa o Pin Trig por 10 microsegundos
-  digitalWrite(SONAR_TRIG, HIGH);
-  delayMicroseconds(10);
-  digitalWrite(SONAR_TRIG, LOW);
-  
   //Lê os Pin Echo e retorna o tempo de viagem da onda sonoar em microsegundos
-  distF = pulseIn(SONAR_ECHO_FRENTE, HIGH)*0.034/2;
-  distD = pulseIn(SONAR_ECHO_DIREITA, HIGH)*0.034/2;
-  distE = pulseIn(SONAR_ECHO_ESQUERDA, HIGH)*0.034/2;
+  distF = getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE);
+  distD = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
+  distE = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
 
   //Lê o sensor de chama;
   chama = analogRead(CHAMA_PIN);
 
   //Atua mediante o estado
   switch(estado){
-    case 0:
+    case 0: //Desativado
+      if(btnStart == HIGH){
+        estado = 1;
+      }
       break;
-    case 1:
+    case 1: //Parado
+      velA = 0; velB = 0;
+      dirA = 0; dirB = 0;
+      velProp = 0; dalayRobot = 0;
+      servo_enabled = 0;
       break;
-    case 2:
+    case 2: //Andar em Frente
+      velA = 0; velB = 0;
+      dirA = 0; dirB = 0;
+      velProp = 0; dalayRobot = 0;
+      servo_enabled = 1;
       break;
-    case 3:
+    case 3: //Andar para tras
+      velA = 0; velB = 0;
+      dirA = 0; dirB = 0;
+      velProp = 0; dalayRobot = 0;
+      servo_enabled = 1;
       break;
-    case 4:
+    case 4: //Rodar à direita
+      velA = 0; velB = 0;
+      dirA = 0; dirB = 0;
+      velProp = 0; dalayRobot = 0;
+      servo_enabled = 1;
       break;
-    case 5:
+    case 5: //Rodar à equerda
+      velA = 0; velB = 0;
+      dirA = 0; dirB = 0;
+      velProp = 0; dalayRobot = 0;
+      servo_enabled = 1;
       break;
-    case 6:
+    case 6: //Apagar a chama
+      velA = 0; velB = 0;
+      dirA = 0; dirB = 0;
+      velProp = 0; dalayRobot = 0;
+      servo_enabled = 0;
       break;
   }
 
   //Aplica outputs
+    analogWrite(MOTOR_A_PWM, velA);
+    analogWrite(MOTOR_B_PWM, velB);
+    digitalWrite(MOTOR_A_DIR, dirA);
+    digitalWrite(MOTOR_B_DIR, dirB);
+    analogWrite(VENTOINHA_INA, velProp);
 
   //Roda o Servo
   if(servo_enabled == 1){
@@ -103,7 +143,7 @@ void loop() {
 
   //Envia a informação
   Bluetooth.println(estado);
-  Serial.println(estados[estado]);
+  //Serial.println(estados[estado]);
 
   //Aplica o delay
   delay(dalayRobot);
