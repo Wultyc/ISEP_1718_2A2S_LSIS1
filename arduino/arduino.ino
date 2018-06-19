@@ -22,13 +22,20 @@ int andaFrente = 0;
 int andaEsquerda = 0 ;
 int andaDireita = 0;
 
+String estados[7] = {"Desat", "Frente", "Direita", "Esq", "Chama"};
+
 void desativa() {
+
+  desativa_robot = 0;
+  estado = 0;
+  servo_enabled = 0;
   analogWrite(MOTOR_A_PWM, 0);
   analogWrite(MOTOR_B_PWM, 0);
   digitalWrite(MOTOR_A_DIR, HIGH);
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(VENTOINHA_INA, VENTOINHA_MIN);
   servo.write(90);
+
 }
 
 void setup() {
@@ -103,10 +110,12 @@ void loop() {
     switch (estado) {
       case 1:
         frente(velP, 0);
+
         do {
           andaFrente = getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE);
           andaEsquerda = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
           andaDireita = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
+          delay(delayS);
         } while (andaFrente > SONAR_DIST_MIN && andaDireita < SONAR_ROOM && andaEsquerda < SONAR_ROOM);
 
         roboPara(delayS);
@@ -115,31 +124,39 @@ void loop() {
         andaDireita = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
 
         if (andaFrente < SONAR_DIST_MIN || andaDireita > SONAR_ROOM || andaEsquerda > SONAR_ROOM) {
+
           roboPara(delayS);
           andaDireita = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
-          roboPara(delayS);
           andaEsquerda = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
+
           if (andaDireita < andaEsquerda) {
             estado = 3;
-          } else {
+          } else if (andaDireita > andaEsquerda) {
             estado = 2;
+          } else {
+            estado = 1;
           }
         }
+        roboPara(0);
         break;
       case 2:
         roboPara(delayS);
         direita(velP, delayP);
+        roboPara(delayS);
         while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_ROOM) { //Confirmar se é mesmo 60
-          frente(velP);
+          frente(velP, delayS);
         }
+        roboPara(delayS);
         estado = 1;
         break;
       case 3:
         roboPara(delayS);
         esquerda(velP, delayP);
+        roboPara(delayS);
         while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_ROOM) { //Confirmar se é mesmo 60
-          frente(velP);
+          frente(velP, delayS);
         }
+        roboPara(delayS);
         estado = 1;
         break;
       default:
@@ -172,7 +189,10 @@ void loop() {
   }
 
   //Envia a informação
-  Serial.println(estado);
+  //Serial.println(estado);
+  Serial.println("Estato\tFrente\tEsq\tDir\tServo\tAngulo");
+  Serial.println(estados[estado] + "\t" + (String)getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) + "\t" + (String)getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA) + "\t" + (String)getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA) + "\t" + (String) servo_enabled +  "\t" + (String) angle_servo);
+
 }
 
 int getDistance(int trig, int echo) {
@@ -194,11 +214,11 @@ void frente(int motorSpeed, int duracao) {
 
   //Motor A
   digitalWrite(MOTOR_A_DIR, HIGH);
-  analogWrite(MOTOR_A_PWM, motorAspeed);
+  analogWrite(MOTOR_A_PWM, motorSpeed);
 
   //Motor B
   digitalWrite(MOTOR_B_DIR, HIGH);
-  analogWrite(MOTOR_B_PWM, motorBspeed);
+  analogWrite(MOTOR_B_PWM, motorSpeed);
 
   delay(duracao);
 }
