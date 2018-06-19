@@ -68,6 +68,7 @@ void setup() {
   angle_servo = 90;
   servo.write(angle_servo);
 
+  Serial.println("Fim Setup");
 }
 
 void loop() {
@@ -101,6 +102,7 @@ void loop() {
       } else {
         roboPara(delayS);
         estado = 0;
+        servo_enabled = 0;
       }
       break;
     case 1: //Andar em Frente
@@ -133,18 +135,21 @@ void loop() {
     case 5: //Apagar a chama
       roboPara(0);
       velProp = 255; analogWrite(VENTOINHA_INA, velProp);
-      servo_enabled = 0;
+      servo_enabled = 1;
       break;
   }    
 
   //Roda o Servo
   if(servo_enabled == 1){
     //Evita rotações não possiveis
-    incrm_servo = (angle_servo == SERVO_MAX_ANGLE) ? -10 : incrm_servo;
+    /*incrm_servo = (angle_servo == SERVO_MAX_ANGLE) ? -10 : incrm_servo;
     incrm_servo = (angle_servo == SERVO_MIN_ANGLE) ? 10 : incrm_servo;
+    angle_servo += incrm_servo; //Define o angulo*/
 
-    angle_servo += incrm_servo; //Define o angulo
-    servo.write(angle_servo); //Roda o servo
+    for(angle_servo = SERVO_MIN_ANGLE; angle_servo <= SERVO_MAX_ANGLE; angle_servo ++){
+      servo.write(angle_servo); //Roda o servo
+    }
+
   }
 
   //Envia a informação
@@ -154,9 +159,6 @@ void loop() {
 
   Serial.println("Estato\tFrente\t Esquerda\tDireita\tAngulo servo");  
   Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) angle_servo);
-
-  //Aplica o delay
-  delay(dalayRobot);
 }
 
 int getDistance(int trig, int echo){
