@@ -157,8 +157,8 @@ void loop() {
   Bluetooth.println("Estato\tFrente\t Esquerda\tDireita");  
   Bluetooth.println("" + (String)estado + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
 
-  Serial.println("Estato\tFrente\t Esquerda\tDireita\tAngulo servo");  
-  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) angle_servo);
+  Serial.println("Estato\tFrente\t Esquerda\tDireita\tAtivar Servo\tAngulo servo");  
+  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) servo_enabled + (String) angle_servo);
 }
 
 int getDistance(int trig, int echo){
