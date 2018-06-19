@@ -143,48 +143,55 @@ void loop() {
   
   switch(estado){
     case 1:
-    frente(255,255);
+    frente(225,225);
      do{
       andaFrente = lerSonar(SONAR_TRIG_FRENTE,SONAR_ECHO_FRENTE);
-      //andaEsquerda = lerSonar(SONAR_TRIG_ESQUERDA,SONAR_ECHO_ESQUERDA);
-      //andaDireita = lerSonar(SONAR_TRIG_DIREITA,SONAR_ECHO_DIREITA);
-     }while(andaFrente>15);
+      andaEsquerda = lerSonar(SONAR_TRIG_ESQUERDA,SONAR_ECHO_ESQUERDA);
+      andaDireita = lerSonar(SONAR_TRIG_DIREITA,SONAR_ECHO_DIREITA);
+     }while(andaFrente>15 && andaDireita<60 && andaEsquerda<60);
 
      roboPara();
      andaFrente = lerSonar(SONAR_TRIG_FRENTE,SONAR_ECHO_FRENTE);
-     //andaEsquerda = lerSonar(SONAR_TRIG_ESQUERDA,SONAR_ECHO_ESQUERDA);
-     //andaDireita = lerSonar(SONAR_TRIG_DIREITA,SONAR_ECHO_DIREITA);
-
+     andaEsquerda = lerSonar(SONAR_TRIG_ESQUERDA,SONAR_ECHO_ESQUERDA);
+     andaDireita = lerSonar(SONAR_TRIG_DIREITA,SONAR_ECHO_DIREITA);
 
      if(andaFrente<15){
       estado = 4;
-     }/*else if(andaDireita>60 || andaEsquerda>60){
+     }else if(andaDireita>60 || andaEsquerda>60){
       estado = 4;
-     }*/
+     }
      break;
     case 2:
       roboPara();
-      direita(175,250,1250);
-      frenteComDuracao(150,150,1000);
+      direita(150,200,1250);
+      frenteComDuracao(150,150,750);
+      andaFrente = lerSonar(SONAR_TRIG_FRENTE,SONAR_ECHO_FRENTE);
+      if(andaFrente>70){
+        frenteComDuracao(150,150,2000);
+      }
       estado = 1;
       break;
     case 3:
       roboPara();
-      esquerda(250,175,1250);
-      frenteComDuracao(225,225,1000);
+      esquerda(200,150,1250);
+      frenteComDuracao(150,150,750);
+      andaFrente = lerSonar(SONAR_TRIG_FRENTE,SONAR_ECHO_FRENTE);
+      if(andaFrente>70){
+        frenteComDuracao(150,150,2000);
+      }
       estado = 1;
       break;
     case 4:
-    roboPara();
-    andaDireita = lerSonar(SONAR_TRIG_DIREITA,SONAR_ECHO_DIREITA);
-    roboPara();
-    andaEsquerda = lerSonar(SONAR_TRIG_ESQUERDA,SONAR_ECHO_ESQUERDA);
-     if(andaDireita<andaEsquerda){
-        estado = 3;
-      }else{
-        estado = 2;
-      }
-      break;
+      roboPara();
+      andaDireita = lerSonar(SONAR_TRIG_DIREITA,SONAR_ECHO_DIREITA);
+      roboPara();
+      andaEsquerda = lerSonar(SONAR_TRIG_ESQUERDA,SONAR_ECHO_ESQUERDA);
+       if(andaDireita<andaEsquerda){
+          estado = 3;
+        }else{
+          estado = 2;
+        }
+        break;
   }
     Serial.println("Distancia: \t Frente \t Esquerda \t Direita");  
     Serial.print("\t \t");
