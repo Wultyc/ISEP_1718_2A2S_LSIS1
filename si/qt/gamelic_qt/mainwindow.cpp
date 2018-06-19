@@ -771,4 +771,11 @@ void MainWindow::on_insNomeRobotLineE_textChanged()
 void MainWindow::on_iniciarProvaAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->ModoProva);
+
+	ui->modoProvaComboBox->clear();
+	vector<string> provas = bd.listarProvas();
+	for (int i = 0; i < provas.size(); i++) {
+		ui->modoProvaComboBox->insertItem(i, QString::fromStdString(provas[i]));
+
+	}
 }

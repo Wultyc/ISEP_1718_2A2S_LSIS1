@@ -1847,6 +1847,85 @@
          <string>Esquerda</string>
         </property>
        </widget>
+       <widget class="QComboBox" name="modoProvaComboBox">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>131</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="currentText">
+         <string>Prova 1</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>Prova 1</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 2</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 3</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 4</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Prova 5</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QPushButton" name="InicarProva">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>131</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Iniciar</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="DadosRegistados">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>90</y>
+          <width>131</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Dados Registados</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
