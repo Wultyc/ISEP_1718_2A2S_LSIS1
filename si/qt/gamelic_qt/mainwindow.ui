@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>8</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -44,7 +44,7 @@
        <widget class="QLabel" name="insNomeLabel">
         <property name="geometry">
          <rect>
-          <x>320</x>
+          <x>259</x>
           <y>21</y>
           <width>131</width>
           <height>20</height>
@@ -206,7 +206,7 @@
        <widget class="QLineEdit" name="insNomeLineE">
         <property name="geometry">
          <rect>
-          <x>461</x>
+          <x>400</x>
           <y>20</y>
           <width>191</width>
           <height>26</height>
@@ -356,13 +356,33 @@
          <string>Inserir</string>
         </property>
        </widget>
+       <widget class="QLabel" name="labelValidObrigatorioEquipa">
+        <property name="geometry">
+         <rect>
+          <x>620</x>
+          <y>20</y>
+          <width>251</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Campo de Preenchimento Obrigatório.</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="inserirProva">
        <widget class="QLabel" name="insLocalLabel">
         <property name="geometry">
          <rect>
-          <x>317</x>
-          <y>148</y>
+          <x>257</x>
+          <y>135</y>
           <width>111</width>
           <height>20</height>
          </rect>
@@ -379,7 +399,7 @@
        <widget class="QLineEdit" name="insNomeProvaLineE">
         <property name="geometry">
          <rect>
-          <x>451</x>
+          <x>391</x>
           <y>65</y>
           <width>241</width>
           <height>26</height>
@@ -394,7 +414,7 @@
        <widget class="QLabel" name="insRobotLabel">
         <property name="geometry">
          <rect>
-          <x>310</x>
+          <x>250</x>
           <y>269</y>
           <width>131</width>
           <height>20</height>
@@ -412,8 +432,8 @@
        <widget class="QLineEdit" name="insLocalLineE">
         <property name="geometry">
          <rect>
-          <x>451</x>
-          <y>145</y>
+          <x>391</x>
+          <y>132</y>
           <width>241</width>
           <height>26</height>
          </rect>
@@ -427,7 +447,7 @@
        <widget class="QLabel" name="insNomeProvaLabel">
         <property name="geometry">
          <rect>
-          <x>310</x>
+          <x>250</x>
           <y>68</y>
           <width>111</width>
           <height>20</height>
@@ -463,7 +483,7 @@
        <widget class="QComboBox" name="insProvaCombo">
         <property name="geometry">
          <rect>
-          <x>451</x>
+          <x>391</x>
           <y>266</y>
           <width>241</width>
           <height>26</height>
@@ -473,8 +493,8 @@
        <widget class="QLabel" name="insLocalLabel_2">
         <property name="geometry">
          <rect>
-          <x>317</x>
-          <y>210</y>
+          <x>257</x>
+          <y>200</y>
           <width>111</width>
           <height>20</height>
          </rect>
@@ -491,11 +511,16 @@
        <widget class="QComboBox" name="diaComboBox">
         <property name="geometry">
          <rect>
-          <x>451</x>
-          <y>210</y>
+          <x>391</x>
+          <y>197</y>
           <width>69</width>
-          <height>22</height>
+          <height>26</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <item>
          <property name="text">
@@ -506,11 +531,16 @@
        <widget class="QComboBox" name="mesComboBox">
         <property name="geometry">
          <rect>
-          <x>530</x>
-          <y>210</y>
+          <x>475</x>
+          <y>197</y>
           <width>69</width>
-          <height>22</height>
+          <height>26</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <item>
          <property name="text">
@@ -521,11 +551,16 @@
        <widget class="QComboBox" name="anoComboBox">
         <property name="geometry">
          <rect>
-          <x>609</x>
-          <y>210</y>
+          <x>562</x>
+          <y>197</y>
           <width>69</width>
-          <height>22</height>
+          <height>26</height>
          </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <item>
          <property name="text">
@@ -533,12 +568,52 @@
          </property>
         </item>
        </widget>
+       <widget class="QLabel" name="labelValidObrigatorioProvaNome">
+        <property name="geometry">
+         <rect>
+          <x>650</x>
+          <y>65</y>
+          <width>251</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Campo de Preenchimento Obrigatório.</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelValidObrigatorioProvaLocal">
+        <property name="geometry">
+         <rect>
+          <x>650</x>
+          <y>132</y>
+          <width>251</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Campo de Preenchimento Obrigatório.</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="inserirRobot">
        <widget class="QLabel" name="insNomeRobotLabel">
         <property name="geometry">
          <rect>
-          <x>307</x>
+          <x>250</x>
           <y>92</y>
           <width>131</width>
           <height>20</height>
@@ -556,7 +631,7 @@
        <widget class="QLineEdit" name="insNomeRobotLineE">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>393</x>
           <y>89</y>
           <width>241</width>
           <height>26</height>
@@ -571,7 +646,7 @@
        <widget class="QLabel" name="insNomeEquipaLabel">
         <property name="geometry">
          <rect>
-          <x>307</x>
+          <x>250</x>
           <y>180</y>
           <width>131</width>
           <height>20</height>
@@ -607,11 +682,31 @@
        <widget class="QComboBox" name="insRobotCombo">
         <property name="geometry">
          <rect>
-          <x>450</x>
+          <x>393</x>
           <y>177</y>
           <width>241</width>
           <height>26</height>
          </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelValidObrigatorioRobot">
+        <property name="geometry">
+         <rect>
+          <x>653</x>
+          <y>89</y>
+          <width>251</width>
+          <height>26</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Campo de Preenchimento Obrigatório.</string>
         </property>
        </widget>
       </widget>

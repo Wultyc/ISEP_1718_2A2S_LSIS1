@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <string.h>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -17,6 +18,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_inserirEquipaAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->inserirEquipa);
+	ui->labelValidObrigatorioEquipa->show();
 }
 
 void MainWindow::on_inserirProvaAction_triggered()
@@ -30,23 +32,23 @@ void MainWindow::on_inserirProvaAction_triggered()
 	vector<int> diaI = bd.MesesI();
 	vector<int> mes = bd.Mes();
 	vector<int> ano = bd.Ano();
-	
+
 
 	for (int i = 0; i < mes.size(); i++) {
 		ui->mesComboBox->insertItem(i, QString::fromStdString(to_string(mes[i])));
-		}
+	}
 
 	for (int i = 0; i < diaI.size(); i++) {
 		ui->diaComboBox->insertItem(i, QString::fromStdString(to_string(diaI[i])));
 	}
-	
+
 	for (int i = 0; i < ano.size(); i++) {
 		ui->anoComboBox->insertItem(i, QString::fromStdString(to_string(ano[i])));
 	}
 
 	for (int i = 0; i < robos.size(); i++) {
 		ui->insProvaCombo->insertItem(i, QString::fromStdString(robos[i]));
-		
+
 	}
 }
 
@@ -188,7 +190,7 @@ void MainWindow::on_modificarProvaAction_triggered()
 	for (int i = 0; i < ano.size(); i++) {
 		ui->anoComboBox_2->insertItem(i, QString::fromStdString(to_string(ano[i])));
 	}
-	
+
 }
 
 void MainWindow::on_modificarRobotAction_triggered()
@@ -319,45 +321,49 @@ void MainWindow::on_eliminarRobotAction_triggered()
 
 void MainWindow::on_pushInserirEquipa_clicked() {
 
-	QString elemento1 = ui->insEle1LineE->text();
-	QString elemento2 = ui->insEle2LineE->text();
-	QString elemento3 = ui->insEle3LineE->text();
-	QString elemento4 = ui->insEle4LineE->text();
-	QString elemento5 = ui->insEle5LineE->text();
-	QString elemento6 = ui->insEle6LineE->text();
-	QString elemento7 = ui->insEle7LineE->text();
-	QString elemento8 = ui->insEle8LineE->text();
+	if (insEquipa == true) {
+		QString elemento1 = ui->insEle1LineE->text();
+		QString elemento2 = ui->insEle2LineE->text();
+		QString elemento3 = ui->insEle3LineE->text();
+		QString elemento4 = ui->insEle4LineE->text();
+		QString elemento5 = ui->insEle5LineE->text();
+		QString elemento6 = ui->insEle6LineE->text();
+		QString elemento7 = ui->insEle7LineE->text();
+		QString elemento8 = ui->insEle8LineE->text();
 
-	QString nomeQE = ui->insNomeLineE->text();
-	bd.inserirEquipa(nomeQE.toStdString());
-	string nomeE = nomeQE.toStdString();
+		QString nomeQE = ui->insNomeLineE->text();
+		bd.inserirEquipa(nomeQE.toStdString());
+		string nomeE = nomeQE.toStdString();
 
 
-	if (!(elemento1.isEmpty())) {
-		bd.inserirElementos(elemento1.toStdString(), nomeE);
+		if (!(elemento1.isEmpty())) {
+			bd.inserirElementos(elemento1.toStdString(), nomeE);
+		}
+		if (!(elemento2.isEmpty())) {
+			bd.inserirElementos(elemento2.toStdString(), nomeE);
+		}
+		if (!(elemento3.isEmpty())) {
+			bd.inserirElementos(elemento3.toStdString(), nomeE);
+		}
+		if (!(elemento4.isEmpty())) {
+			bd.inserirElementos(elemento4.toStdString(), nomeE);
+		}
+		if (!(elemento5.isEmpty())) {
+			bd.inserirElementos(elemento5.toStdString(), nomeE);
+		}
+		if (!(elemento6.isEmpty())) {
+			bd.inserirElementos(elemento6.toStdString(), nomeE);
+		}
+		if (!(elemento7.isEmpty())) {
+			bd.inserirElementos(elemento7.toStdString(), nomeE);
+		}
+		if (!(elemento8.isEmpty())) {
+			bd.inserirElementos(elemento8.toStdString(), nomeE);
+		}
 	}
-	if (!(elemento2.isEmpty())) {
-		bd.inserirElementos(elemento2.toStdString(), nomeE);
+	else {
+		ui->labelValidObrigatorioEquipa->setStyleSheet("color:red");
 	}
-	if (!(elemento3.isEmpty())) {
-		bd.inserirElementos(elemento3.toStdString(), nomeE);
-	}
-	if (!(elemento4.isEmpty())) {
-		bd.inserirElementos(elemento4.toStdString(), nomeE);
-	}
-	if (!(elemento5.isEmpty())) {
-		bd.inserirElementos(elemento5.toStdString(), nomeE);
-	}
-	if (!(elemento6.isEmpty())) {
-		bd.inserirElementos(elemento6.toStdString(), nomeE);
-	}
-	if (!(elemento7.isEmpty())) {
-		bd.inserirElementos(elemento7.toStdString(), nomeE);
-	}
-	if (!(elemento8.isEmpty())) {
-		bd.inserirElementos(elemento8.toStdString(), nomeE);
-	}
-
 }
 
 void MainWindow::on_mensagemInicialAction_triggered()
@@ -376,11 +382,11 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 	ui->modEquipaLineEdit_8->clear();
 	ui->modEquipaLineEdit_9->clear();
 	vector<string> elementos = bd.buscarDadosEquipa(arg1.toStdString());
-	
+
 	switch (elementos.size()) {
 	default:
 
-			break;
+		break;
 	case 1:
 		ui->modEquipaLineEdit_2->setText(QString::fromStdString(elementos[0]));
 		break;
@@ -433,7 +439,7 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 		ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
 		break;
 	}
-	
+
 	int numE;
 	/*numE = bd.buscarIDEquipasNome(arg1.toStdString());
 
@@ -474,31 +480,46 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 }
 
 void MainWindow::on_pushInserirRobot_clicked() {
-
-	QString nomeQE = ui->insRobotCombo->currentText();
-	string nomeE = nomeQE.toStdString();
-	QString nomeRE = ui->insNomeRobotLineE->text();
-	bd.inserirRobo(nomeRE.toStdString(), nomeE);
-
+	if (insRobot == true) {
+		QString nomeQE = ui->insRobotCombo->currentText();
+		string nomeE = nomeQE.toStdString();
+		QString nomeRE = ui->insNomeRobotLineE->text();
+		bd.inserirRobo(nomeRE.toStdString(), nomeE);
+	}
+	else {
+		ui->labelValidObrigatorioRobot->setStyleSheet("color:red");
+	}
 
 }
 
 void MainWindow::on_pushInserirProva_clicked()
 {
-
-	QString nomeQR = ui->insProvaCombo->currentText();
-	string nomeR = nomeQR.toStdString();
-	QString nomeQP = ui->insNomeProvaLineE->text();
-	string nomeP = nomeQP.toStdString();
-	QString local = ui->insLocalLineE->text();
-	QString ano = ui->anoComboBox->currentText();
-	int anoP = ano.toInt();
-	QString mes = ui->mesComboBox->currentText();
-	int mesP = mes.toInt();
-	QString dia = ui->diaComboBox->currentText();
-	int diaP = dia.toInt();
-	bd.inserirProva(nomeP,anoP,mesP,diaP,local.toStdString(), nomeR);
-
+	if (insProvaLocal == true && insProvaNome == true) {
+		QString nomeQR = ui->insProvaCombo->currentText();
+		string nomeR = nomeQR.toStdString();
+		QString nomeQP = ui->insNomeProvaLineE->text();
+		string nomeP = nomeQP.toStdString();
+		QString local = ui->insLocalLineE->text();
+		QString ano = ui->anoComboBox->currentText();
+		int anoP = ano.toInt();
+		QString mes = ui->mesComboBox->currentText();
+		int mesP = mes.toInt();
+		QString dia = ui->diaComboBox->currentText();
+		int diaP = dia.toInt();
+		bd.inserirProva(nomeP, anoP, mesP, diaP, local.toStdString(), nomeR);
+	}
+	else {
+		if (insProvaNome == false) {
+			ui->labelValidObrigatorioProvaNome->setStyleSheet("color:red");
+		}
+		if (insProvaLocal == false) {
+			ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:red");
+		}
+		if (insProvaNome == false && insProvaLocal == false) {
+			ui->labelValidObrigatorioProvaNome->setStyleSheet("color:red");
+			ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:red");
+		}
+	}
 }
 
 void MainWindow::on_pushmodEquipa_3_clicked()
@@ -553,7 +574,7 @@ void MainWindow::on_pusheliEquipas_clicked()
 	string nome = ui->eliEquipasComboBox->currentText().toStdString();
 	bd.eliminarEquipa(bd.buscarIDEquipasNome(nome));
 	//bd.eliminarElementos(bd.buscarIDEquipasNome(nome));
-    
+
 }
 void MainWindow::on_pusheliProvas_clicked()
 {
@@ -572,7 +593,7 @@ void MainWindow::on_pusheliRobot_clicked()
 void MainWindow::on_pushmodProva_clicked() {
 
 	int idProva = bd.buscarIDProvasNome(ui->modProvaComboBox_2->currentText().toStdString());
-	
+
 
 	if ((ui->modProvaComboBox->currentText().toStdString()) == "Nome") {
 		QString nome = ui->modProvalineEdit->text();
@@ -583,15 +604,15 @@ void MainWindow::on_pushmodProva_clicked() {
 		QString local = ui->modProvalineEdit->text();
 		bd.updateLocal(local.toStdString(), idProva);
 	}
-	
+
 	if ((ui->modProvaComboBox->currentText().toStdString()) == "Robo") {
 		QString robo = ui->modComboBoxRobot->currentText();
-		int id= bd.updateRobo1(robo.toStdString());
-		bd.updateRobo2(id,idProva);
+		int id = bd.updateRobo1(robo.toStdString());
+		bd.updateRobo2(id, idProva);
 	}
 
 	if ((ui->modProvaComboBox->currentText().toStdString()) == "Data") {
-		
+
 
 		QString ano = ui->anoComboBox_2->currentText();
 		QString mes = ui->mesComboBox_2->currentText();
@@ -605,7 +626,7 @@ void MainWindow::on_pushmodProva_clicked() {
 void MainWindow::on_pushmodRobot_clicked() {
 
 	int idRobo = bd.buscarIDRoboNome(ui->modRobotComboBox->currentText().toStdString());
-	
+
 	if ((ui->modRoboComboBox_2->currentText().toStdString()) == "Nome") {
 		QString nome1 = ui->modRobotlineEdit->text();
 		bd.updateNomeRobo(nome1.toStdString(), idRobo);
@@ -615,7 +636,7 @@ void MainWindow::on_pushmodRobot_clicked() {
 		int id = bd.buscarIDEquipasNome(robo.toStdString());
 		bd.updateEquipa2(id, idRobo);
 	}
-	
+
 }
 
 
@@ -658,7 +679,7 @@ void MainWindow::on_modProvaComboBox_currentIndexChanged(const QString &arg1)
 		ui->modProvalineEdit->setDisabled(false);
 		ui->modProvalineEdit->show();
 	}
-	
+
 }
 
 void MainWindow::on_modRoboComboBox_2_currentIndexChanged(const QString &arg1)
@@ -677,3 +698,72 @@ void MainWindow::on_modRoboComboBox_2_currentIndexChanged(const QString &arg1)
 		ui->modRobotlineEdit->show();
 	}
 }
+
+void MainWindow::on_insNomeLineE_textChanged()
+{
+	string insert = ui->insNomeLineE->text().toStdString();
+	QString Qinsert = ui->insNomeLineE->text();
+	int count = Qinsert.count(' ');
+	int length = Qinsert.length();
+	if (insert == "" || count == length) {
+		ui->labelValidObrigatorioEquipa->show();
+		insEquipa = false;
+		ui->labelValidObrigatorioEquipa->setStyleSheet("color:black");
+	}
+	else {
+		ui->labelValidObrigatorioEquipa->hide();
+		insEquipa = true;
+	}
+}
+
+void MainWindow::on_insNomeProvaLineE_textChanged()
+{
+	string insert = ui->insNomeProvaLineE->text().toStdString();
+	QString Qinsert = ui->insNomeProvaLineE->text();
+	int count = Qinsert.count(' ');
+	int length = Qinsert.length();
+	if (insert == "" || count == length) {
+		ui->labelValidObrigatorioProvaNome->show();
+		insProvaNome = false;
+		ui->labelValidObrigatorioProvaNome->setStyleSheet("color:black");
+	}
+	else {
+		ui->labelValidObrigatorioProvaNome->hide();
+		insProvaNome = true;
+	}
+}
+
+void MainWindow::on_insLocalLineE_textChanged()
+{
+	string insert = ui->insLocalLineE->text().toStdString();
+	QString Qinsert = ui->insLocalLineE->text();
+	int count = Qinsert.count(' ');
+	int length = Qinsert.length();
+	if (insert == "" || count == length) {
+		ui->labelValidObrigatorioProvaLocal->show();
+		insProvaNome = false;
+		ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:black");
+	}
+	else {
+		ui->labelValidObrigatorioProvaLocal->hide();
+		insProvaNome = true;
+	}
+}
+
+void MainWindow::on_insNomeRobotLineE_textChanged()
+{
+	string insert = ui->insNomeRobotLineE->text().toStdString();
+	QString Qinsert = ui->insNomeRobotLineE->text();
+	int count = Qinsert.count(' ');
+	int length = Qinsert.length();
+	if (insert == "" || count == length) {
+		ui->labelValidObrigatorioRobot->show();
+		insRobot = false;
+		ui->labelValidObrigatorioRobot->setStyleSheet("color:black");
+	}
+	else {
+		ui->labelValidObrigatorioRobot->hide();
+		insRobot = true;
+	}
+}
+
