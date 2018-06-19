@@ -7,6 +7,7 @@ Servo servo;  //Objeto de controlo do servo
 SoftwareSerial Bluetooth(BT_RX, BT_TX); //Definição do Bluetooth
 
 int estado = 0; //Estado do robot
+int desativa_robot = 0; //mantem o robot desativado
 int btnStart = 0, btnStop = 0; //Valor dos botões de Start e Stop
 int distF = 0, distD = 0, distE = 0, chama = 0; //Valores de Input
 int velA = 0, velB = 0, dirA = 0, dirB = 0, velProp = 0, dalayRobot = 0; //Valores de output
@@ -82,8 +83,10 @@ void loop() {
   //Lê o sensor de chama;
   chama = analogRead(CHAMA_PIN);
 
-  //Define o estado
-  if (chama >= CHAMA_PARAM){ estado = 5;}
+  if(desativa_robot == 0){
+    estado = 0;
+    
+  } else if (chama >= CHAMA_PARAM){ estado = 5;}
   else if(distF > SONAR_DIST_MIN){ estado = 1;}
   else if (distF <= SONAR_DIST_MIN || distD <= SONAR_DIST_MIN || distE <= SONAR_DIST_MIN){estado = 2;}
   else if ( (distD > distE*1.10 || distD >= SONAR_ROOM) && distF <= SONAR_ROOM_FRENTE){estado = 3;}
@@ -94,6 +97,7 @@ void loop() {
     case 0: //Desativado
       if(btnStart == HIGH){
         estado = 1;
+        desativa_robot = 1;
       } else {
         roboPara(delayS);
         estado = 0;
@@ -149,7 +153,7 @@ void loop() {
   Bluetooth.println("" + (String)estado + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
 
   Serial.println("Estato\tFrente\t Esquerda\tDireita");  
-  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
+  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) digitalRead(BOTAO_START));
 
   //Aplica o delay
   delay(dalayRobot);
