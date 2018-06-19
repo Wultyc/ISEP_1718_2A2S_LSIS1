@@ -190,6 +190,7 @@ void loop() {
 
   //Envia a informação
   //Serial.println(estado);
+  //Bluetooth.println(estado);
   Serial.println("Estato\tFrente\tEsq\tDir\tServo\tAngulo");
   Serial.println(estados[estado] + "\t" + (String)getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) + "\t" + (String)getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA) + "\t" + (String)getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA) + "\t" + (String) servo_enabled +  "\t" + (String) angle_servo);
 
