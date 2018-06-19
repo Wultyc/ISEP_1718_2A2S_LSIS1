@@ -17,6 +17,10 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     bd bd;
+	bool insProvaNome = false;
+	bool insProvaLocal = false;
+	bool insEquipa = false;
+	bool insRobot = false;
 
 private slots:
 
@@ -72,6 +76,13 @@ private slots:
 
     void on_modRoboComboBox_2_currentIndexChanged(const QString &arg1);
 
+    void on_insNomeLineE_textChanged();
+
+	void on_insNomeProvaLineE_textChanged();
+
+	void on_insLocalLineE_textChanged();
+
+	void on_insNomeRobotLineE_textChanged();
 private:
     Ui::MainWindow *ui;
 };
