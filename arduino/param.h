@@ -27,6 +27,8 @@
 
 //Propeller
 #define VENTOINHA_INA 6
+#define VENTOINHA_MAX 0
+#define VENTOINHA_MIN 255
 
 //Servomotor
 #define SERVO_PIN 10

@@ -51,7 +51,7 @@ void setup() {
   pinMode(SONAR_ECHO_ESQUERDA, INPUT);
   
   pinMode(VENTOINHA_INA, OUTPUT);
-  analogWrite(VENTOINHA_INA, LOW);
+  analogWrite(VENTOINHA_INA, VENTOINHA_MIN);
   
   pinMode(SERVO_PIN, OUTPUT);
   
@@ -108,33 +108,33 @@ void loop() {
     case 1: //Andar em Frente
       roboPara(delayS);
       frente(delayP);
-      velProp = 0; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
+      velProp = VENTOINHA_MIN; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
       servo_enabled = 1;
       break;
     case 2: //Andar para tras
       roboPara(delayS);
       direita(delayP*2); //Roda 2x 90º
       frente(delayP);
-      velProp = 0; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
+      velProp = VENTOINHA_MIN; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
       servo_enabled = 1;
       break;
     case 3: //Rodar à direita
       roboPara(delayS);
       direita(delayP);
       frente(delayP);
-      velProp = 0; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
+      velProp = VENTOINHA_MIN; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
       servo_enabled = 1;
       break;
     case 4: //Rodar à equerda
       roboPara(delayS);
       esquerda(delayP);
       frente(delayP);
-      velProp = 0; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
+      velProp = VENTOINHA_MIN; velProp = 255; analogWrite(VENTOINHA_INA, velProp);
       servo_enabled = 1;
       break;
     case 5: //Apagar a chama
       roboPara(0);
-      velProp = 255; analogWrite(VENTOINHA_INA, velProp);
+      velProp = VENTOINHA_MAX; analogWrite(VENTOINHA_INA, velProp);
       servo_enabled = 1;
       break;
   }    
