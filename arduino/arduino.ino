@@ -151,10 +151,20 @@ void loop() {
     for (angle_servo = SERVO_MIN_ANGLE; angle_servo <= SERVO_MAX_ANGLE; angle_servo ++) {
       servo.write(angle_servo); //Roda o servo
       delay(20);
+
+      if(analogRead(CHAMA_PIN) >= CHAMA_PARAM){
+        apagarChama(angle_servo);
+      }
+      
     }
     for (angle_servo = SERVO_MAX_ANGLE; angle_servo >= SERVO_MIN_ANGLE; angle_servo --) {
       servo.write(angle_servo); //Roda o servo
       delay(20);
+
+      if(analogRead(CHAMA_PIN) >= CHAMA_PARAM){
+        apagarChama(angle_servo);
+      }
+      
     }
 
   }
@@ -253,6 +263,6 @@ void roda180(int motorSpeed) {
   analogWrite(MOTOR_B_PWM, motorSpeed);
 }
 
-void apagarChama() {
+void apagarChama(int angle) {
 
 }
