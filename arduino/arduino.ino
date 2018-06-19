@@ -31,16 +31,21 @@ void setup() {
   pinMode(MOTOR_B_PWM, OUTPUT);
   pinMode(MOTOR_A_CS, OUTPUT);
   pinMode(MOTOR_B_CS, OUTPUT);
+  
   pinMode(SONAR_TRIG_FRENTE, OUTPUT);
   pinMode(SONAR_TRIG_DIREITA, OUTPUT);
   pinMode(SONAR_TRIG_ESQUERDA, OUTPUT);
   pinMode(SONAR_ECHO_FRENTE, INPUT);
   pinMode(SONAR_ECHO_DIREITA, INPUT);
   pinMode(SONAR_ECHO_ESQUERDA, INPUT);
-  pinMode(VENTOINHA_INA, OUTPUT);
+  
+  //pinMode(VENTOINHA_INA, OUTPUT);
+  
   pinMode(SERVO_PIN, OUTPUT);
+  
   pinMode(CHAMA_PIN, INPUT);
   pinMode(CHAMA_LED, OUTPUT);
+  
   pinMode(BOTAO_START, INPUT);
   pinMode(BOTAO_STOP, INPUT);
 
@@ -133,8 +138,8 @@ void loop() {
   //Roda o Servo
   if(servo_enabled == 1){
     //Evita rotações não possiveis
-    incrm_servo = (angle_servo == SERVO_MAX_ANGLE) ? -1 : incrm_servo;
-    incrm_servo = (angle_servo == SERVO_MIN_ANGLE) ? 1 : incrm_servo;
+    incrm_servo = (angle_servo == SERVO_MAX_ANGLE) ? -10 : incrm_servo;
+    incrm_servo = (angle_servo == SERVO_MIN_ANGLE) ? 10 : incrm_servo;
 
     angle_servo += incrm_servo; //Define o angulo
     servo.write(angle_servo); //Roda o servo
