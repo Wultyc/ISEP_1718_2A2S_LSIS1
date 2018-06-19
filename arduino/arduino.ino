@@ -18,7 +18,7 @@ int servo_enabled = 0; //Define se o servo roda ou não
 
 int velP = 128; int delayP = 100; int delayS = 1250; 
 
-String estados[7] = {"Desativado","Fente","Tras","Direita","Esquerda","Apagar Chama"};
+String estados[7] = {"Desat","Fente","Tras","Direita","Esquerda","Chama"};
 
 void setup() {
   //Inicializa a comunicação Serial via Bluetooth
@@ -148,6 +148,11 @@ void loop() {
 
     for(angle_servo = SERVO_MIN_ANGLE; angle_servo <= SERVO_MAX_ANGLE; angle_servo ++){
       servo.write(angle_servo); //Roda o servo
+      delay(20);
+    }
+    for(angle_servo = SERVO_MAX_ANGLE; angle_servo <= SERVO_MIN_ANGLE; angle_servo ++){
+      servo.write(angle_servo); //Roda o servo
+      delay(20);
     }
 
   }
@@ -157,8 +162,8 @@ void loop() {
   Bluetooth.println("Estato\tFrente\t Esquerda\tDireita");  
   Bluetooth.println("" + (String)estado + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
 
-  Serial.println("Estato\tFrente\t Esquerda\tDireita\tAtivar Servo\tAngulo servo");  
-  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) servo_enabled + (String) angle_servo);
+  Serial.println("Estato\tFrente\tEsq\tDireita\tServo\tAngulo");  
+  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) servo_enabled +  "\t" + (String) angle_servo);
 }
 
 int getDistance(int trig, int echo){
