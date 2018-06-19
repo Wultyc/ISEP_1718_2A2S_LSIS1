@@ -142,6 +142,8 @@ void loop() {
         }
         estado = 1;
         break;
+      default:
+        estado = 1;
     }
   }
 
@@ -152,19 +154,19 @@ void loop() {
       servo.write(angle_servo); //Roda o servo
       delay(20);
 
-      if(analogRead(CHAMA_PIN) >= CHAMA_PARAM){
+      if (analogRead(CHAMA_PIN) >= CHAMA_PARAM) {
         apagarChama(angle_servo);
       }
-      
+
     }
     for (angle_servo = SERVO_MAX_ANGLE; angle_servo >= SERVO_MIN_ANGLE; angle_servo --) {
       servo.write(angle_servo); //Roda o servo
       delay(20);
 
-      if(analogRead(CHAMA_PIN) >= CHAMA_PARAM){
+      if (analogRead(CHAMA_PIN) >= CHAMA_PARAM) {
         apagarChama(angle_servo);
       }
-      
+
     }
 
   }
