@@ -18,7 +18,7 @@ int servo_enabled = 0; //Define se o servo roda ou não
 
 int velP = 128; int delayP = 100; int delayS = 1250; 
 
-String estados[7] = {"Desativado","Parado","Fente","Tras","Direita","Esquerda","Apagar Chama"};
+String estados[7] = {"Desativado","Fente","Tras","Direita","Esquerda","Apagar Chama"};
 
 void setup() {
   //Inicializa a comunicação Serial via Bluetooth
@@ -152,8 +152,8 @@ void loop() {
   Bluetooth.println("Estato\tFrente\t Esquerda\tDireita");  
   Bluetooth.println("" + (String)estado + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
 
-  Serial.println("Estato\tFrente\t Esquerda\tDireita");  
-  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) digitalRead(BOTAO_START));
+  Serial.println("Estato\tFrente\t Esquerda\tDireita\tAngulo servo");  
+  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) angle_servo);
 
   //Aplica o delay
   delay(dalayRobot);
