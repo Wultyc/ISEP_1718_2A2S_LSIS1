@@ -24,13 +24,23 @@ void setup() {
   Bluetooth.begin(9600);
   Serial.begin(9600);
 
-  //PinModes
+  //Output inicial
+  velA = 0; velB = 0;
+  dirA = 0; dirB = 0;
+  velProp = 0; dalayRobot = 0;
+  servo_enabled = 0;
+
+  //PinModes e valor padrão
+  pinMode(MOTOR_A_CS, OUTPUT);
+  pinMode(MOTOR_B_CS, OUTPUT);
   pinMode(MOTOR_A_DIR, OUTPUT);
   pinMode(MOTOR_B_DIR, OUTPUT);
   pinMode(MOTOR_A_PWM, OUTPUT);
   pinMode(MOTOR_B_PWM, OUTPUT);
-  pinMode(MOTOR_A_CS, OUTPUT);
-  pinMode(MOTOR_B_CS, OUTPUT);
+  analogWrite(MOTOR_A_PWM, 0);
+  analogWrite(MOTOR_B_PWM, 0);
+  digitalWrite(MOTOR_A_DIR, HIGH);
+  digitalWrite(MOTOR_B_DIR, HIGH);
   
   pinMode(SONAR_TRIG_FRENTE, OUTPUT);
   pinMode(SONAR_TRIG_DIREITA, OUTPUT);
@@ -40,6 +50,7 @@ void setup() {
   pinMode(SONAR_ECHO_ESQUERDA, INPUT);
   
   pinMode(VENTOINHA_INA, OUTPUT);
+  analogWrite(VENTOINHA_INA, LOW);
   
   pinMode(SERVO_PIN, OUTPUT);
   
@@ -55,19 +66,6 @@ void setup() {
   servo.attach(SERVO_PIN);
   angle_servo = 90;
   servo.write(angle_servo);
-
-  //Output inicial
-  velA = 0; velB = 0;
-  dirA = 0; dirB = 0;
-  velProp = 0; dalayRobot = 0;
-  servo_enabled = 0;
-
-  //Desliga o propeller
-  analogWrite(MOTOR_A_PWM, 0);
-  analogWrite(MOTOR_B_PWM, 0);
-  digitalWrite(MOTOR_A_DIR, HIGH);
-  digitalWrite(MOTOR_B_DIR, HIGH);
-  analogWrite(VENTOINHA_INA, LOW);
 
 }
 
