@@ -767,3 +767,8 @@ void MainWindow::on_insNomeRobotLineE_textChanged()
 	}
 }
 
+
+void MainWindow::on_iniciarProvaAction_triggered()
+{
+	ui->stackedWidget->setCurrentWidget(ui->ModoProva);
+}

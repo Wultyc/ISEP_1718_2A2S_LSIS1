@@ -48,6 +48,8 @@ private slots:
 
     void on_eliminarRobotAction_triggered();
 
+	void on_iniciarProvaAction_triggered();
+
     void on_pushInserirEquipa_clicked();
 
     void on_mensagemInicialAction_triggered();
