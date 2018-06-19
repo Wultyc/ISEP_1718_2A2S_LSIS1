@@ -39,7 +39,7 @@ void setup() {
   pinMode(SONAR_ECHO_DIREITA, INPUT);
   pinMode(SONAR_ECHO_ESQUERDA, INPUT);
   
-  //pinMode(VENTOINHA_INA, OUTPUT);
+  pinMode(VENTOINHA_INA, OUTPUT);
   
   pinMode(SERVO_PIN, OUTPUT);
   
@@ -146,8 +146,12 @@ void loop() {
   }
 
   //Envia a informação
-  Bluetooth.println(estado);
-  Serial.println(estados[estado]);
+  //Bluetooth.println(estado);
+  Bluetooth.println("Estato\tFrente\t Esquerda\tDireita");  
+  Bluetooth.println("" + (String)estado + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
+
+  Serial.println("Estato\tFrente\t Esquerda\tDireita");  
+  Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
 
   //Aplica o delay
   delay(dalayRobot);
@@ -173,57 +177,49 @@ void roboPara(int duracao){
   analogWrite(MOTOR_A_PWM, 0);
   //Motor B
   analogWrite(MOTOR_B_PWM, 0);
-  
+  //delay
   delay(duracao);
 }
 void frente(int duracao) {
-
   //Motor A
   digitalWrite(MOTOR_A_DIR, HIGH);
   analogWrite(MOTOR_A_PWM, velP);
-
   //Motor B
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(MOTOR_B_PWM, velP);
-
+  //delay
   delay(duracao);
 }
 
 void tras(int duracao) {
-  
   //Motor A
   digitalWrite(MOTOR_A_DIR, LOW);
   analogWrite(MOTOR_A_PWM, velP);
-
   //Motor B
   digitalWrite(MOTOR_B_DIR, LOW);
   analogWrite(MOTOR_B_PWM, velP);
-
+  //delay
   delay(duracao);
 }
 
 void esquerda(int duracao) {
-
   //Motor A
   digitalWrite(MOTOR_A_DIR, HIGH);
   analogWrite(MOTOR_A_PWM, velP);
-
   //Motor B
   digitalWrite(MOTOR_B_DIR, LOW);
   analogWrite(MOTOR_B_PWM, velP);
-
+  //delay
   delay(duracao);
 }
 
 void direita(int duracao) {
-
   //Motor A
   digitalWrite(MOTOR_A_DIR, LOW);
   analogWrite(MOTOR_A_PWM, velP);
-
   //Motor B
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(MOTOR_B_PWM, velP);
-
+  //delay
   delay(duracao);
 }
