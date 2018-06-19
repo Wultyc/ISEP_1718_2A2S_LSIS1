@@ -20,10 +20,22 @@ int velP = 128; int delayP = 100; int delayS = 1250;
 
 String estados[7] = {"Desat","Fente","Tras","Direita","Esquerda","Chama"};
 
+void desativa(){
+  analogWrite(MOTOR_A_PWM, 0);
+  analogWrite(MOTOR_B_PWM, 0);
+  digitalWrite(MOTOR_A_DIR, HIGH);
+  digitalWrite(MOTOR_B_DIR, HIGH);
+  analogWrite(VENTOINHA_INA, VENTOINHA_MIN);
+  servo.write(90);
+}
+
 void setup() {
   //Inicializa a comunicação Serial via Bluetooth
-  Bluetooth.begin(9600);
+  Bluetooth.begin(38400);
   Serial.begin(9600);
+
+  //Função de interrupção
+  attachInterrupt(digitalPinToInterrupt(2), desativa, RISING);
 
   //Output inicial
   velA = 0; velB = 0;
@@ -150,7 +162,7 @@ void loop() {
       servo.write(angle_servo); //Roda o servo
       delay(20);
     }
-    for(angle_servo = SERVO_MAX_ANGLE; angle_servo <= SERVO_MIN_ANGLE; angle_servo ++){
+    for(angle_servo = SERVO_MAX_ANGLE; angle_servo >= SERVO_MIN_ANGLE; angle_servo --){
       servo.write(angle_servo); //Roda o servo
       delay(20);
     }
@@ -162,7 +174,7 @@ void loop() {
   Bluetooth.println("Estato\tFrente\t Esquerda\tDireita");  
   Bluetooth.println("" + (String)estado + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t");
 
-  Serial.println("Estato\tFrente\tEsq\tDireita\tServo\tAngulo");  
+  Serial.println("Estato\tFrente\tEsq\tDir\tServo\tAngulo");  
   Serial.println(estados[estado] + "\t" + (String)distF + "\t" + (String)distE + "\t" + (String)distD + "\t" + (String) servo_enabled +  "\t" + (String) angle_servo);
 }
 
