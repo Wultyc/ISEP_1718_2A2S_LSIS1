@@ -287,16 +287,25 @@ void roda180(int motorSpeed) {
 }
 
 void apagarChama(int angle) {
+
+  //Avisa que detetou o a chama
+  for(int i = 0; i < 3; i++){
+    digitalWrite(CHAMA_LED, HIGH);
+    delay(500);
+    digitalWrite(CHAMA_LED, LOW);
+    delay(500);
+  }
+  
   Serial.println("CHAMA");
   int dirA, dirB;
   
   //Define para onde se roda
-  if(angle>= 80 || angle <= 100){
+  if(angle>= 85 || angle <= 95){
     dirA = dirB = HIGH;
-  } else if(angle > 100){
+  } else if(angle > 95){
     dirA = HIGH;
     dirB = LOW;
-  } else if(angle < 80){
+  } else if(angle < 85){
     dirA = LOW;
     dirB = HIGH;
   }
