@@ -323,6 +323,7 @@ void apagarChama(int angle) {
 
   delay(delayS);
   }
+  roboPara(0);
 
   while(getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN){ // Vai ate à chama
     frente(velP, delayS);
