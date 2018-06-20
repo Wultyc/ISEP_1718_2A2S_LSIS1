@@ -13,8 +13,9 @@ int chama = 0; //Valores do sensor de chama
 int velA = 0, velB = 0, dirA = 0, dirB = 0, velProp = 0, dalayRobot = 0; //Valores de output
 int angle_chama = 0;  //Angulo da chama em relação ao robot
 int angle_servo = 0;  //Angulo atual do Servo
-int incrm_servo = 1;  //Incremento do anglulo do servo
 int servo_enabled = 0; //Define se o servo roda ou não
+int incrm_servo = 1;  //Incremento do anglulo do servo
+int servo_return = 0; //Define o sentido de rotação (1: sentido positivo | -1: sentido negativo)
 
 int velP = 128; int delayP = 1250; int delayS = 100;
 
@@ -167,7 +168,7 @@ void loop() {
   //Roda o Servo
   if (servo_enabled == 1) {
 
-    for (angle_servo = SERVO_MIN_ANGLE; angle_servo <= SERVO_MAX_ANGLE; angle_servo ++) {
+    /*for (angle_servo = SERVO_MIN_ANGLE; angle_servo <= SERVO_MAX_ANGLE; angle_servo ++) {
       servo.write(angle_servo); //Roda o servo
       delay(20);
 
@@ -184,7 +185,26 @@ void loop() {
         apagarChama(angle_servo);
       }
 
-    }
+    }*/
+
+    servo_return = 1;
+    angle_servo = SERVO_MIN_ANGLE;
+    
+    do{
+      
+      servo.write(angle_servo); //Roda o servo
+
+      if (analogRead(CHAMA_PIN) >= CHAMA_PARAM) {
+        apagarChama(angle_servo);
+      }
+
+      delay(SERVO_DELAY);
+
+      servo_return = (angle_servo == SERVO_MAX_ANGLE) ? -1 : servo_return; //Inverte o sentido de rotação quando chegar-mos ao angulo máximo
+
+      servo_return += SERVO_INCREMENTO * servo_return; //Muda o angulo do servo para a próxima rotação
+      
+    }while (angle_servo <= SERVO_MIN_ANGLE;);
 
   }
 

@@ -32,9 +32,10 @@
 
 //Servomotor
 #define SERVO_PIN 10
-#define SERVO_DELAY 25
+#define SERVO_DELAY 10
 #define SERVO_MAX_ANGLE 180
 #define SERVO_MIN_ANGLE 0
+#define SERVO_INCREMENTO 1
 
 //Sensor de Chama
 #define CHAMA_PIN A5
