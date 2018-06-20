@@ -306,16 +306,19 @@ void apagarChama(int angle) {
   while(analogRead(CHAMA_PIN) <= CHAMA_PARAM){ //Roda ate detetar a chama
     //Motor A
   digitalWrite(MOTOR_A_DIR, dirA);
-  analogWrite(MOTOR_A_PWM, velP/2);
+  analogWrite(MOTOR_A_PWM, velP);
 
   //Motor B
   digitalWrite(MOTOR_B_DIR, dirB);
-  analogWrite(MOTOR_B_PWM, velP/2);
+  analogWrite(MOTOR_B_PWM, velP);
+
+  delay(delayS);
   }
 
   while(getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN){ // Vai ate à chama
     frente(velP, delayS);
   }
+  roboPara(0);
 
   while(analogRead(CHAMA_PIN) >= CHAMA_PARAM){ //Enquanto há chama mantem o propeller a trabalhar
     analogWrite(VENTOINHA_INA, VENTOINHA_MAX);
