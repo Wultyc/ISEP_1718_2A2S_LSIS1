@@ -1,7 +1,7 @@
 #include <Servo.h>
 
 Servo servo;
-int angle = 0;
+int angle = 90;
 int v = 25;
 
 void setup() {
@@ -13,7 +13,7 @@ void setup() {
 
 void loop() { 
  // scan from 0 to 180 degrees
-  for(angle = 0; angle <= 180; angle++){                                  
+  /*for(angle = 0; angle <= 180; angle++){                                  
     servo.write(angle);  
     Serial.print(angle); 
     Serial.print("\n");            
@@ -27,6 +27,6 @@ void loop() {
     Serial.print("\n");         
     delay(v);       
   } 
-  delay(1000);  
-  //servo.write(90);
+  delay(1000);
+  */servo.write(90);
 } 

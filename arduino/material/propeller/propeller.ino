@@ -9,7 +9,7 @@ void loop() {
   // put your main code here, to run repeatedly:
   digitalWrite(6, HIGH);
   Serial.println("Liga");
-  delay(2000);
+  delay(5000);
   digitalWrite(6, LOW);
   Serial.println("Desliga");
   delay(2000);

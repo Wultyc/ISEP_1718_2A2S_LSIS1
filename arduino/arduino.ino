@@ -89,8 +89,6 @@ void setup() {
   servo.attach(SERVO_PIN);
   angle_servo = 90;
   servo.write(angle_servo);
-
-  Serial.println("Fim Setup");
 }
 
 void loop() {
@@ -168,33 +166,15 @@ void loop() {
   //Roda o Servo
   if (servo_enabled == 1) {
 
-    /*for (angle_servo = SERVO_MIN_ANGLE; angle_servo <= SERVO_MAX_ANGLE; angle_servo ++) {
-      servo.write(angle_servo); //Roda o servo
-      delay(20);
-
-      if (analogRead(CHAMA_PIN) >= CHAMA_PARAM) {
-        apagarChama(angle_servo);
-      }
-
-    }
-    for (angle_servo = SERVO_MAX_ANGLE; angle_servo >= SERVO_MIN_ANGLE; angle_servo --) {
-      servo.write(angle_servo); //Roda o servo
-      delay(20);
-
-      if (analogRead(CHAMA_PIN) >= CHAMA_PARAM) {
-        apagarChama(angle_servo);
-      }
-
-    }*/
-
     servo_return = 1;
     angle_servo = SERVO_MIN_ANGLE;
     
     do{
       
       servo.write(angle_servo); //Roda o servo
-
-      if (analogRead(CHAMA_PIN) >= CHAMA_PARAM) {
+      chama = analogRead(CHAMA_PIN);
+      
+      if (chama >= CHAMA_PARAM) {
         apagarChama(angle_servo);
       }
 
@@ -202,9 +182,9 @@ void loop() {
 
       servo_return = (angle_servo == SERVO_MAX_ANGLE) ? -1 : servo_return; //Inverte o sentido de rotação quando chegar-mos ao angulo máximo
 
-      servo_return += SERVO_INCREMENTO * servo_return; //Muda o angulo do servo para a próxima rotação
+      angle_servo += SERVO_INCREMENTO * servo_return; //Muda o angulo do servo para a próxima rotação
       
-    }while (angle_servo <= SERVO_MIN_ANGLE;);
+    }while (angle_servo >= SERVO_MIN_ANGLE);
 
   }
 
@@ -307,5 +287,39 @@ void roda180(int motorSpeed) {
 }
 
 void apagarChama(int angle) {
+  Serial.println("CHAMA");
+  int dirA, dirB;
+  
+  //Define para onde se roda
+  if(angle>= 80 || angle <= 100){
+    dirA = dirB = HIGH;
+  } else if(angle > 100){
+    dirA = HIGH;
+    dirB = LOW;
+  } else if(angle < 80){
+    dirA = LOW;
+    dirB = HIGH;
+  }
+  
+  servo.write(90); //Roda o servo
 
+  while(analogRead(CHAMA_PIN) <= CHAMA_PARAM){ //Roda ate detetar a chama
+    //Motor A
+  digitalWrite(MOTOR_A_DIR, dirA);
+  analogWrite(MOTOR_A_PWM, velP/2);
+
+  //Motor B
+  digitalWrite(MOTOR_B_DIR, dirB);
+  analogWrite(MOTOR_B_PWM, velP/2);
+  }
+
+  while(andaFrente > SONAR_DIST_MIN){ // Vai ate à chama
+    frente(velP, delayS);
+  }
+
+  while(analogRead(CHAMA_PIN) >= CHAMA_PARAM){ //Enquanto há chama mantem o propeller a trabalhar
+    analogWrite(VENTOINHA_INA, VENTOINHA_MAX);
+  }
+  
+  analogWrite(VENTOINHA_INA, VENTOINHA_MIN); //desliga o propeller
 }
