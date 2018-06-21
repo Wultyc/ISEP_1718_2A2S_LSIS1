@@ -85,6 +85,9 @@ private slots:
 	void on_insLocalLineE_textChanged();
 
 	void on_insNomeRobotLineE_textChanged();
+
+	void on_DadosRegistadosAction_triggered();
+
 private:
     Ui::MainWindow *ui;
 };

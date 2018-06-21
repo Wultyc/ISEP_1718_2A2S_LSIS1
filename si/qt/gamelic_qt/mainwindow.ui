@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>13</number>
+       <number>14</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
@@ -1908,23 +1908,40 @@
          <string>Iniciar</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="DadosRegistados">
+      </widget>
+      <widget class="QWidget" name="DadosRegistados">
+       <widget class="QComboBox" name="ProvaStateComboBox">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>90</y>
-          <width>131</width>
-          <height>30</height>
+          <x>470</x>
+          <y>390</y>
+          <width>69</width>
+          <height>22</height>
          </rect>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-         </font>
+       </widget>
+       <widget class="QTableWidget" name="tabelaListarStates">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>20</y>
+          <width>621</width>
+          <height>351</height>
+         </rect>
         </property>
-        <property name="text">
-         <string>Dados Registados</string>
-        </property>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>295</number>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Robo</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>State</string>
+         </property>
+        </column>
        </widget>
       </widget>
      </widget>
@@ -2005,6 +2022,9 @@
      <string>Modo de Prova</string>
     </property>
     <addaction name="iniciarProvaAction"/>
+    <addaction name="separator"/>
+    <addaction name="DadosRegistadosAction"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuWelcome">
     <property name="title">
@@ -2143,6 +2163,11 @@
   <action name="iniciarProvaAction">
    <property name="text">
     <string>Iniciar</string>
+   </property>
+  </action>
+  <action name="DadosRegistadosAction">
+   <property name="text">
+    <string>Dados Registados</string>
    </property>
   </action>
  </widget>

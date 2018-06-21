@@ -779,3 +779,14 @@ void MainWindow::on_iniciarProvaAction_triggered()
 
 	}
 }
+void MainWindow::on_DadosRegistadosAction_triggered()
+{
+    ui->stackedWidget->setCurrentWidget(ui->DadosRegistados);
+
+	ui->ProvaStateComboBox->clear();
+	vector<string> provas = bd.listarProvas();
+	for (int i = 0; i < provas.size(); i++) {
+		ui->ProvaStateComboBox->insertItem(i, QString::fromStdString(provas[i]));
+
+	}
+}
