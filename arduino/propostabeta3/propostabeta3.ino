@@ -295,7 +295,6 @@ void apagarChama(int angle) {
   int dirA, dirB;
   
   enviarEstado(5); //Enviar o estado
-
   //Avisa que detetou o a chama
   for (int i = 0; i < 3; i++) {
     digitalWrite(CHAMA_LED, HIGH);
@@ -328,6 +327,7 @@ void apagarChama(int angle) {
   while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN * 1.20); // Vai ate à chama
   roboPara(0);
 
+  enviarEstado(6); //Enviar o estado
   while (analogRead(CHAMA_PIN) >= chama_param) { //Enquanto há chama mantem o propeller a trabalhar
     analogWrite(VENTOINHA_INA, VENTOINHA_MAX);
     delay(CHAMA_DELAY);
