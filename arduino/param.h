@@ -21,9 +21,9 @@
 #define SONAR_ECHO_FRENTE A2
 #define SONAR_ECHO_DIREITA A3
 #define SONAR_ECHO_ESQUERDA A4
-#define SONAR_DIST_MIN 15 //distancia minima do robot à parede em cm
+#define SONAR_DIST_MIN 20 //distancia minima do robot à parede em cm
 #define SONAR_ROOM 60     //distancia que o robot considera um quarto em cm
-#define SONAR_ROOM_FRENTE 20     //distancia máxima para que o robot entre no quarto em vez de seguir em frente
+#define SONAR_ROOM_FRENTE 25     //distancia máxima para que o robot entre no quarto em vez de seguir em frente
 
 //Propeller
 #define VENTOINHA_INA 6
@@ -35,7 +35,7 @@
 #define SERVO_DELAY 10
 #define SERVO_MAX_ANGLE 180
 #define SERVO_MIN_ANGLE 0
-#define SERVO_INCREMENTO 1
+#define SERVO_INCREMENTO 2
 
 //Sensor de Chama
 #define CHAMA_PIN A5
