@@ -10,6 +10,7 @@ int estado = 0; //Estado do robot
 int desativa_robot = 0; //mantem o robot desativado
 int btnStart = 0, btnStop = 0; //Valor dos botões de Start e Stop
 int chama = 0; //Valores do sensor de chama
+int chama_param = 0;
 int velA = 0, velB = 0, dirA = 0, dirB = 0, velProp = 0, dalayRobot = 0; //Valores de output
 int angle_chama = 0;  //Angulo da chama em relação ao robot
 int angle_servo = 0;  //Angulo atual do Servo
@@ -89,6 +90,9 @@ void setup() {
   servo.attach(SERVO_PIN);
   angle_servo = 90;
   servo.write(angle_servo);
+
+  chama_param = analogRead(CHAMA_PIN) * CHAMA_RAZAO;
+  Serial.println(chama_param);
 }
 
 void loop() {
@@ -168,13 +172,13 @@ void loop() {
 
     servo_return = 1;
     angle_servo = SERVO_MIN_ANGLE;
-    
-    do{
-      
+
+    do {
+
       servo.write(angle_servo); //Roda o servo
       chama = analogRead(CHAMA_PIN);
-      
-      if (chama >= CHAMA_PARAM) {
+
+      if (chama >= chama_param) {
         apagarChama(angle_servo);
       }
 
@@ -183,8 +187,8 @@ void loop() {
       servo_return = (angle_servo == SERVO_MAX_ANGLE) ? -1 : servo_return; //Inverte o sentido de rotação quando chegar-mos ao angulo máximo
 
       angle_servo += SERVO_INCREMENTO * servo_return; //Muda o angulo do servo para a próxima rotação
-      
-    }while (angle_servo >= SERVO_MIN_ANGLE);
+
+    } while (angle_servo >= SERVO_MIN_ANGLE);
 
   }
 
@@ -289,51 +293,42 @@ void roda180(int motorSpeed) {
 void apagarChama(int angle) {
 
   //Avisa que detetou o a chama
-  for(int i = 0; i < 3; i++){
+  for (int i = 0; i < 3; i++) {
     digitalWrite(CHAMA_LED, HIGH);
     delay(500);
     digitalWrite(CHAMA_LED, LOW);
     delay(500);
   }
-  
+
   Serial.println("CHAMA");
   int dirA, dirB;
+
+  servo.write(90); //Roda o servo
   
   //Define para onde se roda
-  if(angle>= 85 || angle <= 95){
-    dirA = dirB = HIGH;
-  } else if(angle > 95){
-    dirA = HIGH;
-    dirB = LOW;
-  } else if(angle < 85){
-    dirA = LOW;
-    dirB = HIGH;
+  if (angle >= 85 || angle <= 95) {
+
+  } else if (angle > 95) {
+    while (analogRead(CHAMA_PIN) <= chama_param) { //Roda ate detetar a chama
+      esquerda(velP, delayS);
+    }
+  } else if (angle < 85) {
+    while (analogRead(CHAMA_PIN) <= chama_param) { //Roda ate detetar a chama
+      direita(velP/2, delayS/2);
+    }
   }
   
-  servo.write(90); //Roda o servo
-
-  while(analogRead(CHAMA_PIN) <= CHAMA_PARAM){ //Roda ate detetar a chama
-    //Motor A
-  digitalWrite(MOTOR_A_DIR, dirA);
-  analogWrite(MOTOR_A_PWM, velP);
-
-  //Motor B
-  digitalWrite(MOTOR_B_DIR, dirB);
-  analogWrite(MOTOR_B_PWM, velP);
-
-  delay(delayS);
-  }
   roboPara(0);
 
-  while(getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN){ // Vai ate à chama
+  while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN * 1.20) { // Vai ate à chama
     frente(velP, delayS);
   }
   roboPara(0);
 
-  while(analogRead(CHAMA_PIN) >= CHAMA_PARAM){ //Enquanto há chama mantem o propeller a trabalhar
+  while (analogRead(CHAMA_PIN) >= chama_param) { //Enquanto há chama mantem o propeller a trabalhar
     analogWrite(VENTOINHA_INA, VENTOINHA_MAX);
     delay(CHAMA_DELAY);
   }
-  
+
   analogWrite(VENTOINHA_INA, VENTOINHA_MIN); //desliga o propeller
 }

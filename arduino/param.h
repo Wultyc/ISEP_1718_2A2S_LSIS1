@@ -40,8 +40,8 @@
 //Sensor de Chama
 #define CHAMA_PIN A5
 #define CHAMA_LED 7
-#define CHAMA_PARAM 125
 #define CHAMA_DELAY 5000
+#define CHAMA_RAZAO 1.20
 
 //Bluetooth
 #define BT_RX 0
