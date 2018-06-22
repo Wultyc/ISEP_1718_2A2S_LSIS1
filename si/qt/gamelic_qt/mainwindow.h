@@ -6,6 +6,7 @@
 #include <QSerialPort>
 #include <QByteArray>
 #include "..\..\gamelicApplication\gamelicApplication\bd.h"
+#include <vector>
 
 using namespace std;
 
@@ -94,7 +95,31 @@ private slots:
 	void readSerial();
 
 	void estado(int num);
-    void on_InicarProva_clicked();
+    
+	void on_InicarProva_clicked();
+
+    void on_ProvaStateComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_modoProvaComboBox_currentIndexChanged(const QString &arg1);
+
+    void on_GuardarProva_clicked();
+    void on_Atras_clicked();
+
+    void on_Esquerda_clicked();
+
+    void on_Frente_clicked();
+
+    void on_Direita_clicked();
+
+    void on_LED_clicked();
+
+    void on_Ventoinha_clicked();
+
+    void on_representarProvaAction_triggered();
+
+    void on_modoProvaComboBox_Representar_currentIndexChanged(const QString &arg1);
+
+    void on_RepresentarProva_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -105,7 +130,7 @@ private:
 	QByteArray serialData;
 	QString serialBuffer;
 	QString parsed_data;
-	double temperature_value;
+	vector<string> vetorEstados;
 };
 
 #endif // MAINWINDOW_H

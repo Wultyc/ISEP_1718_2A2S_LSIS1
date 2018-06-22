@@ -5,8 +5,7 @@
 #include <QSerialPortInfo>
 #include <QDebug>
 #include <QMessageBox>
-
-	int num = 0;
+#include <windows.h>
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -73,27 +72,28 @@ void MainWindow::readSerial()
 	* The message can arrive split into parts.  Need to buffer the serial data and then parse for the temperature value.
 	*
 	*/
-	QStringList buffer_split = serialBuffer.split("\n"); //  split the serialBuffer string, parsing with ',' as the separator
-														//  Check to see if there less than 3 tokens in buffer_split.
-														//  If there are at least 3 then this means there were 2 commas,
-														//  means there is a parsed temperature value as the second token (between 2 commas)
-	if (buffer_split.length() < 2) {
-		// no parsed value yet so continue accumulating bytes from serial in the buffer.
-		serialData = arduino->readAll();
-		serialBuffer = serialBuffer + QString::fromStdString(serialData.toStdString());
-		serialData.clear();
-	}
-	else {
-		// the second element of buffer_split is parsed correctly, update the temperature value on temp_lcdNumber
-		serialBuffer = "";
-		qDebug() << buffer_split << "\n";
-		parsed_data = buffer_split[1];
-		
-		ui->labelLeitura->setText(parsed_data);
-		qDebug() << "Estado : " << parsed_data << "\n";
-		estado(parsed_data.toInt());
+	do {
+		QStringList buffer_split = serialBuffer.split("\n"); //  split the serialBuffer string, parsing with ',' as the separator
+															//  Check to see if there less than 3 tokens in buffer_split.
+															//  If there are at least 3 then this means there were 2 commas,
+															//  means there is a parsed temperature value as the second token (between 2 commas)
+		if (buffer_split.length() < 2) {
+			// no parsed value yet so continue accumulating bytes from serial in the buffer.
+			serialData = arduino->readAll();
+			serialBuffer = serialBuffer + QString::fromStdString(serialData.toStdString());
+			serialData.clear();
+		}
+		else {
+			// the second element of buffer_split is parsed correctly, update the temperature value on temp_lcdNumber
+			serialBuffer = "";
+			//qDebug() << buffer_split << "\n";
+			parsed_data = buffer_split[1];
 
-	}
+			qDebug() << "Estado : " << parsed_data << "\n";
+			estado(parsed_data.toInt());
+
+		}
+	} while (parsed_data.toInt() != 10);
 
 }
 void MainWindow::on_inserirEquipaAction_triggered()
@@ -575,7 +575,6 @@ void MainWindow::on_pushInserirRobot_clicked() {
 
 void MainWindow::on_pushInserirProva_clicked()
 {
-	ui->labelFixe->setText(QString::fromStdString(to_string(insProvaNome)));
 	if (insProvaLocal == true && insProvaNome == true) {
 		QString nomeQR = ui->insProvaCombo->currentText();
 		string nomeR = nomeQR.toStdString();
@@ -823,8 +822,8 @@ void MainWindow::on_insLocalLineE_textChanged()
 	int length = Qinsert.length();
 	if (insert == "" || count == length) {
 		ui->labelValidObrigatorioProvaLocal->show();
-			insProvaLocal = false;
-			ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:black");
+		insProvaLocal = false;
+		ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:black");
 	}
 	else {
 		ui->labelValidObrigatorioProvaLocal->hide();
@@ -856,6 +855,7 @@ void MainWindow::on_iniciarProvaAction_triggered()
 
 	ui->modoProvaComboBox->clear();
 	vector<string> provas = bd.listarProvas();
+
 	for (int i = 0; i < provas.size(); i++) {
 		ui->modoProvaComboBox->insertItem(i, QString::fromStdString(provas[i]));
 	}
@@ -863,31 +863,19 @@ void MainWindow::on_iniciarProvaAction_triggered()
 }
 void MainWindow::on_DadosRegistadosAction_triggered()
 {
-    ui->stackedWidget->setCurrentWidget(ui->DadosRegistados);
+	ui->stackedWidget->setCurrentWidget(ui->DadosRegistados);
 
 	ui->ProvaStateComboBox->clear();
 	vector<string> provas = bd.listarProvas();
 	for (int i = 0; i < provas.size(); i++) {
 		ui->ProvaStateComboBox->insertItem(i, QString::fromStdString(provas[i]));
 	}
-	readSerial();
 }
 
 void MainWindow::estado(int estado) {
 	switch (estado) {
 	default:
-		num++;
-		ui->Stop->setText(QString::fromStdString(to_string(num)));
-		break;
 	case 0:
-		ui->Atras->setStyleSheet("");
-		ui->Direita->setStyleSheet("");
-		ui->Esquerda->setStyleSheet("");
-		ui->Frente->setStyleSheet("");
-		ui->LED->setStyleSheet("");
-		ui->Ventoinha->setStyleSheet("");
-		ui->Stop->setStyleSheet("background-color:black; color:white");
-		break;
 	case 1:
 		ui->Atras->setStyleSheet("");
 		ui->Direita->setStyleSheet("");
@@ -896,6 +884,7 @@ void MainWindow::estado(int estado) {
 		ui->LED->setStyleSheet("");
 		ui->Ventoinha->setStyleSheet("");
 		ui->Stop->setStyleSheet("");
+		vetorEstados.push_back("Frente");
 		break;
 	case 2:
 		ui->Atras->setStyleSheet("background-color:black; color:white");
@@ -905,6 +894,7 @@ void MainWindow::estado(int estado) {
 		ui->LED->setStyleSheet("");
 		ui->Ventoinha->setStyleSheet("");
 		ui->Stop->setStyleSheet("");
+		vetorEstados.push_back("Tras");
 		break;
 	case 3:
 		ui->Atras->setStyleSheet("");
@@ -914,6 +904,7 @@ void MainWindow::estado(int estado) {
 		ui->LED->setStyleSheet("");
 		ui->Ventoinha->setStyleSheet("");
 		ui->Stop->setStyleSheet("");
+		vetorEstados.push_back("Direita");
 		break;
 	case 4:
 		ui->Atras->setStyleSheet("");
@@ -923,6 +914,7 @@ void MainWindow::estado(int estado) {
 		ui->LED->setStyleSheet("");
 		ui->Ventoinha->setStyleSheet("");
 		ui->Stop->setStyleSheet("");
+		vetorEstados.push_back("Esquerda");
 		break;
 	case 5:
 		ui->Atras->setStyleSheet("");
@@ -932,6 +924,7 @@ void MainWindow::estado(int estado) {
 		ui->LED->setStyleSheet("background-color:black; color:white");
 		ui->Ventoinha->setStyleSheet("");
 		ui->Stop->setStyleSheet("");
+		vetorEstados.push_back("LED");
 		break;
 	case 6:
 		ui->Atras->setStyleSheet("");
@@ -941,14 +934,225 @@ void MainWindow::estado(int estado) {
 		ui->LED->setStyleSheet("");
 		ui->Ventoinha->setStyleSheet("background-color:black; color:white");
 		ui->Stop->setStyleSheet("");
+		vetorEstados.push_back("Ventoinha");
 		break;
 	}
 }
 
 void MainWindow::on_InicarProva_clicked()
 {
+	vetorEstados.clear();
 	string prova = ui->modoProvaComboBox->currentText().toStdString();
 	if (prova == "Live") {
 		readSerial();
 	}
+}
+
+void MainWindow::on_ProvaStateComboBox_currentIndexChanged(const QString &arg1)
+{
+	int idRobot = bd.buscarIDRobot(bd.buscarIDProvasNome(arg1.toStdString()));
+	ui->labelNomeRoboDados->setText(QString::fromStdString(bd.buscarRobot(idRobot)));
+}
+
+void MainWindow::on_modoProvaComboBox_currentIndexChanged(const QString &arg1)
+{
+
+}
+
+void MainWindow::on_GuardarProva_clicked()
+{
+	int idProva = bd.buscarIDProvasNome(ui->modoProvaComboBox->currentText().toStdString());
+	for (int i = 0;i < vetorEstados.size();i++) {
+		bd.inserirStates(vetorEstados[i], idProva);
+	}
+	//ui->InicarProva->setText(QString::fromStdString(vetorEstados[0]));
+	//ui->GuardarProva->setText(QString::fromStdString(to_string(idProva)));
+	vetorEstados.clear();
+}
+
+void MainWindow::on_Atras_clicked()
+{
+	vetorEstados.push_back("Atras");
+}
+
+void MainWindow::on_Esquerda_clicked()
+{
+	vetorEstados.push_back("Esquerda");
+}
+
+void MainWindow::on_Frente_clicked()
+{
+	vetorEstados.push_back("Frente");
+}
+
+void MainWindow::on_Direita_clicked()
+{
+	vetorEstados.push_back("Direita");
+}
+
+void MainWindow::on_LED_clicked()
+{
+	vetorEstados.push_back("LED");
+}
+
+void MainWindow::on_Ventoinha_clicked()
+{
+	vetorEstados.push_back("Ventoinha");
+}
+
+void MainWindow::on_representarProvaAction_triggered()
+{
+	ui->stackedWidget->setCurrentWidget(ui->representarProva);
+	ui->labelAvisoProvas->hide();
+
+	ui->modoProvaComboBox_Representar->clear();
+	vector<string> provas = bd.listarProvas();
+	for (int i = 0; i < provas.size(); i++) {
+		ui->modoProvaComboBox_Representar->insertItem(i, QString::fromStdString(provas[i]));
+	}
+
+}
+
+void MainWindow::on_modoProvaComboBox_Representar_currentIndexChanged(const QString &arg1)
+{
+	/*int idProva = bd.buscarIDProvasNome(ui->modoProvaComboBox_Representar->currentText().toStdString());
+
+	if (bd.countStates(idProva) != 0) {
+		ui->labelAvisoProvas->hide();
+		vector<string> states = bd.getStates(idProva);
+		for (int i = 0;i < states.size();i++) {
+			if (states[i] == "Frente_Representar") {
+				ui->Atras_Representar->setStyleSheet("");
+				ui->Direita_Representar->setStyleSheet("");
+				ui->Esquerda_Representar->setStyleSheet("");
+				ui->Frente_Representar->setStyleSheet("background-color:black; color:white");
+				ui->LED_Representar->setStyleSheet("");
+				ui->Ventoinha_Representar->setStyleSheet("");
+				ui->Stop->setStyleSheet("");
+			}
+			else if (states[i] == "Tras") {
+				ui->Atras_Representar->setStyleSheet("background-color:black; color:white");
+				ui->Direita_Representar->setStyleSheet("");
+				ui->Esquerda_Representar->setStyleSheet("");
+				ui->Frente_Representar->setStyleSheet("");
+				ui->LED_Representar->setStyleSheet("");
+				ui->Ventoinha_Representar->setStyleSheet("");
+				ui->Stop->setStyleSheet("");
+			}
+			else if (states[i] == "Direita_Representar") {
+				ui->Atras_Representar->setStyleSheet("");
+				ui->Direita_Representar->setStyleSheet("background-color:black; color:white");
+				ui->Esquerda_Representar->setStyleSheet("");
+				ui->Frente_Representar->setStyleSheet("");
+				ui->LED_Representar->setStyleSheet("");
+				ui->Ventoinha_Representar->setStyleSheet("");
+				ui->Stop->setStyleSheet("");
+			}
+			else if (states[i] == "Esquerda_Representar") {
+				ui->Atras_Representar->setStyleSheet("");
+				ui->Direita_Representar->setStyleSheet("");
+				ui->Esquerda_Representar->setStyleSheet("background-color:black; color:white");
+				ui->Frente_Representar->setStyleSheet("");
+				ui->LED_Representar->setStyleSheet("");
+				ui->Ventoinha_Representar->setStyleSheet("");
+				ui->Stop->setStyleSheet("");
+			}
+			else if (states[i] == "LED_Representar") {
+				ui->Atras_Representar->setStyleSheet("");
+				ui->Direita_Representar->setStyleSheet("");
+				ui->Esquerda_Representar->setStyleSheet("");
+				ui->Frente_Representar->setStyleSheet("");
+				ui->LED_Representar->setStyleSheet("background-color:black; color:white");
+				ui->Ventoinha_Representar->setStyleSheet("");
+				ui->Stop->setStyleSheet("");
+			}
+			else if (states[i] == "Ventoinha_Representar") {
+				ui->Atras_Representar->setStyleSheet("");
+				ui->Direita_Representar->setStyleSheet("");
+				ui->Esquerda_Representar->setStyleSheet("");
+				ui->Frente_Representar->setStyleSheet("");
+				ui->LED_Representar->setStyleSheet("");
+				ui->Ventoinha_Representar->setStyleSheet("background-color:black; color:white");
+				ui->Stop->setStyleSheet("");
+			}
+			Sleep(1000);
+		}
+	}else {
+		ui->labelAvisoProvas->show();
+	}*/
+}
+void MainWindow::on_RepresentarProva_clicked()
+{
+    int idProva = bd.buscarIDProvasNome(ui->modoProvaComboBox_Representar->currentText().toStdString());
+
+        if (bd.countStates(idProva) != 0) {
+            ui->labelAvisoProvas->hide();
+            vector<string> states = bd.getStates(idProva);
+            for (int i = 0;i < states.size();i++) {
+
+                if (states[i] == "Frente") {
+                    ui->Atras_Representar->setStyleSheet("");
+                    ui->Direita_Representar->setStyleSheet("");
+                    ui->Esquerda_Representar->setStyleSheet("");
+                    ui->Frente_Representar->setStyleSheet("background-color:black; color:white");
+                    ui->LED_Representar->setStyleSheet("");
+                    ui->Ventoinha_Representar->setStyleSheet("");
+                    ui->Stop->setStyleSheet("");
+					Sleep(500);
+				}
+                else if (states[i] == "Tras") {
+                    ui->Atras_Representar->setStyleSheet("background-color:black; color:white");
+                    ui->Direita_Representar->setStyleSheet("");
+                    ui->Esquerda_Representar->setStyleSheet("");
+                    ui->Frente_Representar->setStyleSheet("");
+                    ui->LED_Representar->setStyleSheet("");
+                    ui->Ventoinha_Representar->setStyleSheet("");
+                    ui->Stop->setStyleSheet("");
+					Sleep(500);
+				}
+                else if (states[i] == "Direita") {
+                    ui->Atras_Representar->setStyleSheet("");
+                    ui->Direita_Representar->setStyleSheet("background-color:black; color:white");
+                    ui->Esquerda_Representar->setStyleSheet("");
+                    ui->Frente_Representar->setStyleSheet("");
+                    ui->LED_Representar->setStyleSheet("");
+                    ui->Ventoinha_Representar->setStyleSheet("");
+                    ui->Stop->setStyleSheet("");
+					Sleep(500);
+				}
+                else if (states[i] == "Esquerda") {
+                    ui->Atras_Representar->setStyleSheet("");
+                    ui->Direita_Representar->setStyleSheet("");
+                    ui->Esquerda_Representar->setStyleSheet("background-color:black; color:white");
+                    ui->Frente_Representar->setStyleSheet("");
+                    ui->LED_Representar->setStyleSheet("");
+                    ui->Ventoinha_Representar->setStyleSheet("");
+                    ui->Stop->setStyleSheet("");
+					Sleep(500);
+				}
+                else if (states[i] == "LED") {
+                    ui->Atras_Representar->setStyleSheet("");
+                    ui->Direita_Representar->setStyleSheet("");
+                    ui->Esquerda_Representar->setStyleSheet("");
+                    ui->Frente_Representar->setStyleSheet("");
+                    ui->LED_Representar->setStyleSheet("background-color:black; color:white");
+                    ui->Ventoinha_Representar->setStyleSheet("");
+                    ui->Stop->setStyleSheet("");
+					Sleep(500);
+                }
+                else if (states[i] == "Ventoinha") {
+                    ui->Atras_Representar->setStyleSheet("");
+                    ui->Direita_Representar->setStyleSheet("");
+                    ui->Esquerda_Representar->setStyleSheet("");
+                    ui->Frente_Representar->setStyleSheet("");
+                    ui->LED_Representar->setStyleSheet("");
+                    ui->Ventoinha_Representar->setStyleSheet("background-color:black; color:white");
+                    ui->Stop->setStyleSheet("");
+					Sleep(500);
+                }
+				
+            }
+        }else {
+            ui->labelAvisoProvas->show();
+        }
 }

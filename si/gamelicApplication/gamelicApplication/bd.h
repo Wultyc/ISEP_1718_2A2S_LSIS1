@@ -27,7 +27,7 @@ public:
 	void inserirElementos(string nomeEl, string nomeE);
 	void inserirRobo(string nomeR, string nomeE);
 	void inserirProva(string nomeP, int ano, int mes, int dia, string local, string nomeR);
-	void inserirStates(int state, string nomeP);
+	void inserirStates(string state, int idProva);
 	void updateEquipa(string nomeE, int num);
 	void updateElemento(int idElemento, string nomeElNovo);
 	void updateNomeProva(string nomeE, int num);
@@ -37,7 +37,8 @@ public:
 	void updateNomeRobo(string nomeE, int num);
 	void updateEquipa2(int id, int num);
 	void updateData(string data, int num);
-
+	int countStates(int idProva);
+	vector<string> getStates(int idProva);
 
 	vector<string> buscarEquipa(int num);
 	vector<string> buscarElementos(int num);
