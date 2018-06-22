@@ -92,6 +92,10 @@ private slots:
 	void on_DadosRegistadosAction_triggered();
 
 	void readSerial();
+
+	void estado(int num);
+    void on_InicarProva_clicked();
+
 private:
     Ui::MainWindow *ui;
 

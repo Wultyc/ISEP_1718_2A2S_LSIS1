@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QMessageBox>
 
+	int num = 0;
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -90,6 +91,8 @@ void MainWindow::readSerial()
 		
 		ui->labelLeitura->setText(parsed_data);
 		qDebug() << "Estado : " << parsed_data << "\n";
+		estado(parsed_data.toInt());
+
 	}
 
 }
@@ -572,6 +575,7 @@ void MainWindow::on_pushInserirRobot_clicked() {
 
 void MainWindow::on_pushInserirProva_clicked()
 {
+	ui->labelFixe->setText(QString::fromStdString(to_string(insProvaNome)));
 	if (insProvaLocal == true && insProvaNome == true) {
 		QString nomeQR = ui->insProvaCombo->currentText();
 		string nomeR = nomeQR.toStdString();
@@ -819,12 +823,12 @@ void MainWindow::on_insLocalLineE_textChanged()
 	int length = Qinsert.length();
 	if (insert == "" || count == length) {
 		ui->labelValidObrigatorioProvaLocal->show();
-			insProvaNome = false;
+			insProvaLocal = false;
 			ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:black");
 	}
 	else {
 		ui->labelValidObrigatorioProvaLocal->hide();
-		insProvaNome = true;
+		insProvaLocal = true;
 	}
 }
 
@@ -854,8 +858,8 @@ void MainWindow::on_iniciarProvaAction_triggered()
 	vector<string> provas = bd.listarProvas();
 	for (int i = 0; i < provas.size(); i++) {
 		ui->modoProvaComboBox->insertItem(i, QString::fromStdString(provas[i]));
-
 	}
+	ui->modoProvaComboBox->insertItem(provas.size(), "Live");
 }
 void MainWindow::on_DadosRegistadosAction_triggered()
 {
@@ -869,4 +873,82 @@ void MainWindow::on_DadosRegistadosAction_triggered()
 	readSerial();
 }
 
+void MainWindow::estado(int estado) {
+	switch (estado) {
+	default:
+		num++;
+		ui->Stop->setText(QString::fromStdString(to_string(num)));
+		break;
+	case 0:
+		ui->Atras->setStyleSheet("");
+		ui->Direita->setStyleSheet("");
+		ui->Esquerda->setStyleSheet("");
+		ui->Frente->setStyleSheet("");
+		ui->LED->setStyleSheet("");
+		ui->Ventoinha->setStyleSheet("");
+		ui->Stop->setStyleSheet("background-color:black; color:white");
+		break;
+	case 1:
+		ui->Atras->setStyleSheet("");
+		ui->Direita->setStyleSheet("");
+		ui->Esquerda->setStyleSheet("");
+		ui->Frente->setStyleSheet("background-color:black; color:white");
+		ui->LED->setStyleSheet("");
+		ui->Ventoinha->setStyleSheet("");
+		ui->Stop->setStyleSheet("");
+		break;
+	case 2:
+		ui->Atras->setStyleSheet("background-color:black; color:white");
+		ui->Direita->setStyleSheet("");
+		ui->Esquerda->setStyleSheet("");
+		ui->Frente->setStyleSheet("");
+		ui->LED->setStyleSheet("");
+		ui->Ventoinha->setStyleSheet("");
+		ui->Stop->setStyleSheet("");
+		break;
+	case 3:
+		ui->Atras->setStyleSheet("");
+		ui->Direita->setStyleSheet("background-color:black; color:white");
+		ui->Esquerda->setStyleSheet("");
+		ui->Frente->setStyleSheet("");
+		ui->LED->setStyleSheet("");
+		ui->Ventoinha->setStyleSheet("");
+		ui->Stop->setStyleSheet("");
+		break;
+	case 4:
+		ui->Atras->setStyleSheet("");
+		ui->Direita->setStyleSheet("");
+		ui->Esquerda->setStyleSheet("background-color:black; color:white");
+		ui->Frente->setStyleSheet("");
+		ui->LED->setStyleSheet("");
+		ui->Ventoinha->setStyleSheet("");
+		ui->Stop->setStyleSheet("");
+		break;
+	case 5:
+		ui->Atras->setStyleSheet("");
+		ui->Direita->setStyleSheet("");
+		ui->Esquerda->setStyleSheet("");
+		ui->Frente->setStyleSheet("");
+		ui->LED->setStyleSheet("background-color:black; color:white");
+		ui->Ventoinha->setStyleSheet("");
+		ui->Stop->setStyleSheet("");
+		break;
+	case 6:
+		ui->Atras->setStyleSheet("");
+		ui->Direita->setStyleSheet("");
+		ui->Esquerda->setStyleSheet("");
+		ui->Frente->setStyleSheet("");
+		ui->LED->setStyleSheet("");
+		ui->Ventoinha->setStyleSheet("background-color:black; color:white");
+		ui->Stop->setStyleSheet("");
+		break;
+	}
+}
 
+void MainWindow::on_InicarProva_clicked()
+{
+	string prova = ui->modoProvaComboBox->currentText().toStdString();
+	if (prova == "Live") {
+		readSerial();
+	}
+}
