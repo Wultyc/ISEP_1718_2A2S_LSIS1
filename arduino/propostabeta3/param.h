@@ -22,7 +22,7 @@
 #define SONAR_ECHO_DIREITA A3
 #define SONAR_ECHO_ESQUERDA A4
 #define SONAR_DIST_MIN 20 //distancia minima do robot à parede em cm
-#define SONAR_ROOM 60     //distancia que o robot considera um quarto em cm
+#define SONAR_ROOM 30     //distancia que o robot considera um quarto em cm
 #define SONAR_ROOM_FRENTE 25     //distancia máxima para que o robot entre no quarto em vez de seguir em frente
 #define SONAR_ROT_180 30     //distancia das laterais à parede para fazer o robot rodar 180º
 
@@ -53,4 +53,4 @@
 #define BOTAO_STOP 2
 
 //Maximo de rotacoes no mesmo sentido
-#define RotMax 6;
+#define RotMax 6
