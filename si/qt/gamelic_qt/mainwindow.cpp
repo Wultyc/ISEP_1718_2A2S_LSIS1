@@ -1098,8 +1098,7 @@ void MainWindow::on_RepresentarProva_clicked()
                     ui->LED_Representar->setStyleSheet("");
                     ui->Ventoinha_Representar->setStyleSheet("");
                     ui->Stop->setStyleSheet("");
-					Sleep(500);
-				}
+                }
                 else if (states[i] == "Tras") {
                     ui->Atras_Representar->setStyleSheet("background-color:black; color:white");
                     ui->Direita_Representar->setStyleSheet("");
@@ -1108,8 +1107,7 @@ void MainWindow::on_RepresentarProva_clicked()
                     ui->LED_Representar->setStyleSheet("");
                     ui->Ventoinha_Representar->setStyleSheet("");
                     ui->Stop->setStyleSheet("");
-					Sleep(500);
-				}
+                }
                 else if (states[i] == "Direita") {
                     ui->Atras_Representar->setStyleSheet("");
                     ui->Direita_Representar->setStyleSheet("background-color:black; color:white");
@@ -1118,8 +1116,7 @@ void MainWindow::on_RepresentarProva_clicked()
                     ui->LED_Representar->setStyleSheet("");
                     ui->Ventoinha_Representar->setStyleSheet("");
                     ui->Stop->setStyleSheet("");
-					Sleep(500);
-				}
+                }
                 else if (states[i] == "Esquerda") {
                     ui->Atras_Representar->setStyleSheet("");
                     ui->Direita_Representar->setStyleSheet("");
@@ -1128,8 +1125,7 @@ void MainWindow::on_RepresentarProva_clicked()
                     ui->LED_Representar->setStyleSheet("");
                     ui->Ventoinha_Representar->setStyleSheet("");
                     ui->Stop->setStyleSheet("");
-					Sleep(500);
-				}
+                }
                 else if (states[i] == "LED") {
                     ui->Atras_Representar->setStyleSheet("");
                     ui->Direita_Representar->setStyleSheet("");
@@ -1138,7 +1134,6 @@ void MainWindow::on_RepresentarProva_clicked()
                     ui->LED_Representar->setStyleSheet("background-color:black; color:white");
                     ui->Ventoinha_Representar->setStyleSheet("");
                     ui->Stop->setStyleSheet("");
-					Sleep(500);
                 }
                 else if (states[i] == "Ventoinha") {
                     ui->Atras_Representar->setStyleSheet("");
@@ -1148,9 +1143,8 @@ void MainWindow::on_RepresentarProva_clicked()
                     ui->LED_Representar->setStyleSheet("");
                     ui->Ventoinha_Representar->setStyleSheet("background-color:black; color:white");
                     ui->Stop->setStyleSheet("");
-					Sleep(500);
                 }
-				
+				Sleep(500);
             }
         }else {
             ui->labelAvisoProvas->show();
