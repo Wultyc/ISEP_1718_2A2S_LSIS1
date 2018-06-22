@@ -6,31 +6,31 @@
 Servo servo;  //Objeto de controlo do servo
 SoftwareSerial Bluetooth(BT_RX, BT_TX); //Definição do Bluetooth
 
-int estado = 0; //Estado do robot
 int desativa_robot = 0; //mantem o robot desativado
+int ultimo_estado = -1; //ultimo estado enviado
+
 int btnStart = 0, btnStop = 0; //Valor dos botões de Start e Stop
+
 int chama = 0; //Valores do sensor de chama
 int chama_param = 0;
+
 int velA = 0, velB = 0, dirA = 0, dirB = 0, velProp = 0, dalayRobot = 0; //Valores de output
+
 int angle_chama = 0;  //Angulo da chama em relação ao robot
 int angle_servo = 0;  //Angulo atual do Servo
-int servo_enabled = 0; //Define se o servo roda ou não
 int incrm_servo = 1;  //Incremento do anglulo do servo
 int servo_return = 0; //Define o sentido de rotação (1: sentido positivo | -1: sentido negativo)
+int servoFlag = 0;  //Determina o numero de passagem nos 90º
 
-int velP = 255; int delayP = 750; int delayS = 50;
+int velP = 255; int delayP = 750; int delayS = 100;
 
-int andaFrente = 0;
-int andaEsquerda = 0 ;
-int andaDireita = 0;
+int distF = 0, distE = 0, distD = 0, distE2 = 0, distD2 = 0;
+bool validaF = false, validaE = false, validaD = false;
 
-String estados[7] = {"Desat", "Frente", "Direita", "Esq", "Chama"};
+long time_after_rot = 0;
 
 void desativa() {
-
   desativa_robot = 0;
-  estado = 0;
-  servo_enabled = 0;
   analogWrite(MOTOR_A_PWM, 0);
   analogWrite(MOTOR_B_PWM, 0);
   digitalWrite(MOTOR_A_DIR, HIGH);
@@ -51,7 +51,6 @@ void setup() {
   velA = 0; velB = 0;
   dirA = 0; dirB = 0;
   velProp = 0; dalayRobot = 0;
-  servo_enabled = 0;
 
   //PinModes e valor padrão
   pinMode(MOTOR_A_CS, OUTPUT);
@@ -83,7 +82,7 @@ void setup() {
   pinMode(BOTAO_START, INPUT);
   pinMode(BOTAO_STOP, INPUT);
 
-  estado = 0;
+  ultimo_estado = -1;
 
   //Config Servo
   servo.attach(SERVO_PIN);
@@ -98,90 +97,77 @@ void loop() {
   btnStart = digitalRead(BOTAO_START);
 
   if (desativa_robot == 0) {
-    estado = 0;
-    servo_enabled = 0;
     if (btnStart == HIGH) {
-      estado = 0;
       desativa_robot = 1;
     }
     Serial.println(1);
     Bluetooth.println(1);
+
   } else {
+    //Calcula distancias
+    distF = getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE);
+    distE = distE2 = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
+    distD = distD2 = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
 
-    servo_enabled = 1;
+    //Aplica movimento
+    frente(velP, 0); //Anda em frente
+    do {
+      //Valida as medidas
+      validaF = distF >= SONAR_DIST_MIN;
+      validaD = distD >= distD2 * 0.90 || distD <= distD2 * 1.10;
+      validaE = distE >= distE2 * 0.90 || distE <= distE2 * 1.10;
 
-    switch (estado) {
-      case 1:
-        frente(velP, 0);
-        do {
-          andaFrente = getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE);
-          andaEsquerda = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
-          andaDireita = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
-          delay(delayS);
-        } while (andaFrente > SONAR_DIST_MIN && andaDireita < SONAR_ROOM && andaEsquerda < SONAR_ROOM);
+      //guarda as medidas atuais
+      distE2 = distE;
+      distD2 = distD;
 
-        roboPara(delayS);
-        andaFrente = getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE);
-        andaEsquerda = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
-        andaDireita = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
+    } while (validaF == true && validaD == true && validaE == true);
 
-        if (andaFrente < SONAR_DIST_MIN && andaDireita < 30 && andaEsquerda < 30) {
-          estado = 4;
-        } else if (andaFrente < SONAR_DIST_MIN || andaDireita > SONAR_ROOM || andaEsquerda > SONAR_ROOM) {
-          roboPara(delayS);
-          andaDireita = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
-          andaEsquerda = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
-          if (andaDireita < andaEsquerda) {
-            estado = 3;
-          } else if (andaDireita > andaEsquerda) {
-            estado = 2;
-          }
-        }
-        roboPara(0);
-        break;
-      case 2:
-        roboPara(delayS);
-        direita(velP, delayP * 2);
-        roboPara(delayS);
-        while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_ROOM) { //Confirmar se é mesmo 60
-          frente(velP, delayP);
-        }
-        roboPara(delayS);
-        estado = 1;
-        break;
-      case 3:
-        roboPara(delayS);
-        esquerda(velP, delayP * 2);
-        roboPara(delayS);
-        while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_ROOM) { //Confirmar se é mesmo 60
-          frente(velP, delayP);
-        }
-        roboPara(delayS);
-        estado = 1;
-        break;
-      case 4:
-        roboPara(delayS);
-        roda180(velP, delayP * 4);
-        roboPara(delayS);
-        while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_ROOM) { //Confirmar se é mesmo 60
-          frente(velP, delayP);
-        }
-        roboPara(delayS);
-        estado = 1;
-        break;
-      default:
-        estado = 1;
+    roboPara(delayS); //para o robot
+
+    if (distF <= SONAR_DIST_MIN && distD <= SONAR_ROT_180 && distE <= SONAR_ROT_180) {
+
+      roda180(delayP * 3); //roda o robot 180º
+      roboPara(delayS); // para o robot
+
+    } else if (distD >= SONAR_DIST_ROOM || distD > distE) && (rotD < RotMax || distE < SONAR_DIST_MIN) { //Roda para a direita
+
+      //Atualiza as variaveis de rotação
+      rotD ++;
+      rotE = 0;
+
+      //Roda para a direita
+      direita(velP, delayP * 2);
+
+      time_after_rot = millis() + delayP; // Calcula o tempo máximo para andar em frente
+      frente(velP, delayS); //Liga os motores
+
+      while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN || millis() >= time_after_rot); //faz um compasso de espera
+        roboPara(delayS); // para o robot
+
+    } else if (distE >= SONAR_DIST_ROOM || distE > distD) && (rotE < RotMax || distD < SONAR_DIST_MIN) { //Roda para a esquerda
+
+      //Atualiza as variaveis de rotação
+      rotE ++;
+      rotD = 0;
+
+      //Roda para a esquerda
+      esquerda(velP, delayP * 2);
+
+      time_after_rot = millis() + delayP; // Calcula o tempo máximo para andar em frente
+      frente(velP, delayS); //Liga os motores
+
+      while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN || millis() >= time_after_rot); //faz um compasso de espera
+        roboPara(delayS); // para o robot
+
     }
-  }
 
-  //Roda o Servo
-  if (servo_enabled == 1) {
-
+    //Roda o servo
     servo_return = 1;
     angle_servo = SERVO_MIN_ANGLE;
+    servoFlag = 0;
 
     do {
-
       servo.write(angle_servo); //Roda o servo
       chama = analogRead(CHAMA_PIN);
 
@@ -195,10 +181,10 @@ void loop() {
 
       angle_servo += SERVO_INCREMENTO * servo_return; //Muda o angulo do servo para a próxima rotação
 
-    } while (angle_servo >= SERVO_MIN_ANGLE);
+      servoFlag += (angle_servo == 90) ? 1 : 0; //Incrementa a flag apenas se o angulo for 90º
 
+    } while (servoFlag < 2);
   }
-
 }
 
 int getDistance(int trig, int echo) {
@@ -216,8 +202,16 @@ int getDistance(int trig, int echo) {
   return dist;
 }
 
-void frente(int motorSpeed, int duracao) {
+void enviarEstado(int estado) {
+  //Apenas envia se o estado for diferente
+  if (ultimo_estado != estado) {
+    Serial.println(estado);
+    Bluetooth.println(estado);
+    ultimo_estado = estado;
+  }
+}
 
+void frente(int motorSpeed, int duracao) {
   //Motor A
   digitalWrite(MOTOR_A_DIR, HIGH);
   analogWrite(MOTOR_A_PWM, motorSpeed);
@@ -226,14 +220,12 @@ void frente(int motorSpeed, int duracao) {
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(MOTOR_B_PWM, motorSpeed);
 
-  Serial.println(1);
-  Bluetooth.println(2);
+  enviarEstado(1); //Enviar o estado
 
   delay(duracao);
 }
 
 void tras(int motorSpeed, int duracao) {
-
   //Motor A
   digitalWrite(MOTOR_A_DIR, LOW);
   analogWrite(MOTOR_A_PWM, motorSpeed);
@@ -242,30 +234,12 @@ void tras(int motorSpeed, int duracao) {
   digitalWrite(MOTOR_B_DIR, LOW);
   analogWrite(MOTOR_B_PWM, motorSpeed);
 
-  Serial.println(2);
-  Bluetooth.println(2);
-
-  delay(duracao);
-}
-
-void esquerda(int motorSpeed, int duracao) {
-
-  //Motor A
-  digitalWrite(MOTOR_A_DIR, HIGH);
-  analogWrite(MOTOR_A_PWM, motorSpeed);
-
-  //Motor B
-  digitalWrite(MOTOR_B_DIR, LOW);
-  analogWrite(MOTOR_B_PWM, motorSpeed / 2);
-
-  Serial.println(3);
-  Bluetooth.println(3);
+  enviarEstado(2); //Enviar o estado
 
   delay(duracao);
 }
 
 void direita(int motorSpeed, int duracao) {
-
   //Motor A
   digitalWrite(MOTOR_A_DIR, LOW);
   analogWrite(MOTOR_A_PWM, motorSpeed / 2);
@@ -274,14 +248,26 @@ void direita(int motorSpeed, int duracao) {
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(MOTOR_B_PWM, motorSpeed);
 
-  Serial.println(4);
-  Bluetooth.println(4);
+  enviarEstado(3); //Enviar o estado
+
+  delay(duracao);
+}
+
+void esquerda(int motorSpeed, int duracao) {
+  //Motor A
+  digitalWrite(MOTOR_A_DIR, HIGH);
+  analogWrite(MOTOR_A_PWM, motorSpeed);
+
+  //Motor B
+  digitalWrite(MOTOR_B_DIR, LOW);
+  analogWrite(MOTOR_B_PWM, motorSpeed / 2);
+
+  enviarEstado(4); //Enviar o estado
 
   delay(duracao);
 }
 
 void roboPara(int duracao) {
-
   //Motor A
   digitalWrite(MOTOR_A_DIR, HIGH);
   analogWrite(MOTOR_A_PWM, 0);
@@ -290,29 +276,25 @@ void roboPara(int duracao) {
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(MOTOR_B_PWM, 0);
 
-  Serial.println(0);
-  Bluetooth.println(0);
-
   delay(duracao);
 }
 
 void roda180(int motorSpeed, int duracao) {
-  //Motor A
-  digitalWrite(MOTOR_A_DIR, HIGH);
-  analogWrite(MOTOR_A_PWM, motorSpeed);
+  if (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) < SONAR_DIST_MIN) {
+    tras(velP, delayP / 2); //Não há condições para rodar, recua um pouco
+  }
 
-  //Motor B
-  digitalWrite(MOTOR_B_DIR, LOW);
-  analogWrite(MOTOR_B_PWM, motorSpeed);
-
-  delay(duracao);
+  if (getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA) > SONAR_DIST_MIN) {
+    direita(motorSpeed, duracao); //Temos condições para rodar à direita
+  } else {
+    esquerda(motorSpeed, duracao);
+  }
 }
 
 void apagarChama(int angle) {
-
-  Serial.println(5);
-  Bluetooth.println(5);
-
+  int dirA, dirB;
+  
+  enviarEstado(5); //Enviar o estado
   //Avisa que detetou o a chama
   for (int i = 0; i < 3; i++) {
     digitalWrite(CHAMA_LED, HIGH);
@@ -321,23 +303,18 @@ void apagarChama(int angle) {
     delay(500);
   }
 
-  Serial.println(angle);
-  int dirA, dirB;
-
   servo.write(90); //Roda o servo
 
-  /* //Define para onde se roda
-    if(angle >= 85 || angle <= 95){
+  //Define para onde se roda
+  if (angle > 95) {
+    while (analogRead(CHAMA_PIN) <= chama_param) { //Roda ate detetar a chama
       esquerda(velP, delayS);
-    }else if (angle > 95){
-     while (analogRead(CHAMA_PIN) <= chama_param) { //Roda ate detetar a chama
-       esquerda(velP, delayS);
-     }
-    }else if(angle < 85){
-     while (analogRead(CHAMA_PIN) <= chama_param) { //Roda ate detetar a chama
-       direita(velP/2, delayS/2);
-     }
-    }*/
+    }
+  } else if (angle < 85) {
+    while (analogRead(CHAMA_PIN) <= chama_param) { //Roda ate detetar a chama
+      direita(velP / 2, delayS / 2);
+    }
+  }
 
   if (angle > 95) {
     esquerda(velP / 2, delayS / 2);
@@ -346,12 +323,11 @@ void apagarChama(int angle) {
   }
 
   roboPara(0);
-
-  /*while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN * 1.20) { // Vai ate à chama
-    frente(velP, delayS);
-    }*/
+  frente(velP, delayS);
+  while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN * 1.20); // Vai ate à chama
   roboPara(0);
 
+  enviarEstado(6); //Enviar o estado
   while (analogRead(CHAMA_PIN) >= chama_param) { //Enquanto há chama mantem o propeller a trabalhar
     analogWrite(VENTOINHA_INA, VENTOINHA_MAX);
     delay(CHAMA_DELAY);
