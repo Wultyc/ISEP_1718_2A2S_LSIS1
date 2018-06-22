@@ -126,11 +126,6 @@ void loop() {
 
         //Aplica movimento
         do {
-          //Valida as medidas
-          validaF = distF >= SONAR_DIST_MIN;
-          validaD = (distD >= distD2 * 0.90 && distD <= distD2 * 1.10) && distD <= SONAR_ROOM;
-          validaE = (distE >= distE2 * 0.90 && distE <= distE2 * 1.10) && distE <= SONAR_ROOM;
-
           //guarda as medidas atuais
           distE2 = distE;
           distD2 = distD;
@@ -140,6 +135,11 @@ void loop() {
           distE = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
           distD = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
 
+          //Valida as medidas
+          validaF = distF >= SONAR_DIST_MIN;
+          validaD = distD <= SONAR_ROOM;
+          validaE = distE <= SONAR_ROOM;
+        
         } while (validaF == true && validaD == true && validaE == true);
         para(); //para o robot
 
@@ -154,10 +154,10 @@ void loop() {
         }else if (distF <= SONAR_DIST_MIN && (distD <= SONAR_DIST_MIN || distE <= SONAR_DIST_MIN) && (distE <= SONAR_ROOM || distD <= SONAR_ROOM)) {
           estado = 5;
           Serial.println("IF B");
-        } /*else if (distE >= distF * 1.25 && distE < distF * 2.00) {
+        } else if (distE >= distF * 1.25 && distE < distF * 2.00) {
           estado = 1;
           Serial.println("IF C");
-        } */else if (distD >= SONAR_ROOM && rotD < RotMax) { //direita
+        } else if (distD >= SONAR_ROOM && rotD < RotMax) { //direita
           estado = 3;
           Serial.println("IF D");
         } else if (distE >= SONAR_ROOM && rotE < RotMax) { //esquerda
@@ -165,15 +165,16 @@ void loop() {
           Serial.println("IF E");
         } else if (rotD >= RotMax && distE >= SONAR_DIST_MIN) {
           estado = 4;
+          
           Serial.println("IF F");
         } else if (rotE >= RotMax && distD >= SONAR_DIST_MIN) {
           estado = 3;
           Serial.println("IF G");
         } else if (distF >= SONAR_DIST_MIN) {
-          estado = 1;
+          estado = 3;
           Serial.println("IF H");
         } else {
-          estado = 2;
+          estado = 5;
           Serial.println("IF I");
         }
         break;
@@ -279,6 +280,8 @@ void frente(int motorSpeed, int duracao) {
   //Motor B
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(MOTOR_B_PWM, motorSpeed);
+
+  delay(duracao);
   
 }
 
@@ -384,10 +387,6 @@ void apagarChama(int angle) {
   }
 
   robotPara(0);
-  frente(velP, delayS);
-  while (getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE) > SONAR_DIST_MIN * 1.20); // Vai ate à chama
-  robotPara(0);
-
   enviarEstado(7); //Enviar o estado
   while (analogRead(CHAMA_PIN) >= chama_param) { //Enquanto há chama mantem o propeller a trabalhar
     analogWrite(VENTOINHA_INA, VENTOINHA_MAX);
