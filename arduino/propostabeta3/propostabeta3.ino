@@ -91,7 +91,7 @@ void setup() {
   angle_servo = 90;
   servo.write(angle_servo);
 
-  chama_param = analogRead(CHAMA_PIN) * 1.20;
+  chama_param = 800; //analogRead(CHAMA_PIN) * 3.00;
 }
 
 void loop() {
@@ -107,9 +107,9 @@ void loop() {
     }
 
   } else {
-    enviarEstado(estado);
     switch (estado) {
       case 1: //frente
+        enviarEstado(1);
         //Se for o primeiro sprint, anda um bocadinho a mais
         if (first_sprint == 0) {
           frente(velP, delayP * 1.5);
@@ -125,7 +125,7 @@ void loop() {
         frente(velP, 0); //Anda em frente
 
         //Aplica movimento
-        do { enviarEstado(estado);
+        do {
           //Valida as medidas
           validaF = distF >= SONAR_DIST_MIN;
           validaD = (distD >= distD2 * 0.90 && distD <= distD2 * 1.10) && distD <= SONAR_ROOM;
@@ -141,7 +141,6 @@ void loop() {
           distD = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
 
         } while (validaF == true && validaD == true && validaE == true);
-        Serial.println("Fim Loop");
         para(); //para o robot
 
         //Calcular as distancias novas
@@ -149,23 +148,37 @@ void loop() {
         distE = getDistance(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA);
         distD = getDistance(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA);
 
-        if (distF <= SONAR_DIST_MIN && distD <= SONAR_DIST_MIN * 1.25 && distE <= SONAR_DIST_MIN * 1.25) {
+        if (distF <= SONAR_DIST_MIN && distD <= SONAR_DIST_MIN && distE <= SONAR_DIST_MIN) {
           estado = 5;
-        } else if (distD >= SONAR_ROOM && rotD < RotMax) { //direita
+          Serial.println("IF A");
+        }else if (distF <= SONAR_DIST_MIN && (distD <= SONAR_DIST_MIN || distE <= SONAR_DIST_MIN) && (distE <= SONAR_ROOM || distD <= SONAR_ROOM)) {
+          estado = 5;
+          Serial.println("IF B");
+        } /*else if (distE >= distF * 1.25 && distE < distF * 2.00) {
+          estado = 1;
+          Serial.println("IF C");
+        } */else if (distD >= SONAR_ROOM && rotD < RotMax) { //direita
           estado = 3;
+          Serial.println("IF D");
         } else if (distE >= SONAR_ROOM && rotE < RotMax) { //esquerda
           estado = 4;
+          Serial.println("IF E");
         } else if (rotD >= RotMax && distE >= SONAR_DIST_MIN) {
           estado = 4;
+          Serial.println("IF F");
         } else if (rotE >= RotMax && distD >= SONAR_DIST_MIN) {
           estado = 3;
+          Serial.println("IF G");
         } else if (distF >= SONAR_DIST_MIN) {
           estado = 1;
+          Serial.println("IF H");
         } else {
           estado = 2;
+          Serial.println("IF I");
         }
         break;
       case 2: //trás
+        enviarEstado(2);
         //Atualiza as variáveis de rotação
         rotD = 0;
         rotE = 0;
@@ -174,9 +187,10 @@ void loop() {
         estado = 1;
         break;
       case 3: //direita
+        enviarEstado(3);
         //Atualiza as variáveis de rotação
-        rotD ++;
-        rotE = 0;
+        //rotD ++;
+        //rotE = 0;
         //Roda para a direita
         direita(velP, delayP * 2);
         frente(velP, delayP * 2); //Liga os motores
@@ -184,9 +198,10 @@ void loop() {
         estado = 1;
         break;
       case 4: //esquerda
+        enviarEstado(4);
         //Atualiza as variaveis de rotação
-        rotE ++;
-        rotD = 0;
+        //rotE ++;
+        //rotD = 0;
         //Roda para a esquerda
         esquerda(velP, delayP * 2);
         frente(velP, delayP * 2); //Liga os motores
@@ -194,7 +209,7 @@ void loop() {
         estado = 1;
         break;
       case 5: //180
-        roda180(velP, delayP * 3); //roda o robot 180º
+        roda180(velP, delayP * 4); //roda o robot 180º
         robotPara(delayS); // para o robot
 
         estado = 1;
@@ -264,10 +279,6 @@ void frente(int motorSpeed, int duracao) {
   //Motor B
   digitalWrite(MOTOR_B_DIR, HIGH);
   analogWrite(MOTOR_B_PWM, motorSpeed);
-  
-  long timeDelay = millis() + duracao;
-  
-  while(millis() <= timeDelay && getDistance(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE > SONAR_DIST_MIN));
   
 }
 
