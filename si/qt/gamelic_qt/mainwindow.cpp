@@ -1,6 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <string.h>
+#include <QSerialPort>
+#include <QSerialPortInfo>
+#include <QDebug>
+#include <QMessageBox>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -8,13 +12,87 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow)
 {
 	ui->setupUi(this);
+
+	arduino = new QSerialPort(this);
+	serialBuffer = "";
+	parsed_data = "";
+
+
+	/*
+	*   Identify the port the arduino uno is on.
+	*/
+	bool arduino_is_available = false;
+	QString arduino_uno_port_name;
+	//
+	//  For each available serial port
+	foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()) {
+		//  check if the serialport has both a product identifier and a vendor identifier
+		if (serialPortInfo.hasProductIdentifier() && serialPortInfo.hasVendorIdentifier()) {
+			//  check if the product ID and the vendor ID match those of the arduino uno
+			if ((serialPortInfo.productIdentifier() == arduino_uno_product_id)
+				&& (serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id)) {
+				arduino_is_available = true; //    arduino uno is available on this port
+				arduino_uno_port_name = serialPortInfo.portName();
+			}
+		}
+	}
+
+	/*
+	*  Open and configure the arduino port if available
+	*/
+	if (arduino_is_available) {
+		qDebug() << "Found the arduino port...\n";
+		arduino->setPortName(arduino_uno_port_name);
+		arduino->open(QSerialPort::ReadOnly);
+		arduino->setBaudRate(QSerialPort::Baud9600);
+		arduino->setDataBits(QSerialPort::Data8);
+		arduino->setFlowControl(QSerialPort::NoFlowControl);
+		arduino->setParity(QSerialPort::NoParity);
+		arduino->setStopBits(QSerialPort::OneStop);
+		QObject::connect(arduino, SIGNAL(readyRead()), this, SLOT(readSerial()));
+	}
+	else {
+		qDebug() << "Couldn't find the correct port for the arduino.\n";
+		QMessageBox::information(this, "Serial Port Error", "Couldn't open serial port to arduino.");
+	}
 }
 
 MainWindow::~MainWindow()
 {
+	if (arduino->isOpen()) {
+		arduino->close(); //    Close the serial port if it's open.
+	}
 	delete ui;
 }
 
+void MainWindow::readSerial()
+{
+	/*
+	* readyRead() doesn't guarantee that the entire message will be received all at once.
+	* The message can arrive split into parts.  Need to buffer the serial data and then parse for the temperature value.
+	*
+	*/
+	QStringList buffer_split = serialBuffer.split("\n"); //  split the serialBuffer string, parsing with ',' as the separator
+														//  Check to see if there less than 3 tokens in buffer_split.
+														//  If there are at least 3 then this means there were 2 commas,
+														//  means there is a parsed temperature value as the second token (between 2 commas)
+	if (buffer_split.length() < 2) {
+		// no parsed value yet so continue accumulating bytes from serial in the buffer.
+		serialData = arduino->readAll();
+		serialBuffer = serialBuffer + QString::fromStdString(serialData.toStdString());
+		serialData.clear();
+	}
+	else {
+		// the second element of buffer_split is parsed correctly, update the temperature value on temp_lcdNumber
+		serialBuffer = "";
+		qDebug() << buffer_split << "\n";
+		parsed_data = buffer_split[1];
+		
+		ui->labelLeitura->setText(parsed_data);
+		qDebug() << "Estado : " << parsed_data << "\n";
+	}
+
+}
 void MainWindow::on_inserirEquipaAction_triggered()
 {
 	ui->stackedWidget->setCurrentWidget(ui->inserirEquipa);
@@ -741,8 +819,8 @@ void MainWindow::on_insLocalLineE_textChanged()
 	int length = Qinsert.length();
 	if (insert == "" || count == length) {
 		ui->labelValidObrigatorioProvaLocal->show();
-		insProvaNome = false;
-		ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:black");
+			insProvaNome = false;
+			ui->labelValidObrigatorioProvaLocal->setStyleSheet("color:black");
 	}
 	else {
 		ui->labelValidObrigatorioProvaLocal->hide();
@@ -787,6 +865,8 @@ void MainWindow::on_DadosRegistadosAction_triggered()
 	vector<string> provas = bd.listarProvas();
 	for (int i = 0; i < provas.size(); i++) {
 		ui->ProvaStateComboBox->insertItem(i, QString::fromStdString(provas[i]));
-
 	}
+	readSerial();
 }
+
+

@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDialog>
+#include <QSerialPort>
+#include <QByteArray>
 #include "..\..\gamelicApplication\gamelicApplication\bd.h"
 
 using namespace std;
@@ -88,8 +91,17 @@ private slots:
 
 	void on_DadosRegistadosAction_triggered();
 
+	void readSerial();
 private:
     Ui::MainWindow *ui;
+
+	QSerialPort *arduino;
+	static const quint16 arduino_uno_vendor_id = 1027;
+	static const quint16 arduino_uno_product_id = 24577;
+	QByteArray serialData;
+	QString serialBuffer;
+	QString parsed_data;
+	double temperature_value;
 };
 
 #endif // MAINWINDOW_H
