@@ -18,16 +18,16 @@
     <item row="1" column="0">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>14</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="main">
        <widget class="QLabel" name="label">
         <property name="geometry">
          <rect>
-          <x>390</x>
-          <y>150</y>
-          <width>131</width>
-          <height>101</height>
+          <x>465</x>
+          <y>160</y>
+          <width>71</width>
+          <height>30</height>
          </rect>
         </property>
         <property name="font">
@@ -36,7 +36,81 @@
          </font>
         </property>
         <property name="text">
-         <string>Bem Vindo</string>
+         <string>LSIS1</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>210</y>
+          <width>301</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>20</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Projeto - Robô Bombeiro</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="descricao">
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>160</y>
+          <width>821</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Interface desenvolvida no âmbito do Trabalho de Grupo de LSIS 1, cujo objetivo é a criação de um Robô Bombeiro.</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>190</y>
+          <width>901</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Esta interface tem várias funcionalidades, destacando-se a leitura de dados bluetooth que recebe do Arduino, a mostra</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>220</y>
+          <width>901</width>
+          <height>51</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>desses mesmos estados, e o tratamento de informação referente às equipas envolvidas, provas efetuadas e robôs usados.</string>
         </property>
        </widget>
       </widget>
@@ -1856,7 +1930,7 @@
           <x>40</x>
           <y>35</y>
           <width>131</width>
-          <height>30</height>
+          <height>34</height>
          </rect>
         </property>
         <property name="font">
@@ -1904,13 +1978,51 @@
          <string>Guardar</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="LiveProva">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>360</y>
+          <width>131</width>
+          <height>34</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Lêr do Bluetooth</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="labelBluetooth">
+        <property name="geometry">
+         <rect>
+          <x>50</x>
+          <y>400</y>
+          <width>881</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>O leitor encontra-se em modo Bluetooth. Pressione o botão Guardar para que os estados lidos sejam associados à prova selecionada.</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="representarProva">
        <widget class="QPushButton" name="Frente_Representar">
         <property name="geometry">
          <rect>
           <x>445</x>
-          <y>80</y>
+          <y>70</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1928,9 +2040,9 @@
         <property name="geometry">
          <rect>
           <x>40</x>
-          <y>45</y>
+          <y>35</y>
           <width>131</width>
-          <height>30</height>
+          <height>34</height>
          </rect>
         </property>
         <property name="font">
@@ -1946,7 +2058,7 @@
         <property name="geometry">
          <rect>
           <x>245</x>
-          <y>200</y>
+          <y>190</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1964,7 +2076,7 @@
         <property name="geometry">
          <rect>
           <x>820</x>
-          <y>120</y>
+          <y>110</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -1982,7 +2094,7 @@
         <property name="geometry">
          <rect>
           <x>820</x>
-          <y>70</y>
+          <y>60</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -2000,7 +2112,7 @@
         <property name="geometry">
          <rect>
           <x>445</x>
-          <y>200</y>
+          <y>190</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -2021,7 +2133,7 @@
         <property name="geometry">
          <rect>
           <x>445</x>
-          <y>320</y>
+          <y>310</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -2039,7 +2151,7 @@
         <property name="geometry">
          <rect>
           <x>655</x>
-          <y>200</y>
+          <y>190</y>
           <width>110</width>
           <height>40</height>
          </rect>
@@ -2057,7 +2169,7 @@
         <property name="geometry">
          <rect>
           <x>40</x>
-          <y>85</y>
+          <y>75</y>
           <width>131</width>
           <height>34</height>
          </rect>
@@ -2075,7 +2187,7 @@
         <property name="geometry">
          <rect>
           <x>350</x>
-          <y>15</y>
+          <y>5</y>
           <width>321</width>
           <height>31</height>
          </rect>
@@ -2257,6 +2369,8 @@
      <string>Welcome</string>
     </property>
     <addaction name="mensagemInicialAction"/>
+    <addaction name="separator"/>
+    <addaction name="actionDescricao"/>
    </widget>
    <addaction name="menuWelcome"/>
    <addaction name="menuInserir"/>
@@ -2399,6 +2513,11 @@
   <action name="representarProvaAction">
    <property name="text">
     <string>Representação dos Estados</string>
+   </property>
+  </action>
+  <action name="actionDescricao">
+   <property name="text">
+    <string>Descrição</string>
    </property>
   </action>
  </widget>

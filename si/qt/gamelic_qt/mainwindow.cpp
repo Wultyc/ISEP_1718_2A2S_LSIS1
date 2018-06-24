@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <windows.h>
+#include <ctime>
 
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
@@ -17,29 +18,19 @@ MainWindow::MainWindow(QWidget *parent) :
 	serialBuffer = "";
 	parsed_data = "";
 
-
-	/*
-	*   Identify the port the arduino uno is on.
-	*/
+	// Identificar a porta do Arduino Uno, e correr o foreach para cada porta Serial. Arranjar o Product ID e o Vendor ID
 	bool arduino_is_available = false;
 	QString arduino_uno_port_name;
-	//
-	//  For each available serial port
 	foreach(const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts()) {
-		//  check if the serialport has both a product identifier and a vendor identifier
 		if (serialPortInfo.hasProductIdentifier() && serialPortInfo.hasVendorIdentifier()) {
-			//  check if the product ID and the vendor ID match those of the arduino uno
 			if ((serialPortInfo.productIdentifier() == arduino_uno_product_id)
 				&& (serialPortInfo.vendorIdentifier() == arduino_uno_vendor_id)) {
-				arduino_is_available = true; //    arduino uno is available on this port
+				arduino_is_available = true;
 				arduino_uno_port_name = serialPortInfo.portName();
 			}
 		}
 	}
-
-	/*
-	*  Open and configure the arduino port if available
-	*/
+	//Configurar a porta do arduino
 	if (arduino_is_available) {
 		qDebug() << "Found the arduino port...\n";
 		arduino->setPortName(arduino_uno_port_name);
@@ -60,33 +51,26 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
 	if (arduino->isOpen()) {
-		arduino->close(); //    Close the serial port if it's open.
+		arduino->close();
 	}
 	delete ui;
 }
 
 void MainWindow::readSerial()
 {
-	/*
-	* readyRead() doesn't guarantee that the entire message will be received all at once.
-	* The message can arrive split into parts.  Need to buffer the serial data and then parse for the temperature value.
-	*
-	*/
+	//ATEN��O - N�o h� garantias de que a informa��o provinda do bluetooth chegue inteira. Isto leva a que por vezes o estado n�o seja recebido corretamente
+
 	do {
-		QStringList buffer_split = serialBuffer.split("\n"); //  split the serialBuffer string, parsing with ',' as the separator
-															//  Check to see if there less than 3 tokens in buffer_split.
-															//  If there are at least 3 then this means there were 2 commas,
-															//  means there is a parsed temperature value as the second token (between 2 commas)
+		QStringList buffer_split = serialBuffer.split("\n"); //usamos Serial.println, logo o nosso split de informa��o � o \n. 
+
+		//verificar se j� houve um \n. Se entrar no if, continua a acumular informa��o, enquanto que no else manda a informa��o lida at� agora.
 		if (buffer_split.length() < 2) {
-			// no parsed value yet so continue accumulating bytes from serial in the buffer.
 			serialData = arduino->readAll();
 			serialBuffer = serialBuffer + QString::fromStdString(serialData.toStdString());
 			serialData.clear();
 		}
 		else {
-			// the second element of buffer_split is parsed correctly, update the temperature value on temp_lcdNumber
 			serialBuffer = "";
-			//qDebug() << buffer_split << "\n";
 			parsed_data = buffer_split[1];
 
 			qDebug() << "Estado : " << parsed_data << "\n";
@@ -239,8 +223,6 @@ void MainWindow::on_modificarProvaAction_triggered()
 	ui->modProvaComboBox_2->clear();
 	ui->modProvaComboBox->clear();
 	ui->modComboBoxRobot->clear();
-	//ui->modComboBoxRobot->setDisabled(true);
-	//ui->modComboBoxRobot->hide();
 
 	vector<string> provas = bd.listarProvas();
 	vector <string> specs = bd.caracteristicas();
@@ -280,8 +262,6 @@ void MainWindow::on_modificarRobotAction_triggered()
 	ui->modComboBoxRobot_2->clear();
 	ui->modRoboComboBox_2->clear();
 	ui->modRobotComboBox->clear();
-	//ui->modComboBoxRobot->setDisabled(true);
-	//ui->modComboBoxRobot->hide();
 
 	vector<string> robos = bd.listarRobos();
 	vector <string> specs2 = bd.caracteristicas2();
@@ -350,18 +330,23 @@ void MainWindow::on_eliminarProvaAction_triggered()
 	for (int j = 0; j < idProva.size(); j++) {
 		string nomeS = bd.buscarNomeProva(idProva[j]);
 		string local = bd.listarLocalProva(idProva[j]);
+		string data = bd.buscarData(idProva[j]);
 		string roboS = bd.buscarRobot(bd.buscarIDRobot(idProva[j]));
 		QString nomeSQ = QString::fromStdString(nomeS);
 		QString localQ = QString::fromStdString(local);
+		QString dataQ = QString::fromStdString(data);
 		QString roboQ = QString::fromStdString(roboS);
 		ui->tabelaEliminarProva->insertRow(ui->tabelaEliminarProva->rowCount());
 		QTableWidgetItem * nomeProva = new QTableWidgetItem(nomeSQ);
 		QTableWidgetItem * nomeLocal = new QTableWidgetItem(localQ);
+		QTableWidgetItem * nomeData = new QTableWidgetItem(dataQ);
 		QTableWidgetItem * nomeRobo = new QTableWidgetItem(roboQ);
 		nomeProva->setTextAlignment(Qt::AlignCenter);
 		nomeLocal->setTextAlignment(Qt::AlignCenter);
 		nomeRobo->setTextAlignment(Qt::AlignCenter);
+		nomeData->setTextAlignment(Qt::AlignCenter);
 		ui->tabelaEliminarProva->setItem(ui->tabelaEliminarProva->rowCount() - 1, 0, nomeProva);
+		ui->tabelaEliminarProva->setItem(ui->tabelaEliminarProva->rowCount() - 1, 1, nomeData);
 		ui->tabelaEliminarProva->setItem(ui->tabelaEliminarProva->rowCount() - 1, 2, nomeLocal);
 		ui->tabelaEliminarProva->setItem(ui->tabelaEliminarProva->rowCount() - 1, 3, nomeRobo);
 	}
@@ -520,44 +505,6 @@ void MainWindow::on_modEquipasComboBox_currentIndexChanged(const QString &arg1)
 		ui->modEquipaLineEdit_9->setText(QString::fromStdString(elementos[7]));
 		break;
 	}
-
-	int numE;
-	/*numE = bd.buscarIDEquipasNome(arg1.toStdString());
-
-	QString nomeE = ui->modEquipaLineEdit->text();
-	QString elemento1 = ui->modEquipaLineEdit_2->text();
-	QString elemento2 = ui->modEquipaLineEdit_3->text();
-	QString elemento3 = ui->modEquipaLineEdit_4->text();
-	QString elemento4 = ui->modEquipaLineEdit_5->text();
-	QString elemento5 = ui->modEquipaLineEdit_6->text();
-	QString elemento6 = ui->modEquipaLineEdit_7->text();
-	QString elemento7 = ui->modEquipaLineEdit_8->text();
-	QString elemento8 = ui->modEquipaLineEdit_9->text();
-	*/
-	/*if (!(elemento1.isEmpty())) {
-		bd.updateEquipa(elemento1.toStdString(), nomeE.toStdString(), numE);
-	}
-	if (!(elemento2.isEmpty())) {
-		bd.updateEquipa(elemento2.toStdString(), nomeE.toStdString(), numE);
-	}
-	if (!(elemento3.isEmpty())) {
-		bd.updateEquipa(elemento3.toStdString(), nomeE.toStdString(), numE);
-	}
-	if (!(elemento4.isEmpty())) {
-		bd.updateEquipa(elemento4.toStdString(), nomeE.toStdString(), numE);
-	}
-	if (!(elemento5.isEmpty())) {
-		bd.updateEquipa(elemento5.toStdString(), nomeE.toStdString(), numE);
-	}
-	if (!(elemento6.isEmpty())) {
-		bd.updateEquipa(elemento6.toStdString(), nomeE.toStdString(), numE);
-	}
-	if (!(elemento7.isEmpty())) {
-		bd.updateEquipa(elemento7.toStdString(), nomeE.toStdString(), numE);
-	}
-	if (!(elemento8.isEmpty())) {
-		bd.updateEquipa(elemento8.toStdString(), nomeE.toStdString(), numE);
-	}*/
 }
 
 void MainWindow::on_pushInserirRobot_clicked() {
@@ -654,7 +601,6 @@ void MainWindow::on_pusheliEquipas_clicked()
 {
 	string nome = ui->eliEquipasComboBox->currentText().toStdString();
 	bd.eliminarEquipa(bd.buscarIDEquipasNome(nome));
-	//bd.eliminarElementos(bd.buscarIDEquipasNome(nome));
 
 }
 void MainWindow::on_pusheliProvas_clicked()
@@ -859,7 +805,7 @@ void MainWindow::on_iniciarProvaAction_triggered()
 	for (int i = 0; i < provas.size(); i++) {
 		ui->modoProvaComboBox->insertItem(i, QString::fromStdString(provas[i]));
 	}
-	ui->modoProvaComboBox->insertItem(provas.size(), "Live");
+	ui->labelBluetooth->hide();
 }
 void MainWindow::on_DadosRegistadosAction_triggered()
 {
@@ -952,6 +898,17 @@ void MainWindow::on_ProvaStateComboBox_currentIndexChanged(const QString &arg1)
 {
 	int idRobot = bd.buscarIDRobot(bd.buscarIDProvasNome(arg1.toStdString()));
 	ui->labelNomeRoboDados->setText(QString::fromStdString(bd.buscarRobot(idRobot)));
+	ui->tabelaListarStates->setRowCount(0);
+	int idProva = bd.buscarIDProvasNome(arg1.toStdString());
+	vector<string> states = bd.getStates(idProva);
+	for (int i = 0;i < states.size();i++) {
+		string state = states[i];
+		QString stateQ = QString::fromStdString(state);
+		ui->tabelaListarStates->insertRow(ui->tabelaListarStates->rowCount());
+		QTableWidgetItem * stateWidget = new QTableWidgetItem(stateQ);
+		stateWidget->setTextAlignment(Qt::AlignCenter);
+		ui->tabelaListarStates->setItem(ui->tabelaListarStates->rowCount() - 1, 0, stateWidget);
+	}
 }
 
 void MainWindow::on_modoProvaComboBox_currentIndexChanged(const QString &arg1)
@@ -965,9 +922,16 @@ void MainWindow::on_GuardarProva_clicked()
 	for (int i = 0;i < vetorEstados.size();i++) {
 		bd.inserirStates(vetorEstados[i], idProva);
 	}
-	//ui->InicarProva->setText(QString::fromStdString(vetorEstados[0]));
-	//ui->GuardarProva->setText(QString::fromStdString(to_string(idProva)));
 	vetorEstados.clear();
+	ui->labelBluetooth->hide();
+	ui->InicarProva->setDisabled(false);
+	ui->Atras->setDisabled(false);
+	ui->Direita->setDisabled(false);
+	ui->Esquerda->setDisabled(false);
+	ui->Frente->setDisabled(false);
+	ui->LED->setDisabled(false);
+	ui->Ventoinha->setDisabled(false);
+	ui->Stop->setDisabled(false);
 }
 
 void MainWindow::on_Atras_clicked()
@@ -1010,143 +974,99 @@ void MainWindow::on_representarProvaAction_triggered()
 	for (int i = 0; i < provas.size(); i++) {
 		ui->modoProvaComboBox_Representar->insertItem(i, QString::fromStdString(provas[i]));
 	}
-
 }
 
 void MainWindow::on_modoProvaComboBox_Representar_currentIndexChanged(const QString &arg1)
 {
-	/*int idProva = bd.buscarIDProvasNome(ui->modoProvaComboBox_Representar->currentText().toStdString());
+	int idProva = bd.buscarIDProvasNome(ui->modoProvaComboBox_Representar->currentText().toStdString());
 
-	if (bd.countStates(idProva) != 0) {
-		ui->labelAvisoProvas->hide();
-		vector<string> states = bd.getStates(idProva);
-		for (int i = 0;i < states.size();i++) {
-			if (states[i] == "Frente_Representar") {
-				ui->Atras_Representar->setStyleSheet("");
-				ui->Direita_Representar->setStyleSheet("");
-				ui->Esquerda_Representar->setStyleSheet("");
-				ui->Frente_Representar->setStyleSheet("background-color:black; color:white");
-				ui->LED_Representar->setStyleSheet("");
-				ui->Ventoinha_Representar->setStyleSheet("");
-				ui->Stop->setStyleSheet("");
-			}
-			else if (states[i] == "Tras") {
-				ui->Atras_Representar->setStyleSheet("background-color:black; color:white");
-				ui->Direita_Representar->setStyleSheet("");
-				ui->Esquerda_Representar->setStyleSheet("");
-				ui->Frente_Representar->setStyleSheet("");
-				ui->LED_Representar->setStyleSheet("");
-				ui->Ventoinha_Representar->setStyleSheet("");
-				ui->Stop->setStyleSheet("");
-			}
-			else if (states[i] == "Direita_Representar") {
-				ui->Atras_Representar->setStyleSheet("");
-				ui->Direita_Representar->setStyleSheet("background-color:black; color:white");
-				ui->Esquerda_Representar->setStyleSheet("");
-				ui->Frente_Representar->setStyleSheet("");
-				ui->LED_Representar->setStyleSheet("");
-				ui->Ventoinha_Representar->setStyleSheet("");
-				ui->Stop->setStyleSheet("");
-			}
-			else if (states[i] == "Esquerda_Representar") {
-				ui->Atras_Representar->setStyleSheet("");
-				ui->Direita_Representar->setStyleSheet("");
-				ui->Esquerda_Representar->setStyleSheet("background-color:black; color:white");
-				ui->Frente_Representar->setStyleSheet("");
-				ui->LED_Representar->setStyleSheet("");
-				ui->Ventoinha_Representar->setStyleSheet("");
-				ui->Stop->setStyleSheet("");
-			}
-			else if (states[i] == "LED_Representar") {
-				ui->Atras_Representar->setStyleSheet("");
-				ui->Direita_Representar->setStyleSheet("");
-				ui->Esquerda_Representar->setStyleSheet("");
-				ui->Frente_Representar->setStyleSheet("");
-				ui->LED_Representar->setStyleSheet("background-color:black; color:white");
-				ui->Ventoinha_Representar->setStyleSheet("");
-				ui->Stop->setStyleSheet("");
-			}
-			else if (states[i] == "Ventoinha_Representar") {
-				ui->Atras_Representar->setStyleSheet("");
-				ui->Direita_Representar->setStyleSheet("");
-				ui->Esquerda_Representar->setStyleSheet("");
-				ui->Frente_Representar->setStyleSheet("");
-				ui->LED_Representar->setStyleSheet("");
-				ui->Ventoinha_Representar->setStyleSheet("background-color:black; color:white");
-				ui->Stop->setStyleSheet("");
-			}
-			Sleep(1000);
-		}
-	}else {
+	if (bd.countStates(idProva) == 0) {
 		ui->labelAvisoProvas->show();
-	}*/
+		ui->RepresentarProva->setDisabled(true);
+	}
+	else {
+		ui->labelAvisoProvas->hide();
+		ui->RepresentarProva->setDisabled(false);
+	}
 }
 void MainWindow::on_RepresentarProva_clicked()
 {
-    int idProva = bd.buscarIDProvasNome(ui->modoProvaComboBox_Representar->currentText().toStdString());
+	int idProva = bd.buscarIDProvasNome(ui->modoProvaComboBox_Representar->currentText().toStdString());
 
-        if (bd.countStates(idProva) != 0) {
-            ui->labelAvisoProvas->hide();
-            vector<string> states = bd.getStates(idProva);
-            for (int i = 0;i < states.size();i++) {
+	vector<string> states = bd.getStates(idProva);
+	for (int i = 0;i < states.size();i++) {
+		if (states[i] == "Frente") {
+			ui->Atras_Representar->setStyleSheet("");
+			ui->Direita_Representar->setStyleSheet("");
+			ui->Esquerda_Representar->setStyleSheet("");
+			ui->Frente_Representar->setStyleSheet("background-color:black; color:white");
+			ui->LED_Representar->setStyleSheet("");
+			ui->Ventoinha_Representar->setStyleSheet("");
+			ui->Stop->setStyleSheet("");
+		}
+		else if (states[i] == "Tras") {
+			ui->Atras_Representar->setStyleSheet("background-color:black; color:white");
+			ui->Direita_Representar->setStyleSheet("");
+			ui->Esquerda_Representar->setStyleSheet("");
+			ui->Frente_Representar->setStyleSheet("");
+			ui->LED_Representar->setStyleSheet("");
+			ui->Ventoinha_Representar->setStyleSheet("");
+			ui->Stop->setStyleSheet("");
+		}
+		else if (states[i] == "Direita") {
+			ui->Atras_Representar->setStyleSheet("");
+			ui->Direita_Representar->setStyleSheet("background-color:black; color:white");
+			ui->Esquerda_Representar->setStyleSheet("");
+			ui->Frente_Representar->setStyleSheet("");
+			ui->LED_Representar->setStyleSheet("");
+			ui->Ventoinha_Representar->setStyleSheet("");
+			ui->Stop->setStyleSheet("");
+		}
+		else if (states[i] == "Esquerda") {
+			ui->Atras_Representar->setStyleSheet("");
+			ui->Direita_Representar->setStyleSheet("");
+			ui->Esquerda_Representar->setStyleSheet("background-color:black; color:white");
+			ui->Frente_Representar->setStyleSheet("");
+			ui->LED_Representar->setStyleSheet("");
+			ui->Ventoinha_Representar->setStyleSheet("");
+			ui->Stop->setStyleSheet("");
+		}
+		else if (states[i] == "LED") {
+			ui->Atras_Representar->setStyleSheet("");
+			ui->Direita_Representar->setStyleSheet("");
+			ui->Esquerda_Representar->setStyleSheet("");
+			ui->Frente_Representar->setStyleSheet("");
+			ui->LED_Representar->setStyleSheet("background-color:black; color:white");
+			ui->Ventoinha_Representar->setStyleSheet("");
+			ui->Stop->setStyleSheet("");
+		}
+		else if (states[i] == "Ventoinha") {
+			ui->Atras_Representar->setStyleSheet("");
+			ui->Direita_Representar->setStyleSheet("");
+			ui->Esquerda_Representar->setStyleSheet("");
+			ui->Frente_Representar->setStyleSheet("");
+			ui->LED_Representar->setStyleSheet("");
+			ui->Ventoinha_Representar->setStyleSheet("background-color:black; color:white");
+			ui->Stop->setStyleSheet("");
+		}
+	}
+}
 
-                if (states[i] == "Frente") {
-                    ui->Atras_Representar->setStyleSheet("");
-                    ui->Direita_Representar->setStyleSheet("");
-                    ui->Esquerda_Representar->setStyleSheet("");
-                    ui->Frente_Representar->setStyleSheet("background-color:black; color:white");
-                    ui->LED_Representar->setStyleSheet("");
-                    ui->Ventoinha_Representar->setStyleSheet("");
-                    ui->Stop->setStyleSheet("");
-                }
-                else if (states[i] == "Tras") {
-                    ui->Atras_Representar->setStyleSheet("background-color:black; color:white");
-                    ui->Direita_Representar->setStyleSheet("");
-                    ui->Esquerda_Representar->setStyleSheet("");
-                    ui->Frente_Representar->setStyleSheet("");
-                    ui->LED_Representar->setStyleSheet("");
-                    ui->Ventoinha_Representar->setStyleSheet("");
-                    ui->Stop->setStyleSheet("");
-                }
-                else if (states[i] == "Direita") {
-                    ui->Atras_Representar->setStyleSheet("");
-                    ui->Direita_Representar->setStyleSheet("background-color:black; color:white");
-                    ui->Esquerda_Representar->setStyleSheet("");
-                    ui->Frente_Representar->setStyleSheet("");
-                    ui->LED_Representar->setStyleSheet("");
-                    ui->Ventoinha_Representar->setStyleSheet("");
-                    ui->Stop->setStyleSheet("");
-                }
-                else if (states[i] == "Esquerda") {
-                    ui->Atras_Representar->setStyleSheet("");
-                    ui->Direita_Representar->setStyleSheet("");
-                    ui->Esquerda_Representar->setStyleSheet("background-color:black; color:white");
-                    ui->Frente_Representar->setStyleSheet("");
-                    ui->LED_Representar->setStyleSheet("");
-                    ui->Ventoinha_Representar->setStyleSheet("");
-                    ui->Stop->setStyleSheet("");
-                }
-                else if (states[i] == "LED") {
-                    ui->Atras_Representar->setStyleSheet("");
-                    ui->Direita_Representar->setStyleSheet("");
-                    ui->Esquerda_Representar->setStyleSheet("");
-                    ui->Frente_Representar->setStyleSheet("");
-                    ui->LED_Representar->setStyleSheet("background-color:black; color:white");
-                    ui->Ventoinha_Representar->setStyleSheet("");
-                    ui->Stop->setStyleSheet("");
-                }
-                else if (states[i] == "Ventoinha") {
-                    ui->Atras_Representar->setStyleSheet("");
-                    ui->Direita_Representar->setStyleSheet("");
-                    ui->Esquerda_Representar->setStyleSheet("");
-                    ui->Frente_Representar->setStyleSheet("");
-                    ui->LED_Representar->setStyleSheet("");
-                    ui->Ventoinha_Representar->setStyleSheet("background-color:black; color:white");
-                    ui->Stop->setStyleSheet("");
-                }
-				Sleep(500);
-            }
-        }else {
-            ui->labelAvisoProvas->show();
-        }
+void MainWindow::on_LiveProva_clicked()
+{
+	ui->labelBluetooth->show();
+	ui->InicarProva->setDisabled(true);
+	ui->Atras->setDisabled(true);
+	ui->Direita->setDisabled(true);
+	ui->Esquerda->setDisabled(true);
+	ui->Frente->setDisabled(true);
+	ui->LED->setDisabled(true);
+	ui->Ventoinha->setDisabled(true);
+	ui->Stop->setDisabled(true);
+	readSerial();
+}
+
+void MainWindow::on_actionDescricao_triggered()
+{
+    ui->stackedWidget->setCurrentWidget(ui->descricao);
 }
