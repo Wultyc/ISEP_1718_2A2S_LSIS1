@@ -114,11 +114,11 @@ void bd::inserirProva(string nomeP, int ano, int mes, int dia, string local, str
 	delete con;
 }
 
-void bd::inserirStates(int state, string nomeP) {
+void bd::inserirStates(string state, int idProva) {
 	connect();
-	prep = con->prepareStatement("INSERT INTO `robo`.`prova`(`state`)VALUES(?) WHERE Prova_idProva = prova.idProva AND prova.nome =(?)");
-	prep->setInt(1, state);
-	prep->setString(2, nomeP);
+	prep = con->prepareStatement("INSERT INTO `robo`.`states`(`state`,`Prova_idProva`) VALUES (?,?)");
+	prep->setString(1, state);
+	prep->setInt(2, idProva);
 	prep->execute();
 	delete prep;
 	delete con;
@@ -672,7 +672,8 @@ int bd::updateRobo1(string nomeR) {
 		idRobo = res->getInt(1);
 	}
 	return idRobo;
-	
+	delete prep;
+	delete con;
 }
 
 void bd::updateRobo2(int id, int num) {
@@ -757,6 +758,38 @@ void bd::updateData(string data, int idProva) {
 
 	delete prep;
 	delete con;
+}
 
+int bd::countStates(int idProva) {
+	connect();
+	int count;
+	prep = con->prepareStatement("Select count(state) from robo.states where Prova_idProva = ?");
+	prep->setInt(1, idProva);
+	prep->execute();
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		count = res->getInt(1);
+	}
+	return count;
+	delete prep;
+	delete con;
+}
 
+vector<string> bd::getStates(int idProva) {
+	connect();
+	vector<string> states;
+	string current;
+	prep = con->prepareStatement("Select state from robo.states where Prova_idProva = ?");
+	prep->setInt(1, idProva);
+	prep->execute();
+	res = prep->executeQuery();
+	while (res->next())
+	{
+		current = res->getString(1);
+		states.push_back(current);
+	}
+	return states;
+	delete prep;
+	delete con;
 }
