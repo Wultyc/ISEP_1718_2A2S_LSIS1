@@ -215,7 +215,6 @@ void loop() {
     }break;
     case 1:
       if(digitalRead(BOTAO_STOP)==HIGH){
-        Serial.println("DESLIGUEI!");
         //roboParaD();
         estado = 0;
       }else{
@@ -243,7 +242,6 @@ void loop() {
     case 2:
     roboPara();
       if(digitalRead(BOTAO_STOP)==HIGH){
-        Serial.println("DESLIGUEI!");
           //roboParaD();
           estado = 0;
       }else{
@@ -264,8 +262,8 @@ void loop() {
       roboPara();
       btnStop = digitalRead(BOTAO_STOP) ;
       if(btnStop==HIGH){
-        Serial.println("DESLIGUEI!");
           //roboParaD();
+          estado = 0;
       }else{
         detetaChama();
         roboPara();
@@ -282,7 +280,6 @@ void loop() {
     case 4:
     roboPara();
       if(digitalRead(BOTAO_STOP)==HIGH){
-        Serial.println("DESLIGUEI!");
           //roboParaD();
           estado = 0;
       }else{
@@ -298,22 +295,6 @@ void loop() {
         }
       break;
   }
- 
-  Serial.println("Distancia: \t Frente \t Esquerda \t Direita");
-  Serial.print("\t \t");
-  Serial.print(lerSonar(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE));
-  Serial.print("\t \t");
-  Serial.print(lerSonar(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA));
-  Serial.print("\t \t");
-  Serial.println(lerSonar(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA));
-  Bluetooth.println("Distancia: \t Frente \t Esquerda \t Direita");
-  Bluetooth.print("\t \t");
-  Bluetooth.print(lerSonar(SONAR_TRIG_FRENTE, SONAR_ECHO_FRENTE));
-  Bluetooth.print("\t \t");
-  Bluetooth.print(lerSonar(SONAR_TRIG_ESQUERDA, SONAR_ECHO_ESQUERDA));
-  Bluetooth.print("\t \t");
-  Bluetooth.println(lerSonar(SONAR_TRIG_DIREITA, SONAR_ECHO_DIREITA));
-  Serial.print("Estado de Robo: ");
   Serial.println(estado);
 }
 
