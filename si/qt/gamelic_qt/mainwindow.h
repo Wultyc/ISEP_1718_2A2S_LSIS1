@@ -121,6 +121,10 @@ private slots:
 
     void on_RepresentarProva_clicked();
 
+    void on_LiveProva_clicked();
+
+    void on_actionDescricao_triggered();
+
 private:
     Ui::MainWindow *ui;
 
