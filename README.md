@@ -1,12 +1,13 @@
-﻿# LSIS1-18-G6
+# LSIS1-18-G6
 
 ## Elementos da Equipa
-Mário Junior Pereira Moutinho	1151533  
-Jorge Gabriel F. M. Azevedo		1160929  
-Inês da Rocha Fidalgo			1161036  
-André Miguel F. Sacramento		1161107  
-Carolina Oliveira Silva			1161221  
-Eduardo José S. Pires Tavares		1161375  
-Luís Carlos Carmo Pereira		1161573  
+Mário Junior Pereira Moutinho  
+Jorge Gabriel F. M. Azevedo  
+Inês da Rocha Fidalgo  
+André Miguel F. Sacramento  
+Carolina Oliveira Silva  
+Eduardo José S. Pires Tavares  
+Luís Carlos Carmo Pereira  
 
-##
+## Objetivos do Projeto
+Robô bombeiro e aplicação para Windows que regista os dados dos robôs e permite observar o estado do robô em tempo real
